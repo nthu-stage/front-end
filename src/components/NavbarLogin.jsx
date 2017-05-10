@@ -1,31 +1,48 @@
 import React, {Component} from 'react';
 import FacebookLogin from 'react-facebook-login';
+import {Dropdown, DropdownToggle, DropdownMenu, DropdownItem} from 'reactstrap';
+import {Link} from 'react-router-dom';
+import {connect} from 'react-redux';
+import {bindActionCreators} from 'redux';
+import fbLogin from '../actions/fbLogin';
 
 import './NavbarLogin.css';
 
-export default class NavbarLogin extends Component {
+class NavbarLogin extends Component {
     constructor(props) {
         super(props);
 
         this.state = {
-            facebook: null,
+            dropdownOpen: false
         };
 
         this.responseFacebook = this.responseFacebook.bind(this);
+        this.toggle = this.toggle.bind(this);
     }
 
     responseFacebook(response) {
         console.log(response);
-        this.setState({ facebook: response });
+        this.props.fbLogin(response);
+    }
+
+    toggle() {
+        this.setState({
+            dropdownOpen: !this.state.dropdownOpen
+        });
     }
 
     render() {
-        if (this.state.facebook) {
+        if (this.props.fb) {
             return (
-                <div className="facebook-picture">
-                    <img src={this.state.facebook.picture.data.url} />
-                </div>
-
+                <Dropdown isOpen={this.state.dropdownOpen} toggle={this.toggle}>
+                    <DropdownToggle caret className="facebook-picture">
+                        <img src={this.props.fb.picture.data.url}/>
+                    </DropdownToggle>
+                    <DropdownMenu>
+                        <DropdownItem tag={Link} to='/profile'>個人頁面</DropdownItem>
+                        <DropdownItem tag={Link} to='/logout'>登出</DropdownItem>
+                    </DropdownMenu>
+                </Dropdown>
             );
         } else {
             return (
@@ -42,3 +59,17 @@ export default class NavbarLogin extends Component {
         }
     }
 }
+
+function mapStateToProps(state) {
+    return {
+        fb: state.fb,
+    }
+}
+
+function mapDispatchToProps(dispatch) {
+    return bindActionCreators({
+        fbLogin: fbLogin,
+    }, dispatch);
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(NavbarLogin);

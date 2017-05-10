@@ -31,8 +31,9 @@ export default class App extends Component {
             <Router>
                 <div>
                     <Navbar color="faded" light toggleable>
+                        <div className="container">
                             <NavbarToggler right onClick={this.toggle}/>
-                            <NavbarBrand href="/">NTHU Stage</NavbarBrand>
+                            <NavbarBrand tag={Link} to='/'>NTHU Stage</NavbarBrand>
                             <Collapse isOpen={this.state.isOpen} navbar>
                                 <Nav className="ml-auto" navbar>
                                     <NavItem>
@@ -48,8 +49,8 @@ export default class App extends Component {
                                         <NavbarLogin />
                                     </NavItem>
                                 </Nav>
-
                             </Collapse>
+                        </div>
                     </Navbar>
                 </div>
 

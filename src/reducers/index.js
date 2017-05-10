@@ -1,7 +1,8 @@
 import {combineReducers} from 'redux';
+import FbReducer from './reducer_fb'
 
 const rootReducer = combineReducers({
-    state: (state = {}) => state
+    fb: FbReducer,
 });
 
 export default rootReducer;
