@@ -8,6 +8,7 @@
     "react-addons-css-transition-group": "^15.5.2",
     "react-addons-transition-group": "^15.5.2",
     "react-dom": "^15.5.4",
+    "react-facebook-login": "^3.5.2",
     "react-redux": "^5.0.4",
     "react-router-dom": "^4.1.1",
     "reactstrap": "^4.5.0",

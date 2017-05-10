@@ -10,6 +10,8 @@ import {
     NavLink
 } from 'reactstrap';
 
+import NavbarLogin from './NavbarLogin'
+
 export default class App extends Component {
     constructor(props) {
         super(props);
@@ -42,7 +44,11 @@ export default class App extends Component {
                                     <NavItem>
                                         <NavLink tag={Link} to='/pp'>我要提案</NavLink>
                                     </NavItem>
+                                    <NavItem>
+                                        <NavbarLogin />
+                                    </NavItem>
                                 </Nav>
+
                             </Collapse>
                     </Navbar>
                 </div>
