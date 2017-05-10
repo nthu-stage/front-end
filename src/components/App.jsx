@@ -55,7 +55,7 @@ export default class App extends Component {
                                 </Collapse>
                             </div>
                         </Navbar>
-                        <Route exact path="/" render={() => (
+                        <Route path="/wp" render={() => (
                             <WorkshopPage />
                         )}/>
                     </div>
