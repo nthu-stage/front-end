@@ -10,7 +10,8 @@ import {
     NavLink
 } from 'reactstrap';
 
-import NavbarLogin from './NavbarLogin'
+import NavbarLogin from './NavbarLogin';
+import WorkshopPage from './WorkshopPage';
 
 export default class App extends Component {
     constructor(props) {
@@ -52,6 +53,9 @@ export default class App extends Component {
                             </Collapse>
                         </div>
                     </Navbar>
+                    <Route exact path="/" render={() => (
+                        <WorkshopPage />
+                    )}/>
                 </div>
 
 
