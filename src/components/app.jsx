@@ -44,7 +44,7 @@ export default class App extends Component {
                                     <NavItem>
                                         <NavLink tag={Link} to='/pp'>我要提案</NavLink>
                                     </NavItem>
-                                    <NavItem>
+                                    <NavItem className="my-auto">
                                         <NavbarLogin />
                                     </NavItem>
                                 </Nav>

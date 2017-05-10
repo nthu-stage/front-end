@@ -23,7 +23,7 @@ export default class NavbarLogin extends Component {
         if (this.state.facebook) {
             return (
                 <div className="facebook-picture">
-                    <img src="https://scontent.xx.fbcdn.net/v/t1.0-1/p50x50/14907205_1735976403393352_4070401399338628514_n.jpg?oh=a92d0f7cbf8c444eb53e3b93ba2a18dd&oe=597D50E5" />
+                    <img src={this.state.facebook.picture.data.url} />
                 </div>
 
             );
