@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
-import FacebookLogin from 'react-facebook-login';
-import {Dropdown, DropdownToggle, DropdownMenu, DropdownItem} from 'reactstrap';
+import FacebookProvider, { Login } from 'react-facebook';
+import {Dropdown, DropdownToggle, DropdownMenu, DropdownItem, Button} from 'reactstrap';
 import {Link} from 'react-router-dom';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
@@ -16,13 +16,18 @@ class NavbarLogin extends Component {
             dropdownOpen: false
         };
 
-        this.responseFacebook = this.responseFacebook.bind(this);
+        this.handleResponse = this.handleResponse.bind(this);
+        this.handleError = this.handleError.bind(this);
         this.toggle = this.toggle.bind(this);
     }
 
-    responseFacebook(response) {
-        console.log(response);
-        this.props.fbLogin(response);
+    handleResponse(data) {
+        console.log(data);
+        this.props.fbLogin(data);
+    }
+
+    handleError(error) {
+        this.setState({ error });
     }
 
     toggle() {
@@ -36,7 +41,7 @@ class NavbarLogin extends Component {
             return (
                 <Dropdown isOpen={this.state.dropdownOpen} toggle={this.toggle}>
                     <DropdownToggle caret className="facebook-picture">
-                        <img src={this.props.fb.picture.data.url}/>
+                        <img src={this.props.fb.profile.picture.data.url}/>
                     </DropdownToggle>
                     <DropdownMenu>
                         <DropdownItem tag={Link} to='/profile'>個人頁面</DropdownItem>
@@ -46,15 +51,12 @@ class NavbarLogin extends Component {
             );
         } else {
             return (
-                <FacebookLogin
-                    appId="1812105742383573"
-                    autoLoad={true}
+                <Login
                     fields="name,email,picture"
-                    callback={this.responseFacebook}
-                    textButton="登入"
-                    cssClass="btn btn-primary navbar-btn ml-2 mr-2 facebook-button"
-                    icon="fa-facebook"
-                />
+                    onResponse={this.handleResponse}
+                    onError={this.handleError}>
+                    <Button color="primary" className="navbar-btn ml-2 mr-2 facebook-button">登入</Button>
+                </Login>
             );
         }
     }
