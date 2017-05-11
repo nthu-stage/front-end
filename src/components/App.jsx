@@ -12,6 +12,8 @@ import {
 import FacebookProvider, { Login } from 'react-facebook';
 
 import NavbarLogin from './NavbarLogin';
+import Workshop from './Workshop';
+import Idea from './Idea';
 import WorkshopPage from './WorkshopPage';
 
 export default class App extends Component {
@@ -43,7 +45,7 @@ export default class App extends Component {
                                             <NavLink tag={Link} to='/'>工作坊</NavLink>
                                         </NavItem>
                                         <NavItem>
-                                            <NavLink tag={Link} to='/il'>許願池</NavLink>
+                                            <NavLink tag={Link} to='/i'>許願池</NavLink>
                                         </NavItem>
                                         <NavItem>
                                             <NavLink tag={Link} to='/pp'>我要提案</NavLink>
@@ -55,6 +57,12 @@ export default class App extends Component {
                                 </Collapse>
                             </div>
                         </Navbar>
+                        <Route exact path="/" render={() => (
+                            <Workshop />
+                        )}/>
+                        <Route path="/i" render={() => (
+                            <Idea />
+                        )}/>
                         <Route path="/wp" render={() => (
                             <WorkshopPage />
                         )}/>
