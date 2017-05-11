@@ -17,6 +17,7 @@ import NavbarLogin from './NavbarLogin';
 import Workshop from './Workshop';
 import Idea from './Idea';
 import WorkshopPage from './WorkshopPage';
+import Propose from './Propose';
 
 export default class App extends Component {
     constructor(props) {
@@ -63,6 +64,7 @@ export default class App extends Component {
                         <Route exact path="/i" component={Idea} />
                         <Route path="/i/:id" component={Idea} />
                         <Route path="/wp" component={WorkshopPage} />
+                        <Route path="/pp" component={Propose} />
                     </div>
                 </FacebookProvider>
             </Router>
