@@ -44,7 +44,7 @@ class NavbarLogin extends Component {
                         <img src={this.props.fb.profile.picture.data.url}/>
                     </DropdownToggle>
                     <DropdownMenu>
-                        <DropdownItem tag={Link} to='/profile'>個人頁面</DropdownItem>
+                        <DropdownItem tag={Link} to='/pf'>個人頁面</DropdownItem>
                         <DropdownItem tag={Link} to='/logout'>登出</DropdownItem>
                     </DropdownMenu>
                 </Dropdown>

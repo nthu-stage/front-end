@@ -18,6 +18,7 @@ import Workshop from './Workshop';
 import Idea from './Idea';
 import WorkshopPage from './WorkshopPage';
 import Propose from './Propose';
+import Profile from './Profile';
 
 export default class App extends Component {
     constructor(props) {
@@ -65,6 +66,7 @@ export default class App extends Component {
                         <Route path="/i/:id" component={Idea} />
                         <Route path="/wp" component={WorkshopPage} />
                         <Route path="/pp" component={Propose} />
+                        <Route path="/pf" component={Profile} />
                     </div>
                 </FacebookProvider>
             </Router>

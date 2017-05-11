@@ -16,7 +16,7 @@ export default class Idea extends Component {
 
     viewEditToggle() {
         if (this.state.viewEditModal) {
-            this.props.history.push('/i/');
+            this.props.history.push('/i');
         } else {
             this.setState({
                 viewEditModal: true,
