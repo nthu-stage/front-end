@@ -1,8 +1,14 @@
 .coverImg {
     height: 40%;
-    width: 90%;
-    border-radius: 1 rem; 
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 1 rem;
+    width: 100%;
+    border-radius: 3px; 
+    margin: 3 rem auto;
+}
+.container{
+    text-align: center;
+}
+h3{
+    margin-top:1 rem;
+    padding: 1 rem auto;
+    font-weight: bold;
 }

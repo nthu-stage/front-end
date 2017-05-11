@@ -1,14 +1,19 @@
 import React, {Component} from 'react';
 import FacebookProvider, { Comments } from 'react-facebook';
+import {connect} from 'react-redux';
+import {bindActionCreators} from 'redux';
 import{
     ListGroup,
     ListGroupItem,
     Button
 } from 'reactstrap';
 import './WorkshopPage.css';
-export  default class WorkshopPage extends Component{
+import wsSubmit from '../actions/workshopPage.js';
+class WorkshopPage extends Component{
     constructor(props){
         super(props);
+
+        this.handleSubmit = this.handleSubmit.bind(this);
     }
 
     render(){
@@ -53,9 +58,25 @@ export  default class WorkshopPage extends Component{
                         如何透過談判維持個人和企業競爭優勢？
                     </p>
                 </div>
-                <Button color="primary" size="lg" block>我想要報名!!!</Button>
-                <Comments href="http://www.facebook.com" />
+                <Button color="primary" size="lg" block onclick={this.handleSubmit}>我想要報名!!!</Button>
+                <Comments href="http://www.facebook.com" width="100%" num_posts="6" />
             </div>
         )
     }
+    handleSubmit(){
+        this.props.wsSubmit();
+    }
 }
+function mapStateToProps(state) {
+    return {
+        ws:state.ws,
+    }
+}
+
+function mapDispatchToProps(dispatch) {
+    return bindActionCreators({
+        wsSubmit:wsSubmit
+    }, dispatch);
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(WorkshopPage);
