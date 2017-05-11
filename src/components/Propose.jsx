@@ -125,6 +125,9 @@ class Propose extends Component{
         console.log(content);
         this.setState({content:content});
     }
+    handleSubmit(){
+        
+    }
     
 
 }
