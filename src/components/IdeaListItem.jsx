@@ -1,31 +1,19 @@
 import React, { Component } from 'react';
+import { browserHistory } from 'react-router';
 import { Link } from 'react-router-dom';
 import { Card, CardImg, CardText, CardBlock, CardTitle, Progress, Button } from 'reactstrap';
-
-import IdeaViewEditModal from './IdeaViewEditModal'
 
 import './IdeaListItem.css';
 
 export default class IdeaListItem extends Component {
     constructor(props) {
         super(props);
-
-        this.viewEditToggle = this.viewEditToggle.bind(this);
-        this.state = {
-            viewEditModal: false,
-        };
-    }
-
-    viewEditToggle() {
-        this.setState({
-            viewEditModal: !this.state.viewEditModal
-        });
     }
 
     render() {
         return (
             <div className="col col-12 col-sm-6 col-md-4 col-lg-3 my-2">
-                <Card onClick={this.viewEditToggle} className="idea-list-item">
+                <Card tag={Link} to='/i/123456' className="idea-list-item unlink">
                     <CardBlock>
                         <div className="idea-list-item-content">
                             <CardTitle>我想學畫畫</CardTitle>
@@ -40,7 +28,6 @@ export default class IdeaListItem extends Component {
                         </div>
                     </CardBlock>
                 </Card>
-                <IdeaViewEditModal modal={this.state.viewEditModal} toggle={this.viewEditToggle} />
             </div>
         );
     }
