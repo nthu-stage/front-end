@@ -1,14 +1,23 @@
 import React, {Component} from 'react';
-import FacebookProvider, { Comments } from 'react-facebook';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import{
-
+    TabContent,
+    TabPane,
+    Nav,
+    NavItem,
+    NavLink,
+    Card,
+    Button,
+    CardTitle,
+    CardText,
+    Row,
+    Col,
 } from 'reactstrap';
-class WorkshopManage extends Component(){
+class WorkshopManage extends Component{
     constructor(props){
         super(props);
-        this.toggle = this.toggle.bind(this);
+        this.handleToggle = this.handleToggle.bind(this);
         this.state = {
             activeTab: '1'
         };
@@ -20,24 +29,14 @@ class WorkshopManage extends Component(){
 
         return(
             <div className="container">
-                <Nav tabs>
-                <NavItem>
-                    <NavLink
-                    className={classnames({ active: this.state.activeTab === '1' })}
-                    onClick={() => { this.toggle('1'); }}
-                    >
-                        Tab1
-                    </NavLink>
-                </NavItem>
-                <NavItem>
-                    <NavLink
-                    className={classnames({ active: this.state.activeTab === '2' })}
-                    onClick={() => { this.toggle('2'); }}
-                    >
-                        Moar Tabs
-                    </NavLink>
-                </NavItem>
-                </Nav>
+                <Row>
+                    <Col sm={6}>
+                        <Button onClick={() => this.handleToggle('1')} block>工作坊</Button>
+                    </Col>
+                    <Col sm={6}>
+                        <Button onClick={() => this.handleToggle('2')} block>主控台</Button>
+                    </Col>
+                </Row>
                 <TabContent activeTab={this.state.activeTab}>
                     <TabPane tabId="1">
                         <Row>
@@ -48,19 +47,8 @@ class WorkshopManage extends Component(){
                     </TabPane>
                     <TabPane tabId="2">
                         <Row>
-                            <Col sm="6">
-                                <Card block>
-                                    <CardTitle>Special Title Treatment</CardTitle>
-                                    <CardText>With supporting text below as a natural lead-in to additional content.</CardText>
-                                    <Button>Go somewhere</Button>
-                                </Card>
-                            </Col>
-                            <Col sm="6">
-                                <Card block>
-                                    <CardTitle>Special Title Treatment</CardTitle>
-                                    <CardText>With supporting text below as a natural lead-in to additional content.</CardText>
-                                    <Button>Go somewhere</Button>
-                                </Card>
+                            <Col sm="12">
+                                <h4>Tab 2 Contents</h4>
                             </Col>
                         </Row>
                     </TabPane>
@@ -68,7 +56,7 @@ class WorkshopManage extends Component(){
             </div>
         )
     }
-    toggle(tab) {
+    handleToggle(tab) {
         if (this.state.activeTab !== tab) {
             this.setState({
                 activeTab: tab
@@ -76,3 +64,11 @@ class WorkshopManage extends Component(){
         }
     }
 }
+function mapStateToProps(state) {
+    return {
+        wm:state.wm,
+    }
+}
+
+
+export default connect(mapStateToProps)(WorkshopManage);
