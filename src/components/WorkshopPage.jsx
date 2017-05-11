@@ -22,7 +22,7 @@ class WorkshopPage extends Component{
         const location = 'NTHU';
         const speaker = 'LALALAL';
         return(
-            <div className="container">
+            <div className="container workshopPage">
                 <div>
                     <img src="https://d2wq73xazpk036.cloudfront.net/media/27FB7F0C-9885-42A6-9E0C19C35242B5AC/A7BC70EF-2E93-47DA-A355C4B22039324E/thul-6818f8f2-2711-5159-9648-cc23606b037c.jpg?response-content-disposition=inline" className="coverImg" />
                 </div>

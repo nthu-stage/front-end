@@ -11,11 +11,12 @@ import{
     Col,
     
 } from 'reactstrap';
+import './Propose.css';
 
 class Propose extends Component{
     constructor(props){
         super(props);
-        this.inputUrl = null;
+        this.inputUrl = null; ////
     }
 
     render(){
@@ -23,10 +24,9 @@ class Propose extends Component{
         const time = '20:00';
         const location = 'NTHU';
         const speaker = 'LALALAL';
-        const inputValue = "";
         const imgUrl = "https://images-cdn.9gag.com/images/thumbnail-facebook/9155182_1388247030.7007_yqylen_n.jpg";
         return(
-            <div className="container">
+            <div className="container propose">
                 <div>
                     <img src={imgUrl} className="coverImg" />
                 </div>
@@ -34,7 +34,7 @@ class Propose extends Component{
                     <FormGroup row>
                         <Label for="exampleUrl" sm={2}>Image url</Label>
                         <Col sm={10}>
-                            <Input type="url" name="url" id="exampleUrl" placeholder="Give me an image url!!" getRef={el => {this.inputUrl = el}} value={inputValue} onChange={this.handleInputChange}/>
+                            <Input type="url" name="url" id="exampleUrl" placeholder="Give me an image url!!" onChange={this.handleInputChange}/>
                         </Col>
                     </FormGroup>
                 </Form>
@@ -58,16 +58,20 @@ class Propose extends Component{
                             <Label for="speaker">Speaker</Label>
                             <Input type="text" name="speaker" id="speaker" placeholder="speaker" />
                         </FormGroup>
-                        <FormGroup>
+                        <FormGroup className = "inputTextarea">
                             <Label for="speachTitle">SpeachTitle</Label>
-                            <Input type="textarea" name="speaker" id="speaker" placeholder="speaker" />
+                            <Input type="textarea" name="speachTitle" id="speachTitle" placeholder="speachTitle" />
                         </FormGroup>
+                        <Button color="primary" size="lg" block onclick={this.handleSubmit}>我要提案</Button>
                     </Form>
                 </div>
             </div>
         )
     }
+    handleInputChange(){
+    }
 }
+
 function mapStateToProps(state) {
     return {
         //ws:state.ws,
