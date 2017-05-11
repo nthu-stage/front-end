@@ -17,6 +17,24 @@ class Propose extends Component{
     constructor(props){
         super(props);
         this.inputUrl = null; ////
+        this.handleInputChange = this.handleInputChange.bind(this);
+        this.handleDateChange = this.handleDateChange.bind(this);
+        this.handleTimeChange = this.handleTimeChange.bind(this);
+        this.handleLocChange = this.handleLocChange.bind(this);
+        this.handleSpeakerChange = this.handleSpeakerChange.bind(this);
+        this.handleSpeachTitleChange = this.handleSpeachTitleChange.bind(this);
+        this.handleContentChange = this.handleContentChange.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
+        this.state = {
+            imgUrl : "https://images-cdn.9gag.com/images/thumbnail-facebook/9155182_1388247030.7007_yqylen_n.jpg", 
+            date:'',
+            time:'',
+            location:'',
+            speaker:'',
+            SpeachTitle:'',
+            content:'',
+
+        }
     }
 
     render(){
@@ -24,7 +42,7 @@ class Propose extends Component{
         const time = '20:00';
         const location = 'NTHU';
         const speaker = 'LALALAL';
-        const imgUrl = "https://images-cdn.9gag.com/images/thumbnail-facebook/9155182_1388247030.7007_yqylen_n.jpg";
+        const {imgUrl} = this.state;
         return(
             <div className="container propose">
                 <div>
@@ -44,23 +62,27 @@ class Propose extends Component{
                     <Form>
                         <FormGroup>
                             <Label for="date">Date</Label>
-                            <Input type="date" name="date" id="date" placeholder="date placeholder" />
+                            <Input type="date" name="date" id="date" placeholder="date placeholder" onChange={this.handleDateChange}/>
                         </FormGroup>    
                         <FormGroup>
                             <Label for="time">Time</Label>
-                            <Input type="time" name="time" id="time" placeholder="time placeholder" />
+                            <Input type="time" name="time" id="time" placeholder="time placeholder" onChange={this.handleTimeChange}/>
                         </FormGroup>
                         <FormGroup>
                             <Label for="location">Location</Label>
-                            <Input type="text" name="location" id="location" placeholder="location" />
+                            <Input type="text" name="location" id="location" placeholder="location" onChange={this.handleLocChange}/>
                         </FormGroup>
                         <FormGroup>
                             <Label for="speaker">Speaker</Label>
-                            <Input type="text" name="speaker" id="speaker" placeholder="speaker" />
+                            <Input type="text" name="speaker" id="speaker" placeholder="speaker" onChange={this.handleSpeakerChange} />
                         </FormGroup>
-                        <FormGroup className = "inputTextarea">
+                        <FormGroup>
                             <Label for="speachTitle">SpeachTitle</Label>
-                            <Input type="textarea" name="speachTitle" id="speachTitle" placeholder="speachTitle" />
+                            <Input type="text" name="speachTitle" id="speachTitle" placeholder="speachTitle" onChange={this.handleSpeachTitleChange} />
+                        </FormGroup>
+                        <FormGroup>
+                            <Label for="content">SpeachTitle</Label>
+                            <Input type="textarea" name="content" id="content" placeholder="content" rows="10" onChange={this.handleContentChange} />
                         </FormGroup>
                         <Button color="primary" size="lg" block onClick={this.handleSubmit}>我要提案</Button>
                     </Form>
@@ -68,8 +90,43 @@ class Propose extends Component{
             </div>
         )
     }
-    handleInputChange(){
+    handleInputChange(e){
+        const url = e.target.value;
+        console.log(url);
+        this.setState({imgUrl:url});
     }
+    handleDateChange(e){
+        const date = e.target.value;
+        console.log(date);
+        this.setState({date:date});
+    }
+    handleTimeChange(e){
+        const time = e.target.value;
+        console.log(time);
+        this.setState({time:time});
+    }
+    handleLocChange(e){
+        const location = e.target.value;
+        console.log(location);
+        this.setState({location:location});
+    }
+    handleSpeakerChange(e){
+        const speaker = e.target.value;
+        console.log(speaker);
+        this.setState({speaker:speaker});
+    }
+    handleSpeachTitleChange(e){
+        const speachTitle = e.target.value;
+        console.log(speachTitle);
+        this.setState({speachTitle:speachTitle});
+    }
+    handleContentChange(e){
+        const content = e.target.value;
+        console.log(content);
+        this.setState({content:content});
+    }
+    
+
 }
 
 function mapStateToProps(state) {
