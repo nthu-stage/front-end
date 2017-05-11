@@ -1,4 +1,6 @@
 import React, {Component} from 'react';
+import { browserHistory } from 'react-router';
+import createBrowserHistory from 'history/createBrowserHistory';
 import {BrowserRouter as Router, Route, Link} from 'react-router-dom';
 import {
     Collapse,
@@ -16,6 +18,7 @@ import Workshop from './Workshop';
 import Idea from './Idea';
 import WorkshopPage from './WorkshopPage';
 import Propose from './Propose';
+import Profile from './Profile';
 
 export default class App extends Component {
     constructor(props) {
@@ -33,7 +36,7 @@ export default class App extends Component {
     }
     render() {
         return (
-            <Router>
+            <Router history={createBrowserHistory()}>
                 <FacebookProvider appId="1812105742383573">
                     <div>
                         <Navbar color="faded" light toggleable>
@@ -58,18 +61,12 @@ export default class App extends Component {
                                 </Collapse>
                             </div>
                         </Navbar>
-                        <Route exact path="/" render={() => (
-                            <Workshop />
-                        )}/>
-                        <Route path="/i" render={() => (
-                            <Idea />
-                        )}/>
-                        <Route path="/wp" render={() => (
-                            <WorkshopPage />
-                        )}/>
-                        <Route path="/pp" render={() => (
-                            <Propose />
-                        )}/>
+                        <Route exact path="/" component={Workshop} />
+                        <Route exact path="/i" component={Idea} />
+                        <Route path="/i/:id" component={Idea} />
+                        <Route path="/wp" component={WorkshopPage} />
+                        <Route path="/pp" component={Propose} />
+                        <Route path="/pf" component={Profile} />
                     </div>
                 </FacebookProvider>
             </Router>
