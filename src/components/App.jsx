@@ -13,6 +13,7 @@ import FacebookProvider, { Login } from 'react-facebook';
 
 import NavbarLogin from './NavbarLogin';
 import WorkshopPage from './WorkshopPage';
+import Propose from './Propose';
 
 export default class App extends Component {
     constructor(props) {
@@ -57,6 +58,9 @@ export default class App extends Component {
                         </Navbar>
                         <Route path="/wp" render={() => (
                             <WorkshopPage />
+                        )}/>
+                        <Route path="/pp" render={() => (
+                            <Propose />
                         )}/>
                     </div>
                 </FacebookProvider>
