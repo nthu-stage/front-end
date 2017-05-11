@@ -58,7 +58,7 @@ class WorkshopPage extends Component{
                         如何透過談判維持個人和企業競爭優勢？
                     </p>
                 </div>
-                <Button color="primary" size="lg" block onclick={this.handleSubmit}>我想要報名!!!</Button>
+                <Button color="primary" size="lg" block onClick={this.handleSubmit}>我想要報名!!!</Button>
                 <Comments href="http://www.facebook.com" width="100%" num_posts="6" />
             </div>
         )

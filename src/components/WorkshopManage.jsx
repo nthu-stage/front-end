@@ -13,7 +13,11 @@ import{
     CardText,
     Row,
     Col,
+    ListGroup,
+    ListGroupItem
 } from 'reactstrap';
+import WorkshopAttendeeList from './WorkshopManageAttendeeList';
+import WorkshopManagePropose from './WorkshopManagePropose';
 class WorkshopManage extends Component{
     constructor(props){
         super(props);
@@ -26,6 +30,7 @@ class WorkshopManage extends Component{
     
 
     render(){
+        const attendees = [];
 
         return(
             <div className="container">
@@ -39,18 +44,10 @@ class WorkshopManage extends Component{
                 </Row>
                 <TabContent activeTab={this.state.activeTab}>
                     <TabPane tabId="1">
-                        <Row>
-                            <Col sm="12">
-                                <h4>Tab 1 Contents</h4>
-                            </Col>
-                        </Row>
+                        <WorkshopAttendeeList attendees={attendees}/>
                     </TabPane>
                     <TabPane tabId="2">
-                        <Row>
-                            <Col sm="12">
-                                <h4>Tab 2 Contents</h4>
-                            </Col>
-                        </Row>
+                        <WorkshopManagePropose />
                     </TabPane>
                 </TabContent>
             </div>

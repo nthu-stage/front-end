@@ -13,7 +13,7 @@ import{
 } from 'reactstrap';
 import './Propose.css';
 
-class Propose extends Component{
+class WorkshopManagePropose extends Component{
     constructor(props){
         super(props);
         this.inputUrl = null; ////
@@ -62,7 +62,7 @@ class Propose extends Component{
                             <Label for="speachTitle">SpeachTitle</Label>
                             <Input type="textarea" name="speachTitle" id="speachTitle" placeholder="speachTitle" />
                         </FormGroup>
-                        <Button color="primary" size="lg" block onClick={this.handleSubmit}>我要提案</Button>
+                        <Button color="primary" size="lg" block onlick={this.handleSubmit}>我要提案</Button>
                     </Form>
                 </div>
             </div>
@@ -78,10 +78,5 @@ function mapStateToProps(state) {
     }
 }
 
-function mapDispatchToProps(dispatch) {
-    return bindActionCreators({
-       // wsSubmit:wsSubmit
-    }, dispatch);
-}
 
-export default connect(mapStateToProps, mapDispatchToProps)(Propose);
+export default connect(mapStateToProps)(WorkshopManagePropose);
