@@ -1,0 +1,16 @@
+ .workshop-list-item-content {
+    height: 150px;
+    overflow: hidden;
+ }
+
+ .workshop-list-item-img {
+    height: 180px;
+ }
+
+ a.unlink {
+   color: inherit;
+ }
+ a.unlink:hover {
+   color: inherit;
+   text-decoration: inherit;
+ }

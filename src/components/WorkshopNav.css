@@ -1,0 +1,7 @@
+.workshop-nav-filter {
+    width: 100%;
+}
+
+.workshop-nav-filter > button {
+    width: 50%;
+}

@@ -1,0 +1,12 @@
+.idea-list-item {
+    cursor: pointer;
+}
+
+.idea-list-item-content {
+   height: 150px;
+   overflow: hidden;
+}
+
+.idea-list-item-img {
+   height: 180px;
+}
