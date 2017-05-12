@@ -1,0 +1,11 @@
+.profile-available > tbody > tr {
+    height: 50px;
+}
+
+.available {
+    background-color: #5cb85c;
+}
+
+.not-available {
+    background-color: #c9302c;
+}
