@@ -27,10 +27,10 @@ class WorkshopManage extends Component{
         };
     }
     
-    
 
     render(){
         const attendees = [];
+        //const {attendees} = this.props.getAttendees()
 
         return(
             <div className="container">
