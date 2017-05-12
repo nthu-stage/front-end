@@ -51,8 +51,8 @@ class WorkshopPage extends Component{
                 <hr/>
                 <div className="workshop-info">
                     <ListGroup>
-                        <ListGroupItem>日期: {date}</ListGroupItem>
-                        <ListGroupItem>時間: {startTime} - {endTime}</ListGroupItem>
+                        <ListGroupItem>開始時間: {start_datetime}</ListGroupItem>
+                        <ListGroupItem>結束時間: {end_datetime}</ListGroupItem>
                         <ListGroupItem>地點: {location}</ListGroupItem>
                         <ListGroupItem>人數上限: {max_number}</ListGroupItem>
                         <ListGroupItem>演講人</ListGroupItem>
