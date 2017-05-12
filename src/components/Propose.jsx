@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import FacebookProvider, { Comments } from 'react-facebook';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import{
@@ -9,9 +8,19 @@ import{
     Form,
     FormGroup,
     Col,
-    
 } from 'reactstrap';
+import {
+    ppSubmit,
+    ppUrl,
+    ppDate,
+    ppTime,
+    ppLocation,
+    ppSpeaker,
+    ppTitle,
+    ppContent
+} from '../actions/propose.js';
 import './Propose.css';
+
 
 class Propose extends Component{
     constructor(props){
@@ -33,16 +42,12 @@ class Propose extends Component{
             speaker:'',
             SpeachTitle:'',
             content:'',
-
         }
     }
 
     render(){
-        const date = '6/3';
-        const time = '20:00';
-        const location = 'NTHU';
-        const speaker = 'LALALAL';
-        const {imgUrl} = this.state;
+        const {imgUrl,date,time,location,speaker,speachTitle,content} = this.state;
+        console.log(this.props);
         return(
             <div className="container propose">
                 <div>
@@ -93,40 +98,55 @@ class Propose extends Component{
     handleInputChange(e){
         const url = e.target.value;
         console.log(url);
-        this.setState({imgUrl:url});
+        this.setState({
+            imgUrl:url
+        });
     }
     handleDateChange(e){
         const date = e.target.value;
         console.log(date);
-        this.setState({date:date});
+        this.setState({
+            date:date
+        });
     }
     handleTimeChange(e){
         const time = e.target.value;
         console.log(time);
-        this.setState({time:time});
+        this.setState({
+            time:time
+        });
     }
     handleLocChange(e){
         const location = e.target.value;
         console.log(location);
-        this.setState({location:location});
+        this.setState({
+            location:location
+        });
     }
     handleSpeakerChange(e){
         const speaker = e.target.value;
         console.log(speaker);
-        this.setState({speaker:speaker});
+        this.setState({
+            speaker:speaker
+        });
     }
     handleSpeachTitleChange(e){
         const speachTitle = e.target.value;
         console.log(speachTitle);
-        this.setState({speachTitle:speachTitle});
+        this.setState({
+            speachTitle:speachTitle
+        });
     }
     handleContentChange(e){
         const content = e.target.value;
         console.log(content);
-        this.setState({content:content});
+        this.setState({
+            content:content
+        });
     }
     handleSubmit(){
-        this.setState({...this.state});
+        const {imgUrl,date,time,location,speaker,speachTitle,content} = this.state;
+        this.props.ppSubmit(imgUrl,date,time,location,speaker,speachTitle,content);
     }
     
 
@@ -134,13 +154,13 @@ class Propose extends Component{
 
 function mapStateToProps(state) {
     return {
-        //ws:state.ws,
+        pp:state.pp,
     }
 }
 
 function mapDispatchToProps(dispatch) {
     return bindActionCreators({
-       // wsSubmit:wsSubmit
+        ppSubmit:ppSubmit,
     }, dispatch);
 }
 
