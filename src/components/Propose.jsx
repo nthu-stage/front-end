@@ -1,6 +1,6 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import FacebookProvider, { Comments } from 'react-facebook';
-import {connect} from 'react-redux';
+import { connect } from 'react-redux';
 import {bindActionCreators} from 'redux';
 import{
     Button,
@@ -9,7 +9,7 @@ import{
     Form,
     FormGroup,
     Col,
-    
+
 } from 'reactstrap';
 import './Propose.css';
 
@@ -26,7 +26,7 @@ class Propose extends Component{
         this.handleContentChange = this.handleContentChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
         this.state = {
-            imgUrl : "https://images-cdn.9gag.com/images/thumbnail-facebook/9155182_1388247030.7007_yqylen_n.jpg", 
+            imgUrl : "https://images-cdn.9gag.com/images/thumbnail-facebook/9155182_1388247030.7007_yqylen_n.jpg",
             date:'',
             time:'',
             location:'',
@@ -63,7 +63,7 @@ class Propose extends Component{
                         <FormGroup>
                             <Label for="date">Date</Label>
                             <Input type="date" name="date" id="date" placeholder="date placeholder" onChange={this.handleDateChange}/>
-                        </FormGroup>    
+                        </FormGroup>
                         <FormGroup>
                             <Label for="time">Time</Label>
                             <Input type="time" name="time" id="time" placeholder="time placeholder" onChange={this.handleTimeChange}/>
@@ -128,7 +128,7 @@ class Propose extends Component{
     handleSubmit(){
         this.setState({...this.state});
     }
-    
+
 
 }
 

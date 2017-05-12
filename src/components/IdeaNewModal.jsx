@@ -1,13 +1,8 @@
-import React, {Component} from 'react';
-import {connect} from 'react-redux';
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter, Form, FormGroup, Label, Input } from 'reactstrap';
 
 class IdeaNewModal extends Component {
-    constructor(props) {
-        super(props);
-
-    }
-
     render() {
         return (
             <Modal isOpen={this.props.modal} toggle={this.props.toggle}>
