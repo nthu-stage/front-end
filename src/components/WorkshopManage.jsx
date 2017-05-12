@@ -4,17 +4,10 @@ import {bindActionCreators} from 'redux';
 import{
     TabContent,
     TabPane,
-    Nav,
-    NavItem,
-    NavLink,
-    Card,
     Button,
-    CardTitle,
-    CardText,
     Row,
     Col,
-    ListGroup,
-    ListGroupItem
+
 } from 'reactstrap';
 import WorkshopAttendeeList from './WorkshopManageAttendeeList';
 import WorkshopManagePropose from './WorkshopManagePropose';

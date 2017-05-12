@@ -1,5 +1,5 @@
 const initPropose={
-    imgUrl:'',
+    img_url:'',
     date:'',
     time:'',
     location:'',
@@ -12,7 +12,7 @@ export default function (state = initPropose, action) {
         case '@PROPOSE/PROPOSE_SUBMIT':
             return {
                 ...state,
-                imgUrl:action.img,
+                img_url:action.img,
                 time:action.time,
                 location:action.location,
                 speaker:action.speaker,
@@ -23,7 +23,7 @@ export default function (state = initPropose, action) {
         case '@PROPOSE/PROPOSE_UPDATE':
             return {
                 ...state,
-                imgUrl:action.img,
+                img_url:action.img,
                 time:action.time,
                 location:action.location,
                 speaker:action.speaker,
