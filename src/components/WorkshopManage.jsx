@@ -44,10 +44,10 @@ class WorkshopManage extends Component{
                 </Row>
                 <TabContent activeTab={this.state.activeTab}>
                     <TabPane tabId="1">
-                        <WorkshopAttendeeList attendees={attendees}/>
+                        <WorkshopManagePropose />
                     </TabPane>
                     <TabPane tabId="2">
-                        <WorkshopManagePropose />
+                        <WorkshopAttendeeList attendees={attendees}/>
                     </TabPane>
                 </TabContent>
             </div>

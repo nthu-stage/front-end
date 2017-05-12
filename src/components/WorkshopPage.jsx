@@ -69,7 +69,7 @@ class WorkshopPage extends Component{
 }
 function mapStateToProps(state) {
     return {
-        ws:state.ws,
+        wsp:state.wsp,
     }
 }
 
