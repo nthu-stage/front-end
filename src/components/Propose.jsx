@@ -11,13 +11,6 @@ import {
 } from 'reactstrap';
 import {
     ppSubmit,
-    ppUrl,
-    ppDate,
-    ppTime,
-    ppLocation,
-    ppSpeaker,
-    ppTitle,
-    ppContent
 } from '../actions/propose.js';
 import './Propose.css';
 
@@ -59,11 +52,11 @@ class Propose extends Component{
     }
 
     render(){
-        const {imgUrl,date,time,location,speaker,speachTitle,content} = this.state;
+        const {imgUrl} = this.state;
         return(
             <div className="container propose">
                 <div>
-                    <img src={imgUrl} className="coverImg" />
+                    <img src={imgUrl} className="coverImg" alt='' />
                 </div>
                 <Form>
                     <FormGroup row>
@@ -95,11 +88,11 @@ class Propose extends Component{
                         </FormGroup>
                         <FormGroup>
                             <Label for="max_number">最大人數</Label>
-                            <Input type="text" name="max_number" id="max_number" onChange={this.handleMaxChange} required/>
+                            <Input type="number" name="max_number" id="max_number" onChange={this.handleMaxChange} required/>
                         </FormGroup>
                         <FormGroup>
                             <Label for="min_number">最少人數</Label>
-                            <Input type="text" name="min_number" id="min_number" onChange={this.handleMinChange} required/>
+                            <Input type="number" name="min_number" id="min_number" onChange={this.handleMinChange} required/>
                         </FormGroup>
                         <FormGroup required>
                             <Label for="location">地點</Label>
@@ -107,7 +100,7 @@ class Propose extends Component{
                         </FormGroup>
                         <FormGroup>
                             <Label for="price">價格</Label>
-                            <Input type="text" name="price" id="price" onChange={this.handlePriceChange} required/>
+                            <Input type="number" name="price" id="price" onChange={this.handlePriceChange} required/>
                         </FormGroup>
                         <FormGroup>
                             <Label for="title">主題</Label>
@@ -218,8 +211,8 @@ class Propose extends Component{
             introduction,
             price} = this.state;
         const start_datetime =`${date} ${startTime}`;
-        const end_datetime = `${date} ${startTime}`;
-        this.props.ppSubmit(imgUrl,date,start_datetime,end_datetime,location,content,title,min_number,max_number,deadline,introduction,price);
+        const end_datetime = `${date} ${endTime}`;
+        this.props.ppSubmit(imgUrl,start_datetime,end_datetime,location,content,title,min_number,max_number,deadline,introduction,price);
     }
 
 

@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import FacebookProvider, { Comments } from 'react-facebook';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import{
@@ -19,35 +18,53 @@ class WorkshopManagePropose extends Component{
         this.inputUrl = null; ////
         this.handleInputChange = this.handleInputChange.bind(this);
         this.handleDateChange = this.handleDateChange.bind(this);
-        this.handleTimeChange = this.handleTimeChange.bind(this);
+        this.handleStartTimeChange = this.handleStartTimeChange.bind(this);
+        this.handleEndTimeChange = this.handleEndTimeChange.bind(this);
+        this.handleIntroChange = this.handleIntroChange.bind(this);
+        this.handleMaxChange = this.handleMaxChange.bind(this);
+        this.handleMinChange = this.handleMinChange.bind(this);
+        this.handlePriceChange = this.handlePriceChange.bind(this);
         this.handleLocChange = this.handleLocChange.bind(this);
-        this.handleSpeakerChange = this.handleSpeakerChange.bind(this);
-        this.handleSpeachTitleChange = this.handleSpeachTitleChange.bind(this);
+        this.handleTitleChange = this.handleTitleChange.bind(this);
+        this.handleIntroChange = this.handleIntroChange.bind(this);
         this.handleContentChange = this.handleContentChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
         this.state = {
             imgUrl : "https://images-cdn.9gag.com/images/thumbnail-facebook/9155182_1388247030.7007_yqylen_n.jpg", 
             date:'',
-            time:'',
-            location:'',
-            speaker:'',
-            SpeachTitle:'',
-            content:'',
+            startTime:'',
+            endTime:'',
+            location:'1',
+            content:'1',
+            title: 'kkkkkkk',
+            start_datetime: '2017-11-11 18:11',
+            end_datetime: '',
+            min_number: '',
+            max_number: '888',
+            deadline: '2017-11-11',
+            introduction: 'haha',
+            price: '10000',
         }
     }
     componentDidMount(){
         ///this.props.getPropose(propose_id);
-        this.setState({
-            ...this.props.pp,
-        })
+        // this.setState({
+        //     ...this.props.pp,
+        // })
     }
 
     render(){
-        const {imgUrl,date,time,location,speaker,speachTitle,content} = this.state;
+        const {imgUrl,start_datetime,end_datetime,location,content,title,min_number,max_number,deadline,introduction,price} = this.state;
+        const timeForStart = start_datetime.split(' ');
+        const date = timeForStart[0];
+        const startTime = timeForStart[1];
+        const timeForEnd = end_datetime.split(' ');
+        const endTime = timeForEnd[1];
+        console.log(this.state);
         return(
             <div className="container propose">
                 <div>
-                    <img src={imgUrl} className="coverImg" />
+                    <img src={imgUrl} className="coverImg" alt=''/>
                 </div>
                 <Form>
                     <FormGroup row>
@@ -62,30 +79,50 @@ class WorkshopManagePropose extends Component{
                 <div>
                     <Form>
                         <FormGroup>
-                            <Label for="date">Date</Label>
-                            <Input type="date" name="date" id="date" placeholder="date placeholder" value={date} onChange={this.handleDateChange}/>
+                            <Label for="date">日期</Label>
+                            <Input type="date" name="date" id="date"  value={date} onChange={this.handleDateChange} required/>
                         </FormGroup>    
                         <FormGroup>
-                            <Label for="time">Time</Label>
-                            <Input type="time" name="time" id="time" placeholder="time placeholder" value={time} onChange={this.handleTimeChange}/>
+                            <Label for="startTime">開始時間</Label>
+                            <Input type="time" name="startTime" id="startTime" value={startTime} onChange={this.handleStartTimeChange} required/>
                         </FormGroup>
                         <FormGroup>
-                            <Label for="location">Location</Label>
-                            <Input type="text" name="location" id="location" placeholder="location" value={location} onChange={this.handleLocChange}/>
+                            <Label for="endTime">結束時間</Label>
+                            <Input type="time" name="endTime" id="endTime" value={endTime} onChange={this.handleEndTimeChange} required/>
                         </FormGroup>
                         <FormGroup>
-                            <Label for="speaker">Speaker</Label>
-                            <Input type="text" name="speaker" id="speaker" placeholder="speaker" value={speaker} onChange={this.handleSpeakerChange} />
+                            <Label for="deadline">截止日期</Label>
+                            <Input type="date" name="deadline" id="deadline" value={deadline} onChange={this.handleDeadlineChange} required/>
                         </FormGroup>
                         <FormGroup>
-                            <Label for="speachTitle">SpeachTitle</Label>
-                            <Input type="text" name="speachTitle" id="speachTitle" placeholder="speachTitle" value={speachTitle} onChange={this.handleSpeachTitleChange} />
+                            <Label for="max_number">最大人數</Label>
+                            <Input type="number" name="max_number" id="max_number" value={max_number} onChange={this.handleMaxChange} required/>
                         </FormGroup>
                         <FormGroup>
-                            <Label for="content">SpeachTitle</Label>
-                            <Input type="textarea" name="content" id="content" placeholder="content" rows="10" value={content} onChange={this.handleContentChange} />
+                            <Label for="min_number">最少人數</Label>
+                            <Input type="number" name="min_number" id="min_number" value={min_number} onChange={this.handleMinChange} required/>
                         </FormGroup>
-                        <Button color="primary" size="lg" block onClick={this.handleSubmit}>確認提交修改</Button>
+                        <FormGroup required>
+                            <Label for="location">地點</Label>
+                            <Input type="text" name="location" id="location" value={location} onChange={this.handleLocChange} required/>
+                        </FormGroup>
+                        <FormGroup>
+                            <Label for="price">價格</Label>
+                            <Input type="number" name="price" id="price" value={price} onChange={this.handlePriceChange} required/>
+                        </FormGroup>
+                        <FormGroup>
+                            <Label for="title">主題</Label>
+                            <Input type="text" name="title" id="title" value={title} onChange={this.handleTitleChange} required/>
+                        </FormGroup>
+                        <FormGroup>
+                            <Label for="introduction">簡介</Label>
+                            <Input type="textarea" name="introduction" id="introduction" rows="5" value={introduction} onChange={this.handleIntroChange} required/>
+                        </FormGroup>
+                        <FormGroup>
+                            <Label for="content">詳細介紹</Label>
+                            <Input type="textarea" name="content" id="content" rows="10" value={content} onChange={this.handleContentChange} required/>
+                        </FormGroup>
+                        <Button color="primary" type="submit" size="lg" block onClick={this.handleSubmit}>提交修改</Button>
                     </Form>
                 </div>
             </div>
@@ -105,11 +142,36 @@ class WorkshopManagePropose extends Component{
             date:date
         });
     }
-    handleTimeChange(e){
+    handleStartTimeChange(e){
         const time = e.target.value;
         console.log(time);
         this.setState({
-            time:time
+            startTime:time
+        });
+    }
+    handleEndTimeChange(e){
+        const time = e.target.value;
+        console.log(time);
+        this.setState({
+            endTime:time
+        });
+    }
+    handleDeadlineChange(e){
+        const deadline = e.target.value;
+        this.setState({
+            deadline:deadline,
+        });
+    }
+    handleMaxChange(e){
+        const n = e.target.value;
+        this.setState({
+            max_number: n,
+        });
+    }
+    handleMinChange(e){
+        const n = e.target.value;
+        this.setState({
+            min_number: n,
         });
     }
     handleLocChange(e){
@@ -119,31 +181,47 @@ class WorkshopManagePropose extends Component{
             location:location
         });
     }
-    handleSpeakerChange(e){
-        const speaker = e.target.value;
-        console.log(speaker);
+    handlePriceChange(e){
+        const p = e.target.value;
         this.setState({
-            speaker:speaker
+            price:p
         });
     }
-    handleSpeachTitleChange(e){
-        const speachTitle = e.target.value;
-        console.log(speachTitle);
+    handleTitleChange(e){
+        const title = e.target.value;
         this.setState({
-            speachTitle:speachTitle
+            title:title
+        });
+    }
+    handleIntroChange(e){
+        const content = e.target.value;
+        this.setState({
+            introduction:content
         });
     }
     handleContentChange(e){
         const content = e.target.value;
-        console.log(content);
         this.setState({
             content:content
         });
     }
     handleSubmit(){
-        const {imgUrl,date,time,location,speaker,speachTitle,content} = this.state;
-        // this.props.ppUpdate(imgUrl,date,time,location,speaker,speachTitle,content,propose_id);
-        this.props.ppUpdate(imgUrl,date,time,location,speaker,speachTitle,content);
+        const {imgUrl,
+            date,
+            startTime,
+            endTime,
+            location,
+            content,
+            title,
+            min_number,
+            max_number,
+            deadline,
+            introduction,
+            price} = this.state;
+        const start_datetime =`${date} ${startTime}`;
+        const end_datetime = `${date} ${endTime}`;
+        this.props.ppUpdate(imgUrl,date,start_datetime,end_datetime,location,content,title,min_number,max_number,deadline,introduction,price);
+        //undone
     }
 }
 
