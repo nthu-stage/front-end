@@ -5,7 +5,7 @@ import WorkshopManageReducer from './reducer_workshopManage';
 import ProposeReducer from './reducer_propose';
 const rootReducer = combineReducers({
     fb: FbReducer,
-    ws: WorkshopPageReducer,
+    wsp: WorkshopPageReducer,
     wm: WorkshopManageReducer,
     pp: ProposeReducer,
 });
