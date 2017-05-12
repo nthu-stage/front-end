@@ -1,5 +1,6 @@
-import React, {Component} from 'react';
-import {connect} from 'react-redux';
+import React, { Component } from 'react';
+import { BarChart, Bar, XAxis, Tooltip } from 'recharts';
+import { connect } from 'react-redux';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter, Form, FormGroup, Label, Input, TabContent, TabPane } from 'reactstrap';
 
 import './IdeaViewEditModal.css';
@@ -11,6 +12,13 @@ class IdeaViewEditModal extends Component {
         this.tabToggle = this.tabToggle.bind(this);
         this.state = {
             activeTab: '1',
+            availableTime: [
+                {name: '一早', people: 12},
+                {name: '二午', people: 8},
+                {name: '三晚', people: 4},
+                {name: '四晚', people: 3},
+                {name: '五晚', people: 1},
+            ],
         };
     }
 
@@ -35,6 +43,23 @@ class IdeaViewEditModal extends Component {
                             <p>
                                 希望可以速寫
                             </p>
+                            <p>
+                                範例網頁連結：http://google.com
+                            </p>
+                            <p>
+                                範例圖片連結：http://google.com
+                            </p>
+                            <div className="text-center mt-3">
+                                <h6>大家有空的時間</h6>
+                                <BarChart width={300}
+                                          height={100}
+                                          data={this.state.availableTime}
+                                          className="idea-view-view-modal-chart">
+                                    <XAxis dataKey="name"/>
+                                    <Bar dataKey="people" fill="#8884d8" />
+                                    <Tooltip />
+                                </BarChart>
+                            </div>
                         </TabPane>
                         <TabPane tabId="2">
                             <Form>
@@ -63,7 +88,7 @@ class IdeaViewEditModal extends Component {
                         <TabPane tabId="1">
                             <div className="row">
                                 <div className="col">
-                                    <Button color="secondary" onClick={(event) => this.tabToggle('2')}>編輯</Button>{' '}
+                                    <Button color="secondary" onClick={(event) => this.tabToggle('2')}>管理</Button>{' '}
                                     <i className="fa fa-lg fa-heart-o"> 12</i>
                                 </div>
                                 <div className="col text-right">
