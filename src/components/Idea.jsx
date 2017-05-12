@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 
 import IdeaNav from './IdeaNav'
 import IdeaList from './IdeaList'

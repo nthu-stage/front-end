@@ -1,15 +1,10 @@
 import React, { Component } from 'react';
-import { browserHistory } from 'react-router';
 import { Link } from 'react-router-dom';
-import { Card, CardImg, CardText, CardBlock, CardTitle, Progress, Button } from 'reactstrap';
+import { Card, CardText, CardBlock, CardTitle } from 'reactstrap';
 
 import './IdeaListItem.css';
 
 export default class IdeaListItem extends Component {
-    constructor(props) {
-        super(props);
-    }
-
     render() {
         return (
             <div className="col col-12 col-sm-6 col-md-4 col-lg-3 my-2">

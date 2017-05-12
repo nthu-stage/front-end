@@ -1,5 +1,5 @@
-import React, {Component} from 'react';
-import {connect} from 'react-redux';
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import { Button, Form, FormGroup, ButtonGroup, Input } from 'reactstrap';
 
 import IdeaNewModal from './IdeaNewModal';

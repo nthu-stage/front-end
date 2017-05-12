@@ -1,7 +1,6 @@
-import React, {Component} from 'react';
-import { Table, Button } from 'reactstrap';
-import {Link} from 'react-router-dom';
-import {connect} from 'react-redux';
+import React, { Component } from 'react';
+import { Table } from 'reactstrap';
+import { connect } from 'react-redux';
 
 import './ProfileAvailable.css';
 
@@ -21,7 +20,7 @@ class ProfileAvailable extends Component {
             let time = this.state.availableTime[i + idx];
             arr.push(
                 <td key={i + idx}
-                    className={time == 1 ? "available" : "not-available"}
+                    className={time === 1 ? "available" : "not-available"}
                     onClick={event => {
                         let availableTime = this.state.availableTime.slice();
                         availableTime[i + idx] = 1 - availableTime[i + idx];

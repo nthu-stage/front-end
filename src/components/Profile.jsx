@@ -1,15 +1,10 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import { Table, Button } from 'reactstrap';
-import {Link} from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 import ProfileAvailable from './ProfileAvailable'
 
 export default class Profile extends Component {
-    constructor(props) {
-        super(props);
-
-    }
-
     render() {
         return (
             <div className="container text-left">
