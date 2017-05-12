@@ -1,7 +1,7 @@
-import React, {Component} from 'react';
-import {connect} from 'react-redux';
-import {bindActionCreators} from 'redux';
-import{
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import {
     Button,
     Input,
     Label,
@@ -40,7 +40,7 @@ class Propose extends Component{
         this.handleContentChange = this.handleContentChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
         this.state = {
-            imgUrl : "https://images-cdn.9gag.com/images/thumbnail-facebook/9155182_1388247030.7007_yqylen_n.jpg", 
+            imgUrl : "https://images-cdn.9gag.com/images/thumbnail-facebook/9155182_1388247030.7007_yqylen_n.jpg",
             date:'',
             startTime:'',
             endTime:'',
@@ -221,7 +221,7 @@ class Propose extends Component{
         const end_datetime = `${date} ${startTime}`;
         this.props.ppSubmit(imgUrl,date,start_datetime,end_datetime,location,content,title,min_number,max_number,deadline,introduction,price);
     }
-    
+
 
 }
 

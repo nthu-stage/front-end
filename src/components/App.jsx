@@ -1,7 +1,6 @@
-import React, {Component} from 'react';
-import { browserHistory } from 'react-router';
+import React, { Component } from 'react';
 import createBrowserHistory from 'history/createBrowserHistory';
-import {BrowserRouter as Router, Route, Link} from 'react-router-dom';
+import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 import {
     Collapse,
     Navbar,
@@ -11,7 +10,7 @@ import {
     NavItem,
     NavLink
 } from 'reactstrap';
-import FacebookProvider, { Login } from 'react-facebook';
+import FacebookProvider from 'react-facebook';
 
 import NavbarLogin from './NavbarLogin';
 import Workshop from './Workshop';
