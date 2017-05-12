@@ -14,4 +14,7 @@ h3{
 }
 .description{
     text-align: left;
+    overflow: auto;
+    word-break: break-all;
+    white-space: pre-wrap;
 }
