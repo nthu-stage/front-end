@@ -17,7 +17,7 @@ class WorkshopManagePropose extends Component{
         super(props);
         this.inputUrl = null; ////
         this.handleInputChange = this.handleInputChange.bind(this);
-        this.handleDateChange = this.handleDateChange.bind(this);
+        this.handleDateChange = this.handleStartDateChange.bind(this);
         this.handleStartTimeChange = this.handleStartTimeChange.bind(this);
         this.handleEndTimeChange = this.handleEndTimeChange.bind(this);
         this.handleIntroChange = this.handleIntroChange.bind(this);
@@ -31,7 +31,8 @@ class WorkshopManagePropose extends Component{
         this.handleSubmit = this.handleSubmit.bind(this);
         this.state = {
             img_url : "https://images-cdn.9gag.com/images/thumbnail-facebook/9155182_1388247030.7007_yqylen_n.jpg", 
-            date:'',
+            start_date:'',
+            end_date:'',
             startTime:'',
             endTime:'',
             location:'1',
@@ -56,9 +57,10 @@ class WorkshopManagePropose extends Component{
     render(){
         const {img_url,start_datetime,end_datetime,location,content,title,min_number,max_number,deadline,introduction,price} = this.state;
         const timeForStart = start_datetime.split(' ');
-        const date = timeForStart[0];
+        const start_date = timeForStart[0];
         const startTime = timeForStart[1];
         const timeForEnd = end_datetime.split(' ');
+        const end_date = timeForEnd[0];
         const endTime = timeForEnd[1];
         console.log(this.state);
         return(
@@ -79,13 +81,17 @@ class WorkshopManagePropose extends Component{
                 <div>
                     <Form>
                         <FormGroup>
-                            <Label for="date">日期</Label>
-                            <Input type="date" name="date" id="date"  value={date} onChange={this.handleDateChange} required/>
+                            <Label for="startDate">開始日期</Label>
+                            <Input type="date" name="startDate" id="startDate" value={start_date} onChange={this.handleStartDateChange} required/>
                         </FormGroup>    
                         <FormGroup>
                             <Label for="startTime">開始時間</Label>
                             <Input type="time" name="startTime" id="startTime" value={startTime} onChange={this.handleStartTimeChange} required/>
                         </FormGroup>
+                        <FormGroup>
+                            <Label for="endDate">結束日期</Label>
+                            <Input type="date" name="endDate" id="endDate" value={end_date} onChange={this.handleEndDateChange} required/>
+                        </FormGroup> 
                         <FormGroup>
                             <Label for="endTime">結束時間</Label>
                             <Input type="time" name="endTime" id="endTime" value={endTime} onChange={this.handleEndTimeChange} required/>
@@ -135,11 +141,18 @@ class WorkshopManagePropose extends Component{
             img_url:url
         });
     }
-    handleDateChange(e){
+    handleStartDateChange(e){
         const date = e.target.value;
         console.log(date);
         this.setState({
-            date:date
+            start_date:date
+        });
+    }
+    handleEndDateChange(e){
+        const date = e.target.value;
+        console.log(date);
+        this.setState({
+            end_date:date
         });
     }
     handleStartTimeChange(e){
@@ -207,7 +220,8 @@ class WorkshopManagePropose extends Component{
     }
     handleSubmit(){
         const {img_url,
-            date,
+            start_date,
+            end_date,
             startTime,
             endTime,
             location,
@@ -218,9 +232,9 @@ class WorkshopManagePropose extends Component{
             deadline,
             introduction,
             price} = this.state;
-        const start_datetime =`${date} ${startTime}`;
-        const end_datetime = `${date} ${endTime}`;
-        this.props.ppUpdate(img_url,date,start_datetime,end_datetime,location,content,title,min_number,max_number,deadline,introduction,price);
+        const start_datetime =`${start_date} ${startTime}`;
+        const end_datetime = `${end_date} ${endTime}`;
+        this.props.ppUpdate(img_url,start_datetime,end_datetime,location,content,title,min_number,max_number,deadline,introduction,price);
         //undone
     }
 }

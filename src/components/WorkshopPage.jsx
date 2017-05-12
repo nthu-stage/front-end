@@ -12,7 +12,6 @@ import wspSubmit from '../actions/workshopPage.js';
 class WorkshopPage extends Component{
     constructor(props){
         super(props);
-
         this.handleSubmit = this.handleSubmit.bind(this);
         this.state = {
             img_url : "https://images-cdn.9gag.com/images/thumbnail-facebook/9155182_1388247030.7007_yqylen_n.jpg", 
@@ -20,14 +19,18 @@ class WorkshopPage extends Component{
             startTime:'',
             endTime:'',
             location:'1',
-            content:'基於安全性高的考量，本校校園公共區無線區域網路認證方式主要採用 802.1x+PEAP (SSID：nthupeap 或 eduroam) ，但因用戶端需額外進行設定，為了讓使用者可以更便捷使用無線網路服務，目前公共區無線網路已建置雙入口認證機制，除了保留原先 802.1x 認證方式外，亦可透過網頁認證方式 (如本系統，SSID：nthu-cc 或 TANetRoaming) 進行認證連線。',
+            content:`最初，大地守護神化身SPIDER並降臨地球，為審判揭開序幕。
+
+人類無止盡的摧殘，導致世界陷入黑暗渾沌，為了將地球從猖狂的人類手中救出、於是，守護神化身成SPIDER，並且在2016審判日降臨，企圖將地球焚為灰燼後重生成樂土Arcadia，但是SPIDER以鐳射掃描人類後，發現Raver皆有著善良美麗的心，不過這樣仍不夠，SPIDER決定以火焰與雷電作為武裝，再次襲擊地球，讓人類臣服於SPIDER之下。於是，SPIDER再次汲取能量、蓄勢待發，劃破天際的『Lighting閃電風暴』展開新的奏章⋯⋯
+
+2017年11月11-12日 Arcadia 再度入侵，將再度震撼您的感官神經！`,
             title: 'kkkkkkk',
             start_datetime: '2017-11-11 18:11',
             end_datetime: '',
             min_number: '',
             max_number: '888',
             deadline: '2017-11-11',
-            introduction: 'haha',
+            introduction: '2. 公開分享此貼文，並標註兩個人並留言 @____ @____ 5/12､5/13快來台大音樂節玩，還有台灣虎航機票可以抽！！！',
             price: '10000',
         }
     }
@@ -51,8 +54,8 @@ class WorkshopPage extends Component{
                 <hr/>
                 <div className="workshop-info">
                     <ListGroup>
-                        <ListGroupItem>日期: {date}</ListGroupItem>
-                        <ListGroupItem>時間: {startTime} - {endTime}</ListGroupItem>
+                        <ListGroupItem>開始時間: {start_datetime}</ListGroupItem>
+                        <ListGroupItem>結束時間: {end_datetime}</ListGroupItem>
                         <ListGroupItem>地點: {location}</ListGroupItem>
                         <ListGroupItem>人數上限: {max_number}</ListGroupItem>
                         <ListGroupItem>演講人</ListGroupItem>

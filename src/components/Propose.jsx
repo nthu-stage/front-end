@@ -20,7 +20,8 @@ class Propose extends Component{
         super(props);
         this.inputUrl = null; ////
         this.handleInputChange = this.handleInputChange.bind(this);
-        this.handleDateChange = this.handleDateChange.bind(this);
+        this.handleStartDateChange = this.handleStartDateChange.bind(this);
+        this.handleEndDateChange = this.handleEndDateChange.bind(this);
         this.handleStartTimeChange = this.handleStartTimeChange.bind(this);
         this.handleEndTimeChange = this.handleEndTimeChange.bind(this);
         this.handleIntroChange = this.handleIntroChange.bind(this);
@@ -34,7 +35,8 @@ class Propose extends Component{
         this.handleSubmit = this.handleSubmit.bind(this);
         this.state = {
             img_url : "https://images-cdn.9gag.com/images/thumbnail-facebook/9155182_1388247030.7007_yqylen_n.jpg",
-            date:'',
+            start_date:'',
+            end_date:'',
             startTime:'',
             endTime:'',
             location:'',
@@ -71,13 +73,17 @@ class Propose extends Component{
                 <div>
                     <Form>
                         <FormGroup>
-                            <Label for="date">日期</Label>
-                            <Input type="date" name="date" id="date" onChange={this.handleDateChange} required/>
+                            <Label for="startDate">開始日期</Label>
+                            <Input type="date" name="startDate" id="startDate" onChange={this.handleStartDateChange} required/>
                         </FormGroup>    
                         <FormGroup>
                             <Label for="startTime">開始時間</Label>
                             <Input type="time" name="startTime" id="startTime" onChange={this.handleStartTimeChange} required/>
                         </FormGroup>
+                        <FormGroup>
+                            <Label for="endDate">結束日期</Label>
+                            <Input type="date" name="endDate" id="endDate" onChange={this.handleEndDateChange} required/>
+                        </FormGroup> 
                         <FormGroup>
                             <Label for="endTime">結束時間</Label>
                             <Input type="time" name="endTime" id="endTime" onChange={this.handleEndTimeChange} required/>
@@ -127,11 +133,18 @@ class Propose extends Component{
             img_url:url
         });
     }
-    handleDateChange(e){
+    handleStartDateChange(e){
         const date = e.target.value;
         console.log(date);
         this.setState({
-            date:date
+            start_date:date
+        });
+    }
+    handleEndDateChange(e){
+        const date = e.target.value;
+        console.log(date);
+        this.setState({
+            end_date:date
         });
     }
     handleStartTimeChange(e){
@@ -199,7 +212,8 @@ class Propose extends Component{
     }
     handleSubmit(){
         const {img_url,
-            date,
+            start_date,
+            end_date,
             startTime,
             endTime,
             location,
@@ -210,8 +224,8 @@ class Propose extends Component{
             deadline,
             introduction,
             price} = this.state;
-        const start_datetime =`${date} ${startTime}`;
-        const end_datetime = `${date} ${endTime}`;
+        const start_datetime =`${start_date} ${startTime}`;
+        const end_datetime = `${end_date} ${endTime}`;
         this.props.ppSubmit(img_url,start_datetime,end_datetime,location,content,title,min_number,max_number,deadline,introduction,price);
     }
 
