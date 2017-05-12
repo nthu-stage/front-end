@@ -19,6 +19,7 @@ import Idea from './Idea';
 import WorkshopPage from './WorkshopPage';
 import Propose from './Propose';
 import Profile from './Profile';
+import WorkshopManage from './WorkshopManage';
 
 export default class App extends Component {
     constructor(props) {
@@ -67,6 +68,7 @@ export default class App extends Component {
                         <Route path="/wp" component={WorkshopPage} />
                         <Route path="/pp" component={Propose} />
                         <Route path="/pf" component={Profile} />
+                        <Route path="/wm" component={WorkshopManage} />
                     </div>
                 </FacebookProvider>
             </Router>
