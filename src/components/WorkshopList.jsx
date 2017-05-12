@@ -5,21 +5,21 @@ import WorkshopListItem from './WorkshopListItem';
 
 class WorkshopList extends Component {
     render() {
-        return (
-            <div className="row">
-                <WorkshopListItem />
-                <WorkshopListItem />
-                <WorkshopListItem />
-                <WorkshopListItem />
-            </div>
-        );
+        if (this.props.ws) {
+            return (
+                <div className="row">
+                    {this.props.ws.map(workshop => <WorkshopListItem key={workshop.id} {...workshop}/>)}
+                </div>
+            );
+        }
+        return <div></div>;
     }
 }
 
 
-function mapStateToProps(state) {
+function mapStateToProps({ ws }) {
     return {
-
+        ws,
     }
 }
 

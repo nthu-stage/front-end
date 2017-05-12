@@ -18,8 +18,7 @@ class NavbarLogin extends Component {
         this.state = {
             dropdownOpen: false
         };
-
-        console.log(this.props);
+        
         this.props.fbLogin(cookies.get('fb') || null);
 
         this.handleResponse = this.handleResponse.bind(this);
@@ -28,7 +27,6 @@ class NavbarLogin extends Component {
     }
 
     handleResponse(data) {
-        console.log(data);
         let { expiresIn, userID, signedRequest } = data.tokenDetail;
         let fb = { picture_url: data.profile.picture.data.url, userID, signedRequest };
         this.props.fbLogin(fb);
