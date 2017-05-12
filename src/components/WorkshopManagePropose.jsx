@@ -30,7 +30,7 @@ class WorkshopManagePropose extends Component{
         this.handleContentChange = this.handleContentChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
         this.state = {
-            imgUrl : "https://images-cdn.9gag.com/images/thumbnail-facebook/9155182_1388247030.7007_yqylen_n.jpg", 
+            img_url : "https://images-cdn.9gag.com/images/thumbnail-facebook/9155182_1388247030.7007_yqylen_n.jpg", 
             date:'',
             startTime:'',
             endTime:'',
@@ -54,7 +54,7 @@ class WorkshopManagePropose extends Component{
     }
 
     render(){
-        const {imgUrl,start_datetime,end_datetime,location,content,title,min_number,max_number,deadline,introduction,price} = this.state;
+        const {img_url,start_datetime,end_datetime,location,content,title,min_number,max_number,deadline,introduction,price} = this.state;
         const timeForStart = start_datetime.split(' ');
         const date = timeForStart[0];
         const startTime = timeForStart[1];
@@ -64,7 +64,7 @@ class WorkshopManagePropose extends Component{
         return(
             <div className="container propose">
                 <div>
-                    <img src={imgUrl} className="coverImg" alt=''/>
+                    <img src={img_url} className="coverImg" alt=''/>
                 </div>
                 <Form>
                     <FormGroup row>
@@ -132,7 +132,7 @@ class WorkshopManagePropose extends Component{
         const url = e.target.value;
         console.log(url);
         this.setState({
-            imgUrl:url
+            img_url:url
         });
     }
     handleDateChange(e){
@@ -206,7 +206,7 @@ class WorkshopManagePropose extends Component{
         });
     }
     handleSubmit(){
-        const {imgUrl,
+        const {img_url,
             date,
             startTime,
             endTime,
@@ -220,7 +220,7 @@ class WorkshopManagePropose extends Component{
             price} = this.state;
         const start_datetime =`${date} ${startTime}`;
         const end_datetime = `${date} ${endTime}`;
-        this.props.ppUpdate(imgUrl,date,start_datetime,end_datetime,location,content,title,min_number,max_number,deadline,introduction,price);
+        this.props.ppUpdate(img_url,date,start_datetime,end_datetime,location,content,title,min_number,max_number,deadline,introduction,price);
         //undone
     }
 }

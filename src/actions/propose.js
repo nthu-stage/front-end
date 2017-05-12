@@ -1,7 +1,7 @@
 export function ppSubmit(img,date,time,loc,speaker,title,content){
         return{
             type: '@PROPOSE/PROPOSE_SUBMIT',
-            imgUrl:img,
+            img_url:img,
             time:time,
             location:loc,
             speaker:speaker,
@@ -12,7 +12,7 @@ export function ppSubmit(img,date,time,loc,speaker,title,content){
 export function ppUpdate(img,date,time,loc,speaker,title,content,propose_id = '0'){
         return{
             type: '@PROPOSE/PROPOSE_UPDATE',
-            imgUrl:img,
+            img_url:img,
             time:time,
             location:loc,
             speaker:speaker,

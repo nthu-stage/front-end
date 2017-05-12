@@ -8,58 +8,68 @@ import{
     Button
 } from 'reactstrap';
 import './WorkshopPage.css';
-import wsSubmit from '../actions/workshopPage.js';
+import wspSubmit from '../actions/workshopPage.js';
 class WorkshopPage extends Component{
     constructor(props){
         super(props);
 
         this.handleSubmit = this.handleSubmit.bind(this);
+        this.state = {
+            img_url : "https://images-cdn.9gag.com/images/thumbnail-facebook/9155182_1388247030.7007_yqylen_n.jpg", 
+            date:'',
+            startTime:'',
+            endTime:'',
+            location:'1',
+            content:'基於安全性高的考量，本校校園公共區無線區域網路認證方式主要採用 802.1x+PEAP (SSID：nthupeap 或 eduroam) ，但因用戶端需額外進行設定，為了讓使用者可以更便捷使用無線網路服務，目前公共區無線網路已建置雙入口認證機制，除了保留原先 802.1x 認證方式外，亦可透過網頁認證方式 (如本系統，SSID：nthu-cc 或 TANetRoaming) 進行認證連線。',
+            title: 'kkkkkkk',
+            start_datetime: '2017-11-11 18:11',
+            end_datetime: '',
+            min_number: '',
+            max_number: '888',
+            deadline: '2017-11-11',
+            introduction: 'haha',
+            price: '10000',
+        }
     }
-
+    componentDidMount(){
+       // this.props.getWorkshop();///undone
+    }
     render(){
-        const date = '6/3';
-        const time = '20:00';
-        const location = 'NTHU';
-        const speaker = 'LALALAL';
+        const {img_url,start_datetime,end_datetime,location,content,title,min_number,max_number,deadline,introduction,price} = this.state;
+        const timeForStart = start_datetime.split(' ');
+        const date = timeForStart[0];
+        const startTime = timeForStart[1];
+        const timeForEnd = end_datetime.split(' ');
+        const endTime = timeForEnd[1];
+        const commentUrl = `www.nthu-stage/wp/100000`;
         return(
             <div className="container workshopPage">
                 <div>
-                    <img src="https://d2wq73xazpk036.cloudfront.net/media/27FB7F0C-9885-42A6-9E0C19C35242B5AC/A7BC70EF-2E93-47DA-A355C4B22039324E/thul-6818f8f2-2711-5159-9648-cc23606b037c.jpg?response-content-disposition=inline" className="coverImg" />
+                    <img src={img_url} className="coverImg" />
                 </div>
-                <h3>Title</h3>
+                <h3>{title}</h3>
                 <hr/>
                 <div className="workshop-info">
                     <ListGroup>
-                        <ListGroupItem>日期</ListGroupItem>
-                        <ListGroupItem>時間</ListGroupItem>
-                        <ListGroupItem>地點</ListGroupItem>
+                        <ListGroupItem>日期: {date}</ListGroupItem>
+                        <ListGroupItem>時間: {startTime} - {endTime}</ListGroupItem>
+                        <ListGroupItem>地點: {location}</ListGroupItem>
+                        <ListGroupItem>人數上限: {max_number}</ListGroupItem>
                         <ListGroupItem>演講人</ListGroupItem>
                     </ListGroup>
                 </div>
-                <h3>Description</h3>
+                <h3>簡介</h3>
                 <hr/>
                 <div className="description">
-                    <p>本 Seven＆i Holdings Co.（小七的母公司）
-                        將以33億美元收購1000家美國便利店和加油站
-                        實現2019年的10,000家門店計劃！
-
-                        支付寶母公司『螞蟻金服』用戶超過4.5 億
-                        近期計畫合併號稱「東南亞亞馬遜」的電商網站 Lazada
-                        旗下線上支付平臺 helloPay，登陸東南亞！
-
-
-                        在競爭激烈的時代，所需整合相互資源的關鍵，
-                        談判溝通的能力就顯得更為重要！
-
-                        談判成功與否，使用框架便是關鍵。
-                        巴菲特重視的競爭優勢、執行團隊、管理階層、企業文化，
-                        便是談判框架的態度、行為與過程。
-
-                        如何透過談判維持個人和企業競爭優勢？
-                    </p>
+                    <p>{introduction}</p>
+                </div>
+                <h3>內容</h3>
+                <hr/>
+                <div className="description">
+                    <p>{content}</p>
                 </div>
                 <Button color="primary" size="lg" block onClick={this.handleSubmit}>我想要報名!!!</Button>
-                <Comments href="http://www.facebook.com" width="100%" num_posts="6" />
+                <Comments href={commentUrl} width="100%" num_posts="6" />
             </div>
         )
     }
@@ -75,7 +85,7 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
     return bindActionCreators({
-        wsSubmit:wsSubmit
+        wspSubmit:wspSubmit
     }, dispatch);
 }
 

@@ -33,7 +33,7 @@ class Propose extends Component{
         this.handleContentChange = this.handleContentChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
         this.state = {
-            imgUrl : "https://images-cdn.9gag.com/images/thumbnail-facebook/9155182_1388247030.7007_yqylen_n.jpg",
+            img_url : "https://images-cdn.9gag.com/images/thumbnail-facebook/9155182_1388247030.7007_yqylen_n.jpg",
             date:'',
             startTime:'',
             endTime:'',
@@ -52,11 +52,11 @@ class Propose extends Component{
     }
 
     render(){
-        const {imgUrl} = this.state;
+        const {img_url} = this.state;
         return(
             <div className="container propose">
                 <div>
-                    <img src={imgUrl} className="coverImg" alt='' />
+                    <img src={img_url} className="coverImg" alt='' />
                 </div>
                 <Form>
                     <FormGroup row>
@@ -124,7 +124,7 @@ class Propose extends Component{
         const url = e.target.value;
         console.log(url);
         this.setState({
-            imgUrl:url
+            img_url:url
         });
     }
     handleDateChange(e){
@@ -198,7 +198,7 @@ class Propose extends Component{
         });
     }
     handleSubmit(){
-        const {imgUrl,
+        const {img_url,
             date,
             startTime,
             endTime,
@@ -212,7 +212,7 @@ class Propose extends Component{
             price} = this.state;
         const start_datetime =`${date} ${startTime}`;
         const end_datetime = `${date} ${endTime}`;
-        this.props.ppSubmit(imgUrl,start_datetime,end_datetime,location,content,title,min_number,max_number,deadline,introduction,price);
+        this.props.ppSubmit(img_url,start_datetime,end_datetime,location,content,title,min_number,max_number,deadline,introduction,price);
     }
 
 
