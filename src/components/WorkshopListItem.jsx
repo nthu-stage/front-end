@@ -6,20 +6,22 @@ import './WorkshopListItem.css';
 
 export default class WorkshopListItem extends Component {
     render() {
+        let { id, image_url, title, start_datetime, min_number, max_number, introduction, type, deadline, attendees_number } = this.props;
+        start_datetime = new Date(start_datetime);
         return (
             <div className="col col-12 col-sm-6 col-md-4 col-lg-3 my-2">
-                <Card className="unlink" tag={Link} to='/wp'>
-                    <CardImg className="workshop-list-item-img" top width="100%" src="https://placeholdit.imgix.net/~text?txtsize=33&txt=253%C3%97180&w=253&h=180" alt="Card image cap" />
+                <Card className="unlink" tag={Link} to={`/wp/${id}`}>
+                    <CardImg className="workshop-list-item-img" top width="100%" src={image_url} alt="Card image cap" />
                     <CardBlock>
                         <div className="workshop-list-item-content">
-                            <CardTitle>標題</CardTitle>
-                            <CardText>忙碌的生活中，你有多久不曾靜下來傾聽自己？你曾經陷在困境迴圈，或負面的思緒中無法走出來嗎？</CardText>
+                            <CardTitle>{title}</CardTitle>
+                            <CardText>{introduction}</CardText>
                         </div>
                         <div className="row mt-3">
-                            <div className="col col-md-6">12/30 人</div>
-                            <div className="col col-md-6 text-right">剩 12 天</div>
+                            <div className="col col-md-6">{attendees_number}/{type === 2 ? min_number : max_number} 人</div>
+                            <div className="col col-md-6 text-right">{type === 2 ? `剩 ${deadline} 天` : `${start_datetime.getMonth() + 1}/${start_datetime.getDate()}`}</div>
                         </div>
-                        <Progress color="success" value={40} />
+                        <Progress color={type === 2 ? 'warning' : 'success'} value={type === 2 ? attendees_number*100/min_number : 100} />
                     </CardBlock>
                 </Card>
             </div>
