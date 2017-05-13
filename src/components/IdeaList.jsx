@@ -5,20 +5,20 @@ import IdeaListItem from './IdeaListItem';
 
 class IdeaList extends Component {
     render() {
-        return (
-            <div className="row">
-                <IdeaListItem />
-                <IdeaListItem />
-                <IdeaListItem />
-                <IdeaListItem />
-            </div>
-        );
+        if (this.props.ideaSearch) {
+            return (
+                <div className="row">
+                    {this.props.ideaSearch.map(idea => <IdeaListItem key={idea.i_id} {...idea}/>)}
+                </div>
+            );
+        }
+        return <div />;
     }
 }
 
-function mapStateToProps(state) {
+function mapStateToProps({ ideaSearch }) {
     return {
-
+        ideaSearch,
     }
 }
 

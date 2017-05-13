@@ -26,7 +26,7 @@ class WorkshopNav extends Component {
 
     handleFilter(prop, goal) {
         this.setState({state_filter: (prop << 1) + goal});
-        this.props.searchWorkshop(this.state.searchText, this.state.state_filter);
+        this.props.searchWorkshop(this.state.searchText, (prop << 1) + goal);
     }
 
     render() {
