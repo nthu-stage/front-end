@@ -1,25 +1,23 @@
+import history from '../history';
 const initPropose={
     img_url:'',
-    date:'',
-    time:'',
+    start_datetime:'',
+    end_datetime:'',
     location:'',
-    speaker:'',
-    speachTitle:'',
     content:'',
+    title:'',
+    min_number:'',
+    max_number:'',
+    deadline:'',
+    introduction:'',
+    price:''
 }
 export default function (state = initPropose, action) {
     switch (action.type) {
         case '@PROPOSE/PROPOSE_SUBMIT':
-            return {
-                ...state,
-                img_url:action.img,
-                time:action.time,
-                location:action.location,
-                speaker:action.speaker,
-                speachTitle:action.title,
-                content:action.content,
-///////wait for api
-            };
+            if(action.payload.code===200){
+                history.push(`wp/${action.payload.w_id}`)
+            }
         case '@PROPOSE/PROPOSE_UPDATE':
             return {
                 ...state,

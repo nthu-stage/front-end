@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import fileDownload from "react-file-download";
-import csv from 'csv';
+import stringify from 'csv-stringify';
 ////undone
 import {
     Row,
@@ -15,7 +15,7 @@ class WorkshopManageAttendeeList extends Component {
     constructor(props) {
         super(props);
         this.state={
-            attendees:[{"name":"haha","email":"a@gmail"}]
+            attendees:[{"name":"haha","email":"a@gmail"},{"name":"2","email":"b@gmail"}]
         }
     }
 
@@ -28,7 +28,7 @@ class WorkshopManageAttendeeList extends Component {
         );
         if (attendees.length) {
             children = attendees.map(p => (
-                <ListGroupItem key={p.id} action>
+                <ListGroupItem key={p.name} action>
                     <WorkshopAttendee {...p} />
                 </ListGroupItem>
             ));
@@ -40,7 +40,7 @@ class WorkshopManageAttendeeList extends Component {
                     <Col sm={6}>
                         <h3>報名人列表</h3>
                     </Col>
-                    <Button onClick={()=>fileDownload(csv.stringify(attendees),"1.csv")}>匯出</Button>
+                    <Button onClick={()=>fileDownload(JSON.stringify(attendees),"1.json")}>匯出</Button>
                 </Row>
                 <ListGroup>{children}</ListGroup>
             </div>
