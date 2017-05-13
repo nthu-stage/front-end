@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-//import {bindActionCreators} from 'redux';
+import {bindActionCreators} from 'redux';
 import{
     Button,
     Input,
@@ -11,10 +11,14 @@ import{
     
 } from 'reactstrap';
 import './Propose.css';
-import ppUpdate from '../actions/propose.js';
+import {ppUpdate, getPost} from '../actions/propose.js';
+
 class WorkshopManagePropose extends Component{
     constructor(props){
         super(props);
+
+        this.props.getPost("1111");
+
         this.inputUrl = null; ////
         this.handleInputChange = this.handleInputChange.bind(this);
         this.handleDateChange = this.handleStartDateChange.bind(this);
@@ -39,7 +43,7 @@ class WorkshopManagePropose extends Component{
             content:'1',
             title: 'kkkkkkk',
             start_datetime: '2017-11-11 18:11',
-            end_datetime: '',
+            end_datetime: '2017-11-11 18:11',
             min_number: '',
             max_number: '888',
             deadline: '2017-11-11',
@@ -47,11 +51,13 @@ class WorkshopManagePropose extends Component{
             price: '10000',
         }
     }
-    componentDidMount(){
-        ///this.props.getPropose(propose_id);
-        // this.setState({
-        //     ...this.props.pp,
-        // })
+
+    componentWillReceiveProps(next){
+        
+        console.log('componentWillReceiveProps', next.wm);
+        this.setState({
+            ...next.wm,
+        })
     }
 
     render(){
@@ -145,28 +151,28 @@ class WorkshopManagePropose extends Component{
         const date = e.target.value;
         console.log(date);
         this.setState({
-            start_date:date
+            start_datetime:`${date} ${this.state.startTime}`
         });
     }
     handleEndDateChange(e){
         const date = e.target.value;
         console.log(date);
         this.setState({
-            end_date:date
+            end_datetime:`${date} ${this.state.endTime}`
         });
     }
     handleStartTimeChange(e){
         const time = e.target.value;
         console.log(time);
         this.setState({
-            startTime:time
+            start_datetime:`${this.state.start_date} ${time}`
         });
     }
     handleEndTimeChange(e){
         const time = e.target.value;
         console.log(time);
         this.setState({
-            endTime:time
+            end_datetime:`${this.state.end_date} ${time}`
         });
     }
     handleDeadlineChange(e){
@@ -218,7 +224,8 @@ class WorkshopManagePropose extends Component{
             content:content
         });
     }
-    handleSubmit(){
+    handleSubmit(e){
+        e.preventDefault();
         const {img_url,
             start_date,
             end_date,
@@ -241,14 +248,15 @@ class WorkshopManagePropose extends Component{
 
 function mapStateToProps(state) {
     return {
-        pp:state.pp
+        wm:state.wm
     }
 }
-// function mapDispatchToProps(dispatch) {
-//     return bindActionCreators({
-//         ppUpdate:ppUpdate,
-//     }, dispatch);
-// }
+function mapDispatchToProps(dispatch) {
+    return bindActionCreators({
+        ppUpdate:ppUpdate,
+        getPost:getPost
+    }, dispatch);
+}
 
 
-export default connect(mapStateToProps)(WorkshopManagePropose);
+export default connect(mapStateToProps,mapDispatchToProps)(WorkshopManagePropose);

@@ -210,7 +210,8 @@ class Propose extends Component{
             content:content
         });
     }
-    handleSubmit(){
+    handleSubmit(e){
+        e.preventDefault();
         const {img_url,
             start_date,
             end_date,
