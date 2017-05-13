@@ -5,13 +5,18 @@ import {bindActionCreators} from 'redux';
 import{
     ListGroup,
     ListGroupItem,
-    Button
+    Button,
+    Badge
 } from 'reactstrap';
 import './WorkshopPage.css';
-import wspSubmit from '../actions/workshopPage.js';
+import {wspSubmit} from '../actions/workshopPage.js';
+import {getPost} from '../actions/propose.js'
 class WorkshopPage extends Component{
     constructor(props){
         super(props);
+
+        this.props.getPost(this.props.match.params.id);
+
         this.handleSubmit = this.handleSubmit.bind(this);
         this.state = {
             img_url : "https://images-cdn.9gag.com/images/thumbnail-facebook/9155182_1388247030.7007_yqylen_n.jpg", 
@@ -19,12 +24,8 @@ class WorkshopPage extends Component{
             startTime:'',
             endTime:'',
             location:'1',
-            content:`最初，大地守護神化身SPIDER並降臨地球，為審判揭開序幕。
-
-人類無止盡的摧殘，導致世界陷入黑暗渾沌，為了將地球從猖狂的人類手中救出、於是，守護神化身成SPIDER，並且在2016審判日降臨，企圖將地球焚為灰燼後重生成樂土Arcadia，但是SPIDER以鐳射掃描人類後，發現Raver皆有著善良美麗的心，不過這樣仍不夠，SPIDER決定以火焰與雷電作為武裝，再次襲擊地球，讓人類臣服於SPIDER之下。於是，SPIDER再次汲取能量、蓄勢待發，劃破天際的『Lighting閃電風暴』展開新的奏章⋯⋯
-
-2017年11月11-12日 Arcadia 再度入侵，將再度震撼您的感官神經！`,
-            title: 'kkkkkkk',
+            content:``,
+            title: '教練我好想打REACTㄚㄚㄚㄚㄚ',
             start_datetime: '2017-11-11 18:11',
             end_datetime: '',
             min_number: '',
@@ -32,23 +33,32 @@ class WorkshopPage extends Component{
             deadline: '2017-11-11',
             introduction: '2. 公開分享此貼文，並標註兩個人並留言 @____ @____ 5/12､5/13快來台大音樂節玩，還有台灣虎航機票可以抽！！！',
             price: '10000',
+            name:'LALALAND',
+            state:4 ,
+            attended:false,
         }
     }
-    componentDidMount(){
-       // this.props.getWorkshop();///undone
-       console.log(this.props.match.params.id);
-       //this.props.getWorkshop(this.props.match.params.id);
+    componentWillReceiveProps(next){
+       this.setState({
+           ...next.wm,
+           attended:next.wsp,
+       })
     }
     render(){
-        const {img_url,start_datetime,end_datetime,location,content,title,max_number,deadline,introduction,price} = this.state;
+        const {img_url,start_datetime,end_datetime,location,content,title,max_number,deadline,introduction,price,name,state,attended} = this.state;
+        //add name, state, attended in js
         const commentUrl = `www.nthu-stage/wp/${this.props.match.params.id}`;
-        //const btnStr = attended? "我不能去了QQ" : "我想要報名!!";
+        const btnStr = attended? "我不能去了QQ" : "我想要報名!!";
+        const colorList = ['info', 'danger', 'warning', 'success', 'default', 'default'];
+        const badgeColor = colorList[state];
+        const strList = ['審核中', '審核失敗', '調查中', '已達標', '未達標', '已結束'];
+        const badgeStr =  strList[state];
         return(
             <div className="container workshopPage">
                 <div className="coverImg">
                     <img src={img_url}  alt=''/>
                 </div>
-                <h3>{title}</h3>
+                <h2><Badge color={badgeColor}>{badgeStr}</Badge>{title}</h2>
                 <hr/>
                 <div className="workshop-info">
                     <ListGroup>
@@ -58,7 +68,7 @@ class WorkshopPage extends Component{
                         <ListGroupItem>人數上限:　{max_number}</ListGroupItem>
                         <ListGroupItem>截止期限:　{deadline}</ListGroupItem>
                         <ListGroupItem>價　　格:　{price}</ListGroupItem>
-                        <ListGroupItem>講　　者</ListGroupItem>
+                        <ListGroupItem>講　　者:　{name}</ListGroupItem>
                     </ListGroup>
                 </div>
                 <h3>簡介</h3>
@@ -71,24 +81,26 @@ class WorkshopPage extends Component{
                 <div className="description">
                     <p>{content}</p>
                 </div>
-                <Button color="primary" size="lg" block onClick={this.handleSubmit}>btnStr</Button>
+                <Button color="primary" size="lg" block onClick={this.handleSubmit}>{btnStr}</Button>
                 <Comments href={commentUrl} width="100%" num_posts="6" />
             </div>
         )
     }
     handleSubmit(){
-        this.props.wsSubmit();
+        this.props.wspSubmit();
     }
 }
 function mapStateToProps(state) {
     return {
         wsp:state.wsp,
+        wm:state.wm,
     }
 }
 
 function mapDispatchToProps(dispatch) {
     return bindActionCreators({
-        wspSubmit:wspSubmit
+        wspSubmit:wspSubmit,
+        getPost:getPost
     }, dispatch);
 }
 

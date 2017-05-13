@@ -42,6 +42,7 @@ class WorkshopManage extends Component{
                     </TabPane>
                     <TabPane tabId="2" >
                         <WorkshopAttendeeList attendees={attendees}/>
+                        <Button onClick={this.handleDelete} color="danger" size="lg" block>刪除工作坊</Button>
                     </TabPane>
                 </TabContent>
             </div>
