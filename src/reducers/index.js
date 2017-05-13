@@ -1,5 +1,6 @@
 import {combineReducers} from 'redux';
 import FbReducer from './reducer_fb';
+import ProfileReducer from './reducer_profile';
 import WorkshopReducer from './reducer_workshop';
 import IdeaSearchReducer from './reducer_idea_search';
 import IdeaViewEditReducer from './reducer_idea_view_edit';
@@ -10,6 +11,7 @@ import ProposeReducer from './reducer_propose';
 const rootReducer = combineReducers({
     fb: FbReducer,
     ws: WorkshopReducer,
+    pf: ProfileReducer,
     ideaSearch: IdeaSearchReducer,
     ideaViewEdit: IdeaViewEditReducer,
     wsp: WorkshopPageReducer,
