@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Route } from 'react-router-dom';
 
 import IdeaNav from './IdeaNav'
 import IdeaList from './IdeaList'
@@ -35,7 +36,7 @@ export default class Idea extends Component {
             <div className="container">
                 <IdeaNav />
                 <IdeaList />
-                <IdeaViewEditModal modal={this.state.viewEditModal} toggle={this.viewEditToggle} />
+                <Route path='/i/:i_id' render={props => <IdeaViewEditModal {...props} modal={this.state.viewEditModal} toggle={this.viewEditToggle} />}/>
             </div>
         );
     }

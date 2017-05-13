@@ -18,7 +18,7 @@ class NavbarLogin extends Component {
         this.state = {
             dropdownOpen: false
         };
-        
+
         this.props.fbLogin(cookies.get('fb') || null);
 
         this.handleResponse = this.handleResponse.bind(this);
