@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import FacebookProvider, { Comments } from 'react-facebook';
+import { Comments } from 'react-facebook';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import{
@@ -40,12 +40,7 @@ class WorkshopPage extends Component{
        //this.props.getWorkshop(this.props.match.params.id);
     }
     render(){
-        const {img_url,start_datetime,end_datetime,location,content,title,min_number,max_number,deadline,introduction,price} = this.state;
-        const timeForStart = start_datetime.split(' ');
-        const date = timeForStart[0];
-        const startTime = timeForStart[1];
-        const timeForEnd = end_datetime.split(' ');
-        const endTime = timeForEnd[1];
+        const {img_url,start_datetime,end_datetime,location,content,title,max_number,deadline,introduction,price} = this.state;
         const commentUrl = `www.nthu-stage/wp/${this.props.match.params.id}`;
         //const btnStr = attended? "我不能去了QQ" : "我想要報名!!";
         return(
@@ -61,6 +56,8 @@ class WorkshopPage extends Component{
                         <ListGroupItem>結束時間:　{end_datetime}</ListGroupItem>
                         <ListGroupItem>地　　點:　{location}</ListGroupItem>
                         <ListGroupItem>人數上限:　{max_number}</ListGroupItem>
+                        <ListGroupItem>截止期限:　{deadline}</ListGroupItem>
+                        <ListGroupItem>價　　格:　{price}</ListGroupItem>
                         <ListGroupItem>講　　者</ListGroupItem>
                     </ListGroup>
                 </div>

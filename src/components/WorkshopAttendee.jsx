@@ -6,10 +6,7 @@ import {
 } from 'reactstrap';
 
 class WorkshopAttendee extends Component {
-    constructor(props) {
-        super(props);
 
-    }
 
     render() {
         const {name, email} = this.props;

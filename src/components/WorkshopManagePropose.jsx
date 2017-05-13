@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {bindActionCreators} from 'redux';
+//import {bindActionCreators} from 'redux';
 import{
     Button,
     Input,
@@ -244,11 +244,11 @@ function mapStateToProps(state) {
         pp:state.pp
     }
 }
-function mapDispatchToProps(dispatch) {
-    return bindActionCreators({
-        ppUpdate:ppUpdate,
-    }, dispatch);
-}
+// function mapDispatchToProps(dispatch) {
+//     return bindActionCreators({
+//         ppUpdate:ppUpdate,
+//     }, dispatch);
+// }
 
 
 export default connect(mapStateToProps)(WorkshopManagePropose);
