@@ -60,7 +60,7 @@ export function ppUpdate(img_url,start_datetime,end_datetime,location,content,ti
         price:price,
         payload: p.then(ret => {
             if (ret.code === 200) {
-                history.push(`wm/${ret.w_id}`);
+                history.replace(`wp/${ret.w_id}`);
             }
         }),
     }
@@ -93,7 +93,7 @@ export function getPost(w_id){
         }, 600);
     }).then(ret=>{
             return{
-                type: '@MANAGE/INIT',
+                
                 img_url:ret.img_url,
                 start_datetime:ret.start_datetime,
                 end_datetime:ret.end_datetime,
@@ -107,6 +107,12 @@ export function getPost(w_id){
                 price:ret.price,
             }
         });
+
+    return {
+        type: '@MANAGE/INIT',
+        payload: p,
+    }
+    
 }
 
 

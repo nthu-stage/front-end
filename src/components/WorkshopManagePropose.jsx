@@ -16,6 +16,9 @@ import {ppUpdate, getPost} from '../actions/propose.js';
 class WorkshopManagePropose extends Component{
     constructor(props){
         super(props);
+
+        this.props.getPost("1111");
+
         this.inputUrl = null; ////
         this.handleInputChange = this.handleInputChange.bind(this);
         this.handleDateChange = this.handleStartDateChange.bind(this);
@@ -48,11 +51,12 @@ class WorkshopManagePropose extends Component{
             price: '10000',
         }
     }
-    componentWillMount(){
-        this.props.getPost("1111");
-        console.log(this.props.wm);
+
+    componentWillReceiveProps(next){
+        
+        console.log('componentWillReceiveProps', next.wm);
         this.setState({
-            ...this.props.wm,
+            ...next.wm,
         })
     }
 
