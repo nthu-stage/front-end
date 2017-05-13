@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Route } from 'react-router-dom';
-
+import history from '../history';
 import IdeaNav from './IdeaNav'
 import IdeaList from './IdeaList'
 import IdeaViewEditModal from './IdeaViewEditModal'
@@ -17,7 +17,7 @@ export default class Idea extends Component {
 
     viewEditToggle() {
         if (this.state.viewEditModal) {
-            this.props.history.push('/i');
+            history.push('/i');
         } else {
             this.setState({
                 viewEditModal: true,
