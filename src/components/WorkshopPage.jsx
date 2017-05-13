@@ -47,7 +47,7 @@ class WorkshopPage extends Component{
         const timeForEnd = end_datetime.split(' ');
         const endTime = timeForEnd[1];
         const commentUrl = `www.nthu-stage/wp/${this.props.match.params.id}`;
-        const btnStr = attended? "我不能去了QQ" : "我想要報名!!";
+        //const btnStr = attended? "我不能去了QQ" : "我想要報名!!";
         return(
             <div className="container workshopPage">
                 <div className="coverImg">
@@ -74,7 +74,7 @@ class WorkshopPage extends Component{
                 <div className="description">
                     <p>{content}</p>
                 </div>
-                <Button color="primary" size="lg" block onClick={this.handleSubmit}>{btnStr}</Button>
+                <Button color="primary" size="lg" block onClick={this.handleSubmit}>btnStr</Button>
                 <Comments href={commentUrl} width="100%" num_posts="6" />
             </div>
         )
