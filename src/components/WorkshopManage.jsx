@@ -11,6 +11,7 @@ import{
 } from 'reactstrap';
 import WorkshopAttendeeList from './WorkshopManageAttendeeList';
 import WorkshopManagePropose from './WorkshopManagePropose';
+import './WorkshopManage.css';
 class WorkshopManage extends Component{
     constructor(props){
         super(props);
@@ -27,7 +28,7 @@ class WorkshopManage extends Component{
 
         return(
             <div className="container">
-                <Row>
+                <Row className="option">
                     <Col sm={6}>
                         <Button onClick={() => this.handleToggle('1')} block>工作坊</Button>
                     </Col>
@@ -39,7 +40,7 @@ class WorkshopManage extends Component{
                     <TabPane tabId="1">
                         <WorkshopManagePropose />
                     </TabPane>
-                    <TabPane tabId="2">
+                    <TabPane tabId="2" >
                         <WorkshopAttendeeList attendees={attendees}/>
                     </TabPane>
                 </TabContent>

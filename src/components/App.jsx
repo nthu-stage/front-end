@@ -64,10 +64,12 @@ export default class App extends Component {
                         <Route exact path="/" component={Workshop} />
                         <Route exact path="/i" component={Idea} />
                         <Route path="/i/:id" component={Idea} />
-                        <Route path="/wp" component={WorkshopPage} />
+                        <Route exact path="/wp" component={WorkshopPage} />
+                        <Route path="/wp/:id" component={WorkshopPage} />
                         <Route path="/pp" component={Propose} />
                         <Route path="/pf" component={Profile} />
-                        <Route path="/wm" component={WorkshopManage} />
+                        <Route exact path="/wm" component={WorkshopManage} />
+                        <Route path="/wm/:id" component={WorkshopManage} />
                     </div>
                 </FacebookProvider>
             </Router>

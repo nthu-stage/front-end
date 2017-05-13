@@ -36,6 +36,8 @@ class WorkshopPage extends Component{
     }
     componentDidMount(){
        // this.props.getWorkshop();///undone
+       console.log(this.props.match.params.id);
+       //this.props.getWorkshop(this.props.match.params.id);
     }
     render(){
         const {img_url,start_datetime,end_datetime,location,content,title,min_number,max_number,deadline,introduction,price} = this.state;
@@ -44,21 +46,22 @@ class WorkshopPage extends Component{
         const startTime = timeForStart[1];
         const timeForEnd = end_datetime.split(' ');
         const endTime = timeForEnd[1];
-        const commentUrl = `www.nthu-stage/wp/100000`;
+        const commentUrl = `www.nthu-stage/wp/${this.props.match.params.id}`;
+        const btnStr = attended? "我不能去了QQ" : "我想要報名!!";
         return(
             <div className="container workshopPage">
-                <div>
-                    <img src={img_url} className="coverImg" />
+                <div className="coverImg">
+                    <img src={img_url}  alt=''/>
                 </div>
                 <h3>{title}</h3>
                 <hr/>
                 <div className="workshop-info">
                     <ListGroup>
-                        <ListGroupItem>開始時間: {start_datetime}</ListGroupItem>
-                        <ListGroupItem>結束時間: {end_datetime}</ListGroupItem>
-                        <ListGroupItem>地點: {location}</ListGroupItem>
-                        <ListGroupItem>人數上限: {max_number}</ListGroupItem>
-                        <ListGroupItem>演講人</ListGroupItem>
+                        <ListGroupItem>開始時間:　{start_datetime}</ListGroupItem>
+                        <ListGroupItem>結束時間:　{end_datetime}</ListGroupItem>
+                        <ListGroupItem>地　　點:　{location}</ListGroupItem>
+                        <ListGroupItem>人數上限:　{max_number}</ListGroupItem>
+                        <ListGroupItem>講　　者</ListGroupItem>
                     </ListGroup>
                 </div>
                 <h3>簡介</h3>
@@ -71,7 +74,7 @@ class WorkshopPage extends Component{
                 <div className="description">
                     <p>{content}</p>
                 </div>
-                <Button color="primary" size="lg" block onClick={this.handleSubmit}>我想要報名!!!</Button>
+                <Button color="primary" size="lg" block onClick={this.handleSubmit}>{btnStr}</Button>
                 <Comments href={commentUrl} width="100%" num_posts="6" />
             </div>
         )

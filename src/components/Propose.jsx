@@ -57,8 +57,8 @@ class Propose extends Component{
         const {img_url} = this.state;
         return(
             <div className="container propose">
-                <div>
-                    <img src={img_url} className="coverImg" alt='' />
+                <div className="coverImg">
+                    <img src={img_url}  alt='' />
                 </div>
                 <Form>
                     <FormGroup row>
