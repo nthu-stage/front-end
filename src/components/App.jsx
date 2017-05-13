@@ -21,6 +21,8 @@ import Propose from './Propose';
 import Profile from './Profile';
 import WorkshopManage from './WorkshopManage';
 
+import './App.css';
+
 export default class App extends Component {
     constructor(props) {
         super(props);
