@@ -1,5 +1,6 @@
 import {combineReducers} from 'redux';
 import FbReducer from './reducer_fb';
+import AlertReducer from './reducer_alert';
 import ProfileReducer from './reducer_profile';
 import WorkshopReducer from './reducer_workshop';
 import IdeaSearchReducer from './reducer_idea_search';
@@ -11,6 +12,7 @@ import AttendeeReducer from './reducer_attendee';
 
 const rootReducer = combineReducers({
     fb: FbReducer,
+    alert: AlertReducer,
     ws: WorkshopReducer,
     pf: ProfileReducer,
     ideaSearch: IdeaSearchReducer,
