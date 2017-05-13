@@ -1,12 +1,23 @@
-export function ppSubmit(img,date,time,loc,speaker,title,content){
+export function ppSubmit(img_url,start_datetime,end_datetime,location,content,title,min_number,max_number,deadline,introduction,price){
         return{
             type: '@PROPOSE/PROPOSE_SUBMIT',
-            img_url:img,
-            time:time,
-            location:loc,
-            speaker:speaker,
-            speachTitle:title,
+            img_url:img_url,
+            start_datetime:start_datetime,
+            end_datetime:end_datetime,
+            location:location,
             content:content,
+            title:title,
+            min_number:min_number,
+            max_number:max_number,
+            deadline:deadline,
+            introduction:introduction,
+            price:price,
+            payload:{
+                w_id:100000,
+                code:200
+                /////undone
+            }
+
         }
 }
 export function ppUpdate(img,date,time,loc,speaker,title,content,propose_id = '0'){
