@@ -1,5 +1,5 @@
-export function wsSubmit(){
+export function wspSubmit(){
         return{
-            type: '@WORKSHOPPAGE/WORKSHOP_SUBMIT',
+            type: '@WORKSHOPPAGE/WORKSHOPPAGE_SUBMIT',
         }
 }

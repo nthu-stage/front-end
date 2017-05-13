@@ -8,58 +8,74 @@ import{
     Button
 } from 'reactstrap';
 import './WorkshopPage.css';
-import wsSubmit from '../actions/workshopPage.js';
+import wspSubmit from '../actions/workshopPage.js';
 class WorkshopPage extends Component{
     constructor(props){
         super(props);
-
         this.handleSubmit = this.handleSubmit.bind(this);
-    }
+        this.state = {
+            img_url : "https://images-cdn.9gag.com/images/thumbnail-facebook/9155182_1388247030.7007_yqylen_n.jpg", 
+            date:'',
+            startTime:'',
+            endTime:'',
+            location:'1',
+            content:`最初，大地守護神化身SPIDER並降臨地球，為審判揭開序幕。
 
+人類無止盡的摧殘，導致世界陷入黑暗渾沌，為了將地球從猖狂的人類手中救出、於是，守護神化身成SPIDER，並且在2016審判日降臨，企圖將地球焚為灰燼後重生成樂土Arcadia，但是SPIDER以鐳射掃描人類後，發現Raver皆有著善良美麗的心，不過這樣仍不夠，SPIDER決定以火焰與雷電作為武裝，再次襲擊地球，讓人類臣服於SPIDER之下。於是，SPIDER再次汲取能量、蓄勢待發，劃破天際的『Lighting閃電風暴』展開新的奏章⋯⋯
+
+2017年11月11-12日 Arcadia 再度入侵，將再度震撼您的感官神經！`,
+            title: 'kkkkkkk',
+            start_datetime: '2017-11-11 18:11',
+            end_datetime: '',
+            min_number: '',
+            max_number: '888',
+            deadline: '2017-11-11',
+            introduction: '2. 公開分享此貼文，並標註兩個人並留言 @____ @____ 5/12､5/13快來台大音樂節玩，還有台灣虎航機票可以抽！！！',
+            price: '10000',
+        }
+    }
+    componentDidMount(){
+       // this.props.getWorkshop();///undone
+       console.log(this.props.match.params.id);
+       //this.props.getWorkshop(this.props.match.params.id);
+    }
     render(){
-        const date = '6/3';
-        const time = '20:00';
-        const location = 'NTHU';
-        const speaker = 'LALALAL';
+        const {img_url,start_datetime,end_datetime,location,content,title,min_number,max_number,deadline,introduction,price} = this.state;
+        const timeForStart = start_datetime.split(' ');
+        const date = timeForStart[0];
+        const startTime = timeForStart[1];
+        const timeForEnd = end_datetime.split(' ');
+        const endTime = timeForEnd[1];
+        const commentUrl = `www.nthu-stage/wp/${this.props.match.params.id}`;
+        //const btnStr = attended? "我不能去了QQ" : "我想要報名!!";
         return(
             <div className="container workshopPage">
-                <div>
-                    <img src="https://d2wq73xazpk036.cloudfront.net/media/27FB7F0C-9885-42A6-9E0C19C35242B5AC/A7BC70EF-2E93-47DA-A355C4B22039324E/thul-6818f8f2-2711-5159-9648-cc23606b037c.jpg?response-content-disposition=inline" className="coverImg" />
+                <div className="coverImg">
+                    <img src={img_url}  alt=''/>
                 </div>
-                <h3>Title</h3>
+                <h3>{title}</h3>
                 <hr/>
                 <div className="workshop-info">
                     <ListGroup>
-                        <ListGroupItem>日期</ListGroupItem>
-                        <ListGroupItem>時間</ListGroupItem>
-                        <ListGroupItem>地點</ListGroupItem>
-                        <ListGroupItem>演講人</ListGroupItem>
+                        <ListGroupItem>開始時間:　{start_datetime}</ListGroupItem>
+                        <ListGroupItem>結束時間:　{end_datetime}</ListGroupItem>
+                        <ListGroupItem>地　　點:　{location}</ListGroupItem>
+                        <ListGroupItem>人數上限:　{max_number}</ListGroupItem>
+                        <ListGroupItem>講　　者</ListGroupItem>
                     </ListGroup>
                 </div>
-                <h3>Description</h3>
+                <h3>簡介</h3>
                 <hr/>
                 <div className="description">
-                    <p>本 Seven＆i Holdings Co.（小七的母公司）
-                        將以33億美元收購1000家美國便利店和加油站
-                        實現2019年的10,000家門店計劃！
-
-                        支付寶母公司『螞蟻金服』用戶超過4.5 億
-                        近期計畫合併號稱「東南亞亞馬遜」的電商網站 Lazada
-                        旗下線上支付平臺 helloPay，登陸東南亞！
-
-
-                        在競爭激烈的時代，所需整合相互資源的關鍵，
-                        談判溝通的能力就顯得更為重要！
-
-                        談判成功與否，使用框架便是關鍵。
-                        巴菲特重視的競爭優勢、執行團隊、管理階層、企業文化，
-                        便是談判框架的態度、行為與過程。
-
-                        如何透過談判維持個人和企業競爭優勢？
-                    </p>
+                    <p>{introduction}</p>
                 </div>
-                <Button color="primary" size="lg" block onClick={this.handleSubmit}>我想要報名!!!</Button>
-                <Comments href="http://www.facebook.com" width="100%" num_posts="6" />
+                <h3>內容</h3>
+                <hr/>
+                <div className="description">
+                    <p>{content}</p>
+                </div>
+                <Button color="primary" size="lg" block onClick={this.handleSubmit}>btnStr</Button>
+                <Comments href={commentUrl} width="100%" num_posts="6" />
             </div>
         )
     }
@@ -75,7 +91,7 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
     return bindActionCreators({
-        wsSubmit:wsSubmit
+        wspSubmit:wspSubmit
     }, dispatch);
 }
 
