@@ -13,6 +13,7 @@ import {
 import FacebookProvider from 'react-facebook';
 
 import NavbarLogin from './NavbarLogin';
+import AppAlert from './AppAlert';
 import Workshop from './Workshop';
 import Idea from './Idea';
 import WorkshopPage from './WorkshopPage';
@@ -61,6 +62,7 @@ export default class App extends Component {
                                 </Collapse>
                             </div>
                         </Navbar>
+                        <AppAlert />
                         <Route exact path="/" component={Workshop} />
                         <Route exact path="/i" component={Idea} />
                         <Route path="/i/:id" component={Idea} />

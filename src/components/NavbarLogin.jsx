@@ -8,6 +8,7 @@ import Cookies from 'universal-cookie';
 const cookies = new Cookies();
 
 import fbLogin from '../actions/fbLogin';
+import { showAlert, hideAlert } from '../actions/alert';
 
 import './NavbarLogin.css';
 
@@ -31,6 +32,8 @@ class NavbarLogin extends Component {
         let fb = { picture_url: data.profile.picture.data.url, userID, signedRequest };
         this.props.fbLogin(fb);
         cookies.set('fb', fb, { maxAge: expiresIn });
+        this.props.showAlert('登入成功！', 'success');
+        this.props.hideAlert(3000);
     }
 
     handleLogout() {
@@ -68,15 +71,17 @@ class NavbarLogin extends Component {
     }
 }
 
-function mapStateToProps(state) {
+function mapStateToProps({ fb }) {
     return {
-        fb: state.fb,
+        fb,
     }
 }
 
 function mapDispatchToProps(dispatch) {
     return bindActionCreators({
-        fbLogin: fbLogin,
+        fbLogin,
+        showAlert,
+        hideAlert,
     }, dispatch);
 }
 
