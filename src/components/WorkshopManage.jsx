@@ -38,10 +38,10 @@ class WorkshopManage extends Component{
                 </Row>
                 <TabContent activeTab={this.state.activeTab}>
                     <TabPane tabId="1">
-                        <WorkshopManagePropose />
+                        <WorkshopManagePropose w_id={this.props.match.params.id}/>
                     </TabPane>
                     <TabPane tabId="2" >
-                        <WorkshopAttendeeList attendees={attendees}/>
+                        <WorkshopAttendeeList w_id={this.props.match.params.id}/>
                         <Button onClick={this.handleDelete} color="danger" size="lg" block>刪除工作坊</Button>
                     </TabPane>
                 </TabContent>

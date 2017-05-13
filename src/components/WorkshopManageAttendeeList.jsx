@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import fileDownload from "react-file-download";
-import stringify from 'csv-stringify';
+//import stringify from 'csv-stringify';
 ////undone
 import {
     Row,
@@ -11,16 +11,29 @@ import {
     Button
 } from 'reactstrap';
 import WorkshopAttendee from './WorkshopAttendee';
+import {getAttendee} from '../actions/attendee.js'
+import {bindActionCreators} from 'redux';
+
 class WorkshopManageAttendeeList extends Component {
     constructor(props) {
         super(props);
+        this.props.getAttendee(this.props.w_id);
         this.state={
-            attendees:[{"name":"haha","email":"a@gmail"},{"name":"2","email":"b@gmail"}]
+            attendees:[]
         }
     }
+    componentWillReceiveProps(next){
+        
+        console.log('componentWillReceiveProps', next.wsa);
+        this.setState({
+            ...next.wsa,
+        })
+    }
 
-    render() {
+    
+    render(){
         const {attendees} = this.state;
+        console.log("list",attendees);
         let children = (
             <ListGroupItem className='empty d-flex justify-content-center align-items-center'>
                 <div className='empty-text'>目前沒有人報名喔ㄏㄏ</div>
@@ -50,8 +63,14 @@ class WorkshopManageAttendeeList extends Component {
 
 function mapStateToProps(state) {
     return {
-
+        wsa:state.wsa
     }
 }
+function mapDispatchToProps(dispatch) {
+    return bindActionCreators({
+        getAttendee:getAttendee,
+    }, dispatch);
+}
 
-export default connect(mapStateToProps)(WorkshopManageAttendeeList);
+
+export default connect(mapStateToProps,mapDispatchToProps)(WorkshopManageAttendeeList);

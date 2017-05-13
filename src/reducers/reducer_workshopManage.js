@@ -1,4 +1,4 @@
-import history from '../history';
+
 const initManage={
     img_url:'',
     start_datetime:'',
