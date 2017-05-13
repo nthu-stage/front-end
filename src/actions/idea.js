@@ -1,7 +1,7 @@
 export function comeUpWithIdea(idea) {
     return {
         type: 'IDEA_COME_UP_WITH',
-        payload: { i_id: 12345 },
+        payload: { code: 200, i_id: 12345 },
     }
 }
 
