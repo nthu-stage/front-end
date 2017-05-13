@@ -13,7 +13,7 @@ export function comeUpWithIdea(idea) {
         type: 'IDEA_COME_UP_WITH',
         payload: p.then(ret => {
             if (ret.code === 200) {
-                history.push(`i/${ret.i_id}`);
+                history.replace(`i/${ret.i_id}`);
             }
         }),
     }

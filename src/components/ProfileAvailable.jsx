@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import { Table } from 'reactstrap';
 import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+
+import { updateAvailableTime } from '../actions/profile';
 
 import './ProfileAvailable.css';
 
@@ -9,24 +12,19 @@ class ProfileAvailable extends Component {
         super(props);
 
         this.genTimeArr = this.genTimeArr.bind(this);
-        this.state = {
-            availableTime: [1, 1, 1, 0, 0, 1, 0, 1, 0, 1, 1, 1, 0, 0, 1, 0, 1, 0, 1, 1, 1],
-        };
     }
 
     genTimeArr(idx) {
         let arr = [];
         for (let i = 0; i < 21; i += 3) {
-            let time = this.state.availableTime[i + idx];
+            let time = this.props.availableTime[i + idx];
             arr.push(
                 <td key={i + idx}
-                    className={time === 1 ? "available" : "not-available"}
+                    className={time === true ? 'available' : 'not-available'}
                     onClick={event => {
-                        let availableTime = this.state.availableTime.slice();
-                        availableTime[i + idx] = 1 - availableTime[i + idx];
-                        this.setState({
-                            availableTime,
-                        })
+                        let availableTime = this.props.availableTime.slice();
+                        availableTime[i + idx] = !availableTime[i + idx];
+                        this.props.updateAvailableTime(availableTime);
                     }}
                     ></td>
             );
@@ -68,10 +66,10 @@ class ProfileAvailable extends Component {
     }
 }
 
-function mapStateToProps(state) {
-    return {
-
-    }
+function mapDispatchToProps(dispatch) {
+    return bindActionCreators({
+        updateAvailableTime,
+    }, dispatch);
 }
 
-export default connect(mapStateToProps)(ProfileAvailable);
+export default connect(null, mapDispatchToProps)(ProfileAvailable);
