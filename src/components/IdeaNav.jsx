@@ -22,19 +22,19 @@ class IdeaNav extends Component {
             newLearnModal: false,
             viewEditModal: false,
             searchText: '',
-            type_filter: 'new',
+            order: 'new',
         };
     }
 
     handleSubmit(event) {
         event.preventDefault();
-        this.props.searchIdea(this.state.searchText, this.state.type_filter);
+        this.props.searchIdea(this.state.searchText, this.state.order);
     }
 
-    handleFilter(type_filter) {
-        if (this.state.type_filter === type_filter) return;
-        this.setState({ type_filter });
-        this.props.searchIdea(this.state.searchText, type_filter);
+    handleFilter(order) {
+        if (this.state.order === order) return;
+        this.setState({ order });
+        this.props.searchIdea(this.state.searchText, order);
     }
 
     newTeachToggle() {
@@ -73,8 +73,8 @@ class IdeaNav extends Component {
                 </div>
                 <div className="col col-md-3">
                     <ButtonGroup className="idea-nav-filter">
-                        <Button color={this.state.type_filter === 'new' ? 'info' : 'secondary'} onClick={e => this.handleFilter('new')}>最新</Button>
-                        <Button color={this.state.type_filter === 'hot' ? 'info' : 'secondary'} onClick={e => this.handleFilter('hot')}>熱門</Button>
+                        <Button color={this.state.order === 'new' ? 'info' : 'secondary'} onClick={e => this.handleFilter('new')}>最新</Button>
+                        <Button color={this.state.order === 'hot' ? 'info' : 'secondary'} onClick={e => this.handleFilter('hot')}>熱門</Button>
                     </ButtonGroup>
                 </div>
             </div>
