@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Login } from 'react-facebook';
-import { Dropdown, DropdownToggle, DropdownMenu, DropdownItem, Button } from 'reactstrap';
+import { NavItem, NavLink, Dropdown, DropdownToggle, DropdownMenu, DropdownItem, Button } from 'reactstrap';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
@@ -50,22 +50,34 @@ class NavbarLogin extends Component {
     render() {
         if (this.props.fb) {
             return (
-                <Dropdown isOpen={this.state.dropdownOpen} toggle={this.toggle}>
-                    <DropdownToggle caret className="facebook-picture">
-                        <img src={this.props.fb.picture_url} alt="fb" />
-                    </DropdownToggle>
-                    <DropdownMenu>
-                        <DropdownItem tag={Link} to='/pf'>個人頁面</DropdownItem>
-                        <DropdownItem onClick={this.handleLogout}>登出</DropdownItem>
-                    </DropdownMenu>
-                </Dropdown>
+                <div>
+                    <NavItem className="my-auto hidden-xs-down">
+                        <Dropdown isOpen={this.state.dropdownOpen} toggle={this.toggle}>
+                            <DropdownToggle caret className="facebook-picture">
+                                <img src={this.props.fb.picture_url} alt="fb" />
+                            </DropdownToggle>
+                            <DropdownMenu>
+                                <DropdownItem tag={Link} to='/pf'>個人頁面</DropdownItem>
+                                <DropdownItem onClick={this.handleLogout}>登出</DropdownItem>
+                            </DropdownMenu>
+                        </Dropdown>
+                    </NavItem>
+                    <NavItem className="my-auto hidden-sm-up">
+                        <NavLink tag={Link} to='/pf'>個人頁面</NavLink>
+                    </NavItem>
+                    <NavItem className="my-auto hidden-sm-up">
+                        <NavLink onClick={this.handleLogout}>登出</NavLink>
+                    </NavItem>
+                </div>
             );
         } else {
             return (
-                <Login fields={['name', 'email', 'picture']}
-                       onResponse={this.handleResponse}>
-                    <Button color="primary" className="navbar-btn ml-2 mr-2 facebook-button">登入</Button>
-                </Login>
+                <NavItem className="my-auto">
+                    <Login className="hidden-xs-down" fields={['name', 'email', 'picture']} onResponse={this.handleResponse}>
+                        <Button color="primary" className="navbar-btn ml-2 mr-2 facebook-button hidden-xs-down">登入</Button>
+                    </Login>
+                    <Login className="hidden-sm-up" fields={['name', 'email', 'picture']} onResponse={this.handleResponse}><NavLink href="" className="nav-link hidden-sm-up">FB 登入</NavLink></Login>
+                </NavItem>
             );
         }
     }
