@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "axios": "^0.16.1",
     "bootstrap": "^4.0.0-alpha.6",
     "react": "^15.5.4",
     "react-addons-css-transition-group": "^15.5.2",
@@ -15,6 +16,7 @@
     "reactstrap": "^4.5.0",
     "recharts": "^0.22.4",
     "redux": "^3.6.0",
+    "redux-promise": "^0.5.3",
     "universal-cookie": "^2.0.5"
   },
   "devDependencies": {
