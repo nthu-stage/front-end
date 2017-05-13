@@ -15,28 +15,28 @@ class WorkshopNav extends Component {
         this.handleFilter = this.handleFilter.bind(this);
         this.state = {
             searchText: '',
-            state_filter: 3,
+            stateFilter: 3,
         };
     }
 
     handleSubmit(event) {
         event.preventDefault();
-        this.props.searchWorkshop(this.state.searchText, this.state.state_filter);
+        this.props.searchWorkshop(this.state.searchText, this.state.stateFilter);
     }
 
     handleFilter(prop, goal) {
-        this.setState({state_filter: (prop << 1) + goal});
+        this.setState({stateFilter: (prop << 1) + goal});
         this.props.searchWorkshop(this.state.searchText, (prop << 1) + goal);
     }
 
     render() {
-        const { state_filter } = this.state;
-        let prop = state_filter >> 1, goal = state_filter & 1;
+        const { stateFilter } = this.state;
+        let prop = stateFilter >> 1, goal = stateFilter & 1;
         return (
             <div className="row mt-3">
                 <div className="col col-md-9">
                     <Form onSubmit={this.handleSubmit}>
-                        <Input type="text" onChange={e => this.setState({searchText: e.target.value})} placeholder="搜尋喜愛的工作坊" />
+                        <Input type="text" onChange={e => this.setState({searchText: e.target.value})} value={this.state.searchText} placeholder="搜尋喜愛的工作坊" />
                     </Form>
                 </div>
                 <div className="col col-md-3">

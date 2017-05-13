@@ -19,21 +19,7 @@ export function comeUpWithIdea(idea) {
     }
 }
 
-export function updateIdea(idea) {
-    return {
-        type: 'IDEA_COME_UP_WITH',
-        payload: 200,
-    }
-}
-
-export function deleteIdea(i_id) {
-    return {
-        type: 'IDEA_DELETE',
-        payload: 200,
-    }
-}
-
-export function searchIdea(searchText, type_filter) {
+export function searchIdea(searchText, order) {
     return {
         type: 'IDEA_SEARCH',
         payload: [
@@ -57,7 +43,23 @@ export function searchIdea(searchText, type_filter) {
     }
 }
 
+export function updateIdea(idea) {
+    return {
+        type: 'IDEA_COME_UP_WITH',
+        payload: 200,
+    }
+}
+
+export function deleteIdea(i_id) {
+    i_id = parseInt(i_id);
+    return {
+        type: 'IDEA_DELETE',
+        payload: 200,
+    }
+}
+
 export function likeSearchIdea(i_id) {
+    i_id = parseInt(i_id);
     return {
         type: 'IDEA_LIKE_SEARCH',
         payload: {
@@ -69,8 +71,9 @@ export function likeSearchIdea(i_id) {
 }
 
 export function showViewEditIdea(i_id) {
+    i_id = parseInt(i_id);
     console.log('showViewEditIdea', i_id);
-    if (i_id === '12345') {
+    if (i_id === 12345) {
         return {
             type: 'IDEA_SHOW_VIEW_EDIT',
             payload: {
@@ -92,7 +95,7 @@ export function showViewEditIdea(i_id) {
                 ],
             },
         }
-    } else if (i_id === '12') {
+    } else if (i_id === 12) {
         return {
             type: 'IDEA_SHOW_VIEW_EDIT',
             payload: {
@@ -119,6 +122,7 @@ export function showViewEditIdea(i_id) {
 }
 
 export function likeViewEditIdea(i_id) {
+    i_id = parseInt(i_id);
     if (i_id === 12345) {
         return {
             type: 'IDEA_LIKE_VIEW_EDIT',
