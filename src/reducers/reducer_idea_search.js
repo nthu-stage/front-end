@@ -1,3 +1,5 @@
+import history from '../history';
+
 export default function (state = null, action) {
     switch (action.type) {
         case 'IDEA_SEARCH':
@@ -12,6 +14,10 @@ export default function (state = null, action) {
                 }
             }
             return next_state;
+        case 'IDEA_COME_UP_WITH':
+            if (action.payload.code === 200) {
+                history.push(`i/${action.payload.i_id}`);
+            }
         default:
             return state;
     }

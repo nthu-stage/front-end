@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import createBrowserHistory from 'history/createBrowserHistory';
-import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
+import history from '../history';
+import { Router, Route, Link } from 'react-router-dom';
 import {
     Collapse,
     Navbar,
@@ -36,7 +36,7 @@ export default class App extends Component {
     }
     render() {
         return (
-            <Router history={createBrowserHistory()}>
+            <Router history={history}>
                 <FacebookProvider appId="1812105742383573">
                     <div>
                         <Navbar color="faded" light toggleable>
