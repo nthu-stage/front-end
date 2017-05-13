@@ -17,7 +17,7 @@ class WorkshopManagePropose extends Component{
     constructor(props){
         super(props);
 
-        this.props.getPost("1111");
+        this.props.getPost(this.props.w_id);
 
         this.inputUrl = null; ////
         this.handleInputChange = this.handleInputChange.bind(this);

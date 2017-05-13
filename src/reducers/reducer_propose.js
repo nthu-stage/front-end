@@ -18,6 +18,7 @@ export default function (state = initPropose, action) {
             if(action.payload.code===200){
                 history.push(`wp/${action.payload.w_id}`)
             }
+            break;
         case '@PROPOSE/PROPOSE_UPDATE':
             return {
                 ...state,

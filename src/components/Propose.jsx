@@ -24,6 +24,7 @@ class Propose extends Component{
         this.handleEndDateChange = this.handleEndDateChange.bind(this);
         this.handleStartTimeChange = this.handleStartTimeChange.bind(this);
         this.handleEndTimeChange = this.handleEndTimeChange.bind(this);
+        this.handleDeadlineChange = this.handleDeadlineChange.bind(this);
         this.handleIntroChange = this.handleIntroChange.bind(this);
         this.handleMaxChange = this.handleMaxChange.bind(this);
         this.handleMinChange = this.handleMinChange.bind(this);

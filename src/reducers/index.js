@@ -7,6 +7,7 @@ import IdeaViewEditReducer from './reducer_idea_view_edit';
 import WorkshopPageReducer from './reducer_workshopPage';
 import WorkshopManageReducer from './reducer_workshopManage';
 import ProposeReducer from './reducer_propose';
+import AttendeeReducer from './reducer_attendee';
 
 const rootReducer = combineReducers({
     fb: FbReducer,
@@ -17,6 +18,7 @@ const rootReducer = combineReducers({
     wsp: WorkshopPageReducer,
     wm: WorkshopManageReducer,
     pp: ProposeReducer,
+    wsa:AttendeeReducer
 });
 
 export default rootReducer;
