@@ -1,7 +1,21 @@
+import history from '../history';
+
 export function comeUpWithIdea(idea) {
+    let p = new Promise((resolve, reject) => {
+        setTimeout(() => {
+            resolve({ code: 200, i_id: 12345 });
+        }, 1000);
+    }).then(ret => {
+        return ret;
+    });
+
     return {
         type: 'IDEA_COME_UP_WITH',
-        payload: { code: 200, i_id: 12345 },
+        payload: p.then(ret => {
+            if (ret.code === 200) {
+                history.push(`i/${ret.i_id}`);
+            }
+        }),
     }
 }
 
