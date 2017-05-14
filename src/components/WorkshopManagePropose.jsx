@@ -8,7 +8,6 @@ import{
     Form,
     FormGroup,
     Col,
-    
 } from 'reactstrap';
 import './Propose.css';
 import {ppUpdate, getPost} from '../actions/propose.js';
@@ -21,8 +20,9 @@ class WorkshopManagePropose extends Component{
 
         this.inputUrl = null; ////
         this.handleInputChange = this.handleInputChange.bind(this);
-        this.handleDateChange = this.handleStartDateChange.bind(this);
+        this.handleStartDateChange = this.handleStartDateChange.bind(this);
         this.handleStartTimeChange = this.handleStartTimeChange.bind(this);
+        this.handleEndDateChange = this.handleEndDateChange.bind(this);
         this.handleEndTimeChange = this.handleEndTimeChange.bind(this);
         this.handleIntroChange = this.handleIntroChange.bind(this);
         this.handleMaxChange = this.handleMaxChange.bind(this);
@@ -55,8 +55,19 @@ class WorkshopManagePropose extends Component{
     componentWillReceiveProps(next){
         
         console.log('componentWillReceiveProps', next.wm);
+        const {start_datetime,end_datetime} = next.wm;
+        const timeForStart = start_datetime.split(' ');
+        const start_date = timeForStart[0];
+        const startTime = timeForStart[1];
+        const timeForEnd = end_datetime.split(' ');
+        const end_date = timeForEnd[0];
+        const endTime = timeForEnd[1];
         this.setState({
             ...next.wm,
+            startTime:startTime,
+            endTime:endTime,
+            start_date:start_date,
+            end_date:end_date
         })
     }
 
@@ -84,15 +95,15 @@ class WorkshopManagePropose extends Component{
                 </Form>
                 <h3>Detail</h3>
                 <hr/>
-                <div>
-                    <Form>
+                <div>{false?
+                    <Form onSubmit={this.handleSubmit}>
                         <FormGroup>
                             <Label for="startDate">開始日期</Label>
-                            <Input type="date" name="startDate" id="startDate" value={start_date} onChange={this.handleStartDateChange} required/>
+                            <Input type="date" name="startDate" id="startDate" value={start_date} onChange={this.handleStartDateChange} required />
                         </FormGroup>    
                         <FormGroup>
                             <Label for="startTime">開始時間</Label>
-                            <Input type="time" name="startTime" id="startTime" value={startTime} onChange={this.handleStartTimeChange} required/>
+                            <Input type="time" name="startTime" id="startTime" value={startTime} onChange={this.handleStartTimeChange} required />
                         </FormGroup>
                         <FormGroup>
                             <Label for="endDate">結束日期</Label>
@@ -103,7 +114,7 @@ class WorkshopManagePropose extends Component{
                             <Input type="time" name="endTime" id="endTime" value={endTime} onChange={this.handleEndTimeChange} required/>
                         </FormGroup>
                         <FormGroup>
-                            <Label for="deadline">截止日期</Label>
+                            <Label for="deadline">報名截止</Label>
                             <Input type="date" name="deadline" id="deadline" value={deadline} onChange={this.handleDeadlineChange} required/>
                         </FormGroup>
                         <FormGroup>
@@ -134,8 +145,61 @@ class WorkshopManagePropose extends Component{
                             <Label for="content">詳細介紹</Label>
                             <Input type="textarea" name="content" id="content" rows="10" value={content} onChange={this.handleContentChange} required/>
                         </FormGroup>
-                        <Button color="primary" type="submit" size="lg" block onClick={this.handleSubmit}>提交修改</Button>
+                        <Button color="primary" type="submit" size="lg" block >提交修改</Button>
                     </Form>
+                    :
+                    <Form onSubmit={this.handleSubmit}>
+                        <FormGroup>
+                            <Label for="startDate">開始日期</Label>
+                            <Input type="date" name="startDate" id="startDate" value={start_date} onChange={this.handleStartDateChange} required readOnly/>
+                        </FormGroup>    
+                        <FormGroup>
+                            <Label for="startTime">開始時間</Label>
+                            <Input type="time" name="startTime" id="startTime" value={startTime} onChange={this.handleStartTimeChange} required readOnly/>
+                        </FormGroup>
+                        <FormGroup>
+                            <Label for="endDate">結束日期</Label>
+                            <Input type="date" name="endDate" id="endDate" value={end_date} onChange={this.handleEndDateChange} required readOnly/>
+                        </FormGroup> 
+                        <FormGroup>
+                            <Label for="endTime">結束時間</Label>
+                            <Input type="time" name="endTime" id="endTime" value={endTime} onChange={this.handleEndTimeChange} required readOnly />
+                        </FormGroup>
+                        <FormGroup>
+                            <Label for="deadline">報名截止</Label>
+                            <Input type="date" name="deadline" id="deadline" value={deadline} onChange={this.handleDeadlineChange} required readOnly/>
+                        </FormGroup>
+                        <FormGroup>
+                            <Label for="max_number">最大人數</Label>
+                            <Input type="number" name="max_number" id="max_number" value={max_number} onChange={this.handleMaxChange} required readOnly/>
+                        </FormGroup>
+                        <FormGroup>
+                            <Label for="min_number">最少人數</Label>
+                            <Input type="number" name="min_number" id="min_number" value={min_number} onChange={this.handleMinChange} required readOnly/>
+                        </FormGroup>
+                        <FormGroup required>
+                            <Label for="location">地點</Label>
+                            <Input type="text" name="location" id="location" value={location} onChange={this.handleLocChange} required readOnly/>
+                        </FormGroup>
+                        <FormGroup>
+                            <Label for="price">價格</Label>
+                            <Input type="number" name="price" id="price" value={price} onChange={this.handlePriceChange} required/>
+                        </FormGroup>
+                        <FormGroup>
+                            <Label for="title">主題</Label>
+                            <Input type="text" name="title" id="title" value={title} onChange={this.handleTitleChange} required/>
+                        </FormGroup>
+                        <FormGroup>
+                            <Label for="introduction">簡介</Label>
+                            <Input type="textarea" name="introduction" id="introduction" rows="5" value={introduction} onChange={this.handleIntroChange} required/>
+                        </FormGroup>
+                        <FormGroup>
+                            <Label for="content">詳細介紹</Label>
+                            <Input type="textarea" name="content" id="content" rows="10" value={content} onChange={this.handleContentChange} required/>
+                        </FormGroup>
+                        <Button color="primary" type="submit" size="lg" block >提交修改</Button>
+                    </Form>
+                    }
                 </div>
             </div>
         )
@@ -151,28 +215,32 @@ class WorkshopManagePropose extends Component{
         const date = e.target.value;
         console.log(date);
         this.setState({
-            start_datetime:`${date} ${this.state.startTime}`
+            start_datetime:`${date} ${this.state.startTime}`,
+            start_date:date
         });
     }
     handleEndDateChange(e){
         const date = e.target.value;
         console.log(date);
         this.setState({
-            end_datetime:`${date} ${this.state.endTime}`
+            end_datetime:`${date} ${this.state.endTime}`,
+            end_date:date
         });
     }
     handleStartTimeChange(e){
         const time = e.target.value;
         console.log(time);
         this.setState({
-            start_datetime:`${this.state.start_date} ${time}`
+            start_datetime:`${this.state.start_date} ${time}`,
+            startTime:time
         });
     }
     handleEndTimeChange(e){
         const time = e.target.value;
         console.log(time);
         this.setState({
-            end_datetime:`${this.state.end_date} ${time}`
+            end_datetime:`${this.state.end_date} ${time}`,
+            endTime:time
         });
     }
     handleDeadlineChange(e){

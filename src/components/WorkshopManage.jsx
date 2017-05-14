@@ -65,7 +65,7 @@ class WorkshopManage extends Component{
                         <Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
                         <ModalHeader toggle={this.toggle}>Modal title</ModalHeader>
                         <ModalBody>
-                            確定要刪除工作坊?
+                            確定要刪除工作坊？
                             <br />
                             <Modal isOpen={this.state.nestedModal} toggle={this.toggleNested}>
                             <ModalHeader>刪除工作坊</ModalHeader>
