@@ -58,7 +58,7 @@ class WorkshopPage extends Component{
                 <div className="coverImg">
                     <img src={img_url}  alt=''/>
                 </div>
-                <h3><Badge color={badgeColor} className="badge" inline-block>{badgeStr}</Badge></h3>
+                <h3><Badge color={badgeColor} className="badge" >{badgeStr}</Badge></h3>
                 <h2>{title}</h2>
                 <hr/>
                 <div className="workshop-info">
