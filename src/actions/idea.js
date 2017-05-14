@@ -1,22 +1,20 @@
 import history from '../history';
+import { createIdea } from '../api/idea';
+import { deliverAlert } from './alert';
 
 export function comeUpWithIdea(idea) {
-    let p = new Promise((resolve, reject) => {
-        setTimeout(() => {
-            resolve({ code: 200, i_id: 12345 });
-        }, 1000);
-    }).then(ret => {
-        return ret;
+    return ((dispatch, getState) => {
+        createIdea(getState().fb, idea).then(res => {
+            dispatch({
+                type: 'IDEA_COME_UP_WITH',
+                payload: res.data,
+            });
+            history.replace(`i/${res.data.i_id}`);
+            dispatch(deliverAlert('許願成功', 'success', 3000));
+        }).catch(res => {
+            dispatch(deliverAlert('許願失敗', 'danger', 3000));
+        });
     });
-
-    return {
-        type: 'IDEA_COME_UP_WITH',
-        payload: p.then(ret => {
-            if (ret.code === 200) {
-                history.replace(`i/${ret.i_id}`);
-            }
-        }),
-    }
 }
 
 export function searchIdea(searchText, order) {
@@ -51,7 +49,7 @@ export function updateIdea(idea) {
 }
 
 export function deleteIdea(i_id) {
-    i_id = parseInt(i_id);
+    i_id = parseInt(i_id, 10);
     return {
         type: 'IDEA_DELETE',
         payload: 200,
@@ -59,7 +57,7 @@ export function deleteIdea(i_id) {
 }
 
 export function likeSearchIdea(i_id) {
-    i_id = parseInt(i_id);
+    i_id = parseInt(i_id, 10);
     return {
         type: 'IDEA_LIKE_SEARCH',
         payload: {
@@ -71,8 +69,7 @@ export function likeSearchIdea(i_id) {
 }
 
 export function showViewEditIdea(i_id) {
-    i_id = parseInt(i_id);
-    console.log('showViewEditIdea', i_id);
+    i_id = parseInt(i_id, 10);
     if (i_id === 12345) {
         return {
             type: 'IDEA_SHOW_VIEW_EDIT',
@@ -126,7 +123,7 @@ export function showViewEditIdea(i_id) {
 }
 
 export function likeViewEditIdea(i_id) {
-    i_id = parseInt(i_id);
+    i_id = parseInt(i_id, 10);
     if (i_id === 12345) {
         return {
             type: 'IDEA_LIKE_VIEW_EDIT',

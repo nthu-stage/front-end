@@ -1,6 +1,4 @@
-import history from '../history';
-
-export default function (state = null, action) {
+export default function (state = [], action) {
     let next_state;
     switch (action.type) {
         case 'IDEA_SEARCH':
