@@ -18,9 +18,11 @@ import WorkshopAttendeeList from './WorkshopManageAttendeeList';
 import WorkshopManagePropose from './WorkshopManagePropose';
 import './WorkshopManage.css';
 import {wsDelete} from '../actions/deleteWorkshop.js';
+import {isLogin} from '../actions/propose.js';
 class WorkshopManage extends Component{
     constructor(props){
         super(props);
+        this.props.isLogin();
         this.handleToggle = this.handleToggle.bind(this);
         this.handleDelete = this.handleDelete.bind(this);
         this.state = {
@@ -44,46 +46,51 @@ class WorkshopManage extends Component{
         });
     }
     render(){
-        return(
-            <div className="container">
-                <Row className="option">
-                    <Col sm={6}>
-                        <Button onClick={() => this.handleToggle('1')} block>工作坊</Button>
-                    </Col>
-                    <Col sm={6}>
-                        <Button onClick={() => this.handleToggle('2')} block>主控台</Button>
-                    </Col>
-                </Row>
-                <TabContent activeTab={this.state.activeTab}>
-                    <TabPane tabId="1">
-                        <WorkshopManagePropose w_id={this.props.match.params.id}/>
-                    </TabPane>
-                    <TabPane tabId="2" >
-                        <WorkshopAttendeeList w_id={this.props.match.params.id}/>
-                        <Button onClick={this.toggle} color="danger" size="lg" block>刪除工作坊</Button>
-                        <Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
-                        <ModalHeader toggle={this.toggle}>Modal title</ModalHeader>
-                        <ModalBody>
-                            確定要刪除工作坊？
-                            <br />
-                            <Modal isOpen={this.state.nestedModal} toggle={this.toggleNested}>
-                            <ModalHeader>刪除工作坊</ModalHeader>
-                            <ModalBody>請再次確認</ModalBody>
+        if(this.props.fb){
+            return( 
+                <div className="container">
+                    <Row className="option">
+                        <Col sm={6}>
+                            <Button onClick={() => this.handleToggle('1')} block>工作坊</Button>
+                        </Col>
+                        <Col sm={6}>
+                            <Button onClick={() => this.handleToggle('2')} block>主控台</Button>
+                        </Col>
+                    </Row>
+                    <TabContent activeTab={this.state.activeTab}>
+                        <TabPane tabId="1">
+                            <WorkshopManagePropose w_id={this.props.match.params.id}/>
+                        </TabPane>
+                        <TabPane tabId="2" >
+                            <WorkshopAttendeeList w_id={this.props.match.params.id}/>
+                            <Button onClick={this.toggle} color="danger" size="lg" block>刪除工作坊</Button>
+                            <Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
+                            <ModalHeader toggle={this.toggle}>Modal title</ModalHeader>
+                            <ModalBody>
+                                確定要刪除工作坊？
+                                <br />
+                                <Modal isOpen={this.state.nestedModal} toggle={this.toggleNested}>
+                                <ModalHeader>刪除工作坊</ModalHeader>
+                                <ModalBody>請再次確認</ModalBody>
+                                <ModalFooter>
+                                    <Button color="danger" onClick={this.handleDelete}>確定</Button>{' '}
+                                    <Button color="secondary" onClick={this.toggle}>取消</Button>
+                                </ModalFooter>
+                                </Modal>
+                            </ModalBody>
                             <ModalFooter>
-                                <Button color="danger" onClick={this.handleDelete}>確定</Button>{' '}
-                                <Button color="secondary" onClick={this.toggle}>取消</Button>
+                                <Button color="warning" onClick={this.toggleNested}>沒錯 !</Button>{' '}
+                                <Button color="secondary" onClick={this.toggle}>取消</Button>{' '}
                             </ModalFooter>
                             </Modal>
-                        </ModalBody>
-                        <ModalFooter>
-                            <Button color="warning" onClick={this.toggleNested}>沒錯 !</Button>{' '}
-                            <Button color="secondary" onClick={this.toggle}>取消</Button>{' '}
-                        </ModalFooter>
-                        </Modal>
-                    </TabPane>
-                </TabContent>
-            </div>
-        )
+                        </TabPane>
+                    </TabContent>
+                </div>    
+            )
+        } else {
+             return <div />;
+        }
+        
     }
     handleToggle(tab) {
         if (this.state.activeTab !== tab) {
@@ -100,11 +107,13 @@ class WorkshopManage extends Component{
 function mapStateToProps(state) {
     return {
         wm:state.wm,
+        fb:state.fb
     }
 }
 function mapDispatchToProps(dispatch) {
     return bindActionCreators({
         wsDelete:wsDelete,
+        isLogin:isLogin,
     }, dispatch);
 }
 

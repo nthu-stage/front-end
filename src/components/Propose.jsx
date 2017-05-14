@@ -12,6 +12,7 @@ import {
 import {
     ppSubmit,
 } from '../actions/propose.js';
+import {isLogin} from '../actions/propose'
 import './Propose.css';
 
 
@@ -19,6 +20,7 @@ class Propose extends Component{
     constructor(props){
         super(props);
         this.inputUrl = null; ////
+        this.props.isLogin();
         this.handleInputChange = this.handleInputChange.bind(this);
         this.handleStartDateChange = this.handleStartDateChange.bind(this);
         this.handleEndDateChange = this.handleEndDateChange.bind(this);
@@ -243,6 +245,7 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
     return bindActionCreators({
         ppSubmit:ppSubmit,
+        isLogin:isLogin,
     }, dispatch);
 }
 

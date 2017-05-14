@@ -7,3 +7,15 @@ export function listWorkshop(fb, searchText, stateFilter) {
     let { userID, signedRequest } = fb;
     return axios.get(url, { headers: { userID, signedRequest } });
 }
+
+export function getPostFromApi(fb, w_id) {
+    let url = `${baseUrl}/workshops/${w_id}`;
+    
+    if(fb){
+        let { userID, signedRequest } = fb;
+        return axios.get(url, { headers: { userID, signedRequest } });
+    }else{
+        return axios.get(url, { headers: { userID: null, signedRequest: null } });
+    }
+    
+}
