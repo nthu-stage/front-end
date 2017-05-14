@@ -45,6 +45,7 @@ export function ppUpdate(propose,w_id){
                 history.replace(`/wm/${w_id}`);
                 dispatch(deliverAlert('提交成功','success',3000));
             }).catch(err => {
+                console.log(err);
                 if(err.response.status === 400){
                     dispatch(deliverAlert('請先登入','warnig',3000));
                 }
