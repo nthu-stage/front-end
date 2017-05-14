@@ -228,7 +228,7 @@ class Propose extends Component{
             price} = this.state;
         const start_datetime =`${start_date} ${startTime}`;
         const end_datetime = `${end_date} ${endTime}`;
-        this.props.ppSubmit(img_url,start_datetime,end_datetime,location,content,title,min_number,max_number,deadline,introduction,price);
+        this.props.ppSubmit({img_url,start_datetime,end_datetime,location,content,title,min_number,max_number,deadline,introduction,price});
     }
 
 
