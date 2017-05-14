@@ -32,7 +32,15 @@ class IdeaNewModal extends Component {
 
         return (
             <Modal isOpen={modal} toggle={toggle}>
-                <ModalHeader>Modal title</ModalHeader>
+                <div className="modal-header">
+                    <h4 className="modal-title">
+                        <span className="mr-3"><img className="idea-view-view-facebook-picture" src={this.props.fb.picture_url} alt="fb" /></span>
+                        <span className="idea-view-view-modal-title">{this.props.fb.name}</span>
+                    </h4>
+                    <button onClick={this.props.toggle} type="button" className="close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
                 <Form onSubmit={this.handleSubmit}>
                     <ModalBody>
                         <FormGroup>
@@ -70,10 +78,16 @@ class IdeaNewModal extends Component {
     }
 }
 
+function mapStateToProps({ fb }) {
+    return {
+        fb,
+    }
+}
+
 function mapDispatchToProps(dispatch) {
     return bindActionCreators({
         comeUpWithIdea,
     }, dispatch);
 }
 
-export default connect(null, mapDispatchToProps)(IdeaNewModal);
+export default connect(mapStateToProps, mapDispatchToProps)(IdeaNewModal);

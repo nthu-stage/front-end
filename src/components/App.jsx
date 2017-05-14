@@ -13,12 +13,15 @@ import {
 import FacebookProvider from 'react-facebook';
 
 import NavbarLogin from './NavbarLogin';
+import AppAlert from './AppAlert';
 import Workshop from './Workshop';
 import Idea from './Idea';
 import WorkshopPage from './WorkshopPage';
 import Propose from './Propose';
 import Profile from './Profile';
 import WorkshopManage from './WorkshopManage';
+
+import './App.css';
 
 export default class App extends Component {
     constructor(props) {
@@ -42,7 +45,7 @@ export default class App extends Component {
                         <Navbar color="faded" light toggleable>
                             <div className="container">
                                 <NavbarToggler right onClick={this.toggle}/>
-                                <NavbarBrand tag={Link} to='/'>NTHU Stage</NavbarBrand>
+                                <NavbarBrand tag={Link} to='/'><i className="fa fa-cubes fa-lg mr-2" aria-hidden="true"></i>NTHU Stage</NavbarBrand>
                                 <Collapse isOpen={this.state.isOpen} navbar>
                                     <Nav className="ml-auto" navbar>
                                         <NavItem>
@@ -54,13 +57,12 @@ export default class App extends Component {
                                         <NavItem>
                                             <NavLink tag={Link} to='/pp'>我要提案</NavLink>
                                         </NavItem>
-                                        <NavItem className="my-auto">
-                                            <NavbarLogin />
-                                        </NavItem>
+                                        <NavbarLogin />
                                     </Nav>
                                 </Collapse>
                             </div>
                         </Navbar>
+                        <AppAlert />
                         <Route exact path="/" component={Workshop} />
                         <Route exact path="/i" component={Idea} />
                         <Route path="/i/:id" component={Idea} />

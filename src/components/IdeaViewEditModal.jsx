@@ -3,6 +3,7 @@ import { Button, Modal, ModalHeader, ModalBody, ModalFooter, Form, FormGroup, La
 import { BarChart, Bar, XAxis, Tooltip } from 'recharts';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
+import { Share } from 'react-facebook';
 
 import { showViewEditIdea, likeViewEditIdea, updateIdea, deleteIdea } from '../actions/idea';
 import './IdeaViewEditModal.css';
@@ -60,13 +61,18 @@ class IdeaViewEditModal extends Component {
         if (this.props.ideaViewEdit) {
 
             const { modal, toggle } = this.props;
-            const { i_id, idea_type, skill, goal, like_number, web_url, image_url, liked, isEditor, mostAvaiTime } = this.props.ideaViewEdit;
-            console.log(mostAvaiTime);
+            const { i_id, idea_type, skill, goal, like_number, web_url, image_url, picture_url, name, isEditor, liked, mostAvaiTime } = this.props.ideaViewEdit;
             return (
                 <Modal isOpen={modal} toggle={toggle}>
-                    <ModalHeader>
-                        ModalTitle
-                    </ModalHeader>
+                    <div className="modal-header idea-view-view-modal-header">
+                        <h4 className="modal-title">
+                            <span className="mr-3"><img className="idea-view-view-facebook-picture" src={picture_url} alt="fb" /></span>
+                            <span className="idea-view-view-modal-title">{name}</span>
+                        </h4>
+                        <button onClick={this.props.toggle} type="button" className="close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
                     <Form onSubmit={this.handleSubmit}>
                         <ModalBody>
                             <TabContent activeTab={this.state.activeTab}>
@@ -111,12 +117,14 @@ class IdeaViewEditModal extends Component {
                             <TabContent className="w-100" activeTab={this.state.activeTab}>
                                 <TabPane tabId="1">
                                     <div className="row">
-                                        <div className="col">
-                                            {isEditor && <Button color="secondary" className="mr-3" onClick={(event) => this.tabToggle('2')}>管理</Button>}
-                                            <i onClick={e => this.props.likeViewEditIdea(i_id)} className={`fa fa-lg ${liked ? 'fa-heart' : 'fa-heart-o'}`}> {like_number}</i>
+                                        <div className="col vertcal-align">
+                                            <Share href={`/i/${i_id}`}>
+                                                <i className="fa fa-lg fa-facebook mr-3 cursor-pointer" aria-hidden="true"> 分享</i>
+                                            </Share>
+                                            <i onClick={e => this.props.likeViewEditIdea(i_id)} className={`cursor-pointer fa fa-lg ${liked ? 'fa-heart' : 'fa-heart-o'}`}> {like_number}</i>
                                         </div>
                                         <div className="col text-right">
-                                            <Button color="secondary" onClick={this.props.toggle}>取消</Button>
+                                            {isEditor && <Button color="secondary" onClick={(event) => this.tabToggle('2')}>管理</Button>}
                                         </div>
                                     </div>
                                 </TabPane>

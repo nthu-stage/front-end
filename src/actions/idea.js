@@ -19,21 +19,7 @@ export function comeUpWithIdea(idea) {
     }
 }
 
-export function updateIdea(idea) {
-    return {
-        type: 'IDEA_COME_UP_WITH',
-        payload: 200,
-    }
-}
-
-export function deleteIdea(i_id) {
-    return {
-        type: 'IDEA_DELETE',
-        payload: 200,
-    }
-}
-
-export function searchIdea(searchText, type_filter) {
+export function searchIdea(searchText, order) {
     return {
         type: 'IDEA_SEARCH',
         payload: [
@@ -57,7 +43,23 @@ export function searchIdea(searchText, type_filter) {
     }
 }
 
+export function updateIdea(idea) {
+    return {
+        type: 'IDEA_COME_UP_WITH',
+        payload: 200,
+    }
+}
+
+export function deleteIdea(i_id) {
+    i_id = parseInt(i_id);
+    return {
+        type: 'IDEA_DELETE',
+        payload: 200,
+    }
+}
+
 export function likeSearchIdea(i_id) {
+    i_id = parseInt(i_id);
     return {
         type: 'IDEA_LIKE_SEARCH',
         payload: {
@@ -69,8 +71,9 @@ export function likeSearchIdea(i_id) {
 }
 
 export function showViewEditIdea(i_id) {
+    i_id = parseInt(i_id);
     console.log('showViewEditIdea', i_id);
-    if (i_id === '12345') {
+    if (i_id === 12345) {
         return {
             type: 'IDEA_SHOW_VIEW_EDIT',
             payload: {
@@ -81,6 +84,8 @@ export function showViewEditIdea(i_id) {
                 like_number: 12,
                 web_url: 'http://web_url/',
                 image_url: 'http://image_url/',
+                picture_url: 'https://scontent.xx.fbcdn.net/v/t1.0-1/p50x50/14907205_1735976403393352_4070401399338628514_n.jpg?oh=a92d0f7cbf8c444eb53e3b93ba2a18dd&oe=597D50E5',
+                name: '賴詰凱',
                 liked: true,
                 isEditor: false,
                 mostAvaiTime: [
@@ -92,7 +97,7 @@ export function showViewEditIdea(i_id) {
                 ],
             },
         }
-    } else if (i_id === '12') {
+    } else if (i_id === 12) {
         return {
             type: 'IDEA_SHOW_VIEW_EDIT',
             payload: {
@@ -103,6 +108,8 @@ export function showViewEditIdea(i_id) {
                 like_number: 9,
                 web_url: 'http://web_url/',
                 image_url: 'http://image_url/',
+                picture_url: 'https://scontent.xx.fbcdn.net/v/t1.0-1/p50x50/14907205_1735976403393352_4070401399338628514_n.jpg?oh=a92d0f7cbf8c444eb53e3b93ba2a18dd&oe=597D50E5',
+                name: '林軒毅',
                 liked: false,
                 isEditor: true,
                 mostAvaiTime: [
@@ -119,6 +126,7 @@ export function showViewEditIdea(i_id) {
 }
 
 export function likeViewEditIdea(i_id) {
+    i_id = parseInt(i_id);
     if (i_id === 12345) {
         return {
             type: 'IDEA_LIKE_VIEW_EDIT',

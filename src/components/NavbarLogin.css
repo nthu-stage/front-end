@@ -15,3 +15,11 @@
     height: 100%;
     border-radius: 50%;
 }
+
+.vertcal-align {
+    margin: auto 0;
+}
+
+.cursor-pointer {
+    cursor: pointer;
+}
