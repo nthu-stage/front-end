@@ -11,7 +11,7 @@ export function showProfile() {
                     min_number: 10,
                     max_number: 30,
                     deadline: 'Sat May 10 2017 20:53:47 GMT+0800 (CST)',
-                    phase: 'judging',
+                    state: 0,
                     attendees_number: 0,
                 },
                 {
@@ -21,7 +21,7 @@ export function showProfile() {
                     min_number: 10,
                     max_number: 50,
                     deadline: 'Sat May 15 2017 20:00:00 GMT+0800 (CST)',
-                    phase: 'judge_na',
+                    state: 3,
                     attendees_number: 12,
                 },
                 {
@@ -31,7 +31,7 @@ export function showProfile() {
                     min_number: 20,
                     max_number: 40,
                     deadline: 'Sat May 15 2017 20:00:00 GMT+0800 (CST)',
-                    phase: 'investigating',
+                    state: 2,
                     attendees_number: 15,
                 },
             ],
@@ -40,19 +40,7 @@ export function showProfile() {
                     w_id: 15,
                     title: 'TYS 5/20 聯合就業徵才媒合活動　正職Ｘ大學實習Ｘ高中職體驗',
                     start_datetime: 'Sat May 20 2017 20:53:47 GMT+0800 (CST)',
-                    phase: 'unreached',
-                },
-                {
-                    w_id: 16,
-                    title: 'TYS 5/20 聯合就業徵才媒合活動　正職Ｘ大學實習Ｘ高中職體驗',
-                    start_datetime: 'Sat May 20 2017 20:53:47 GMT+0800 (CST)',
-                    phase: 'reached',
-                },
-                {
-                    w_id: 17,
-                    title: 'TYS 5/20 聯合就業徵才媒合活動　正職Ｘ大學實習Ｘ高中職體驗',
-                    start_datetime: 'Sat May 20 2017 20:53:47 GMT+0800 (CST)',
-                    phase: 'over',
+                    state: 3,
                 },
             ],
             comeUpWith: [
