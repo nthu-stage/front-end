@@ -1,20 +1,45 @@
 import history from '../history';
-export function ppSubmit(img_url,start_datetime,end_datetime,location,content,title,min_number,max_number,deadline,introduction,price){
-    let p = new Promise((resolve,reject)=>{
-        setTimeout(() => {
-            resolve({ code: 200, w_id: 12345 });
-        }, 600);
-    }).then(ret=>{
-        return ret;
-    });
-    return{
-        type: '@PROPOSE/SUBMIT',
-        payload: p.then(ret => {
-            if (ret.code === 200) {
-                history.push(`/wp/${ret.w_id}`);
+import { deliverAlert } from './alert';
+import { submitPropose } from '../api/workshopManage'
+export function ppSubmit(propose){
+    return ((dispatch, getState) => {
+        submitPropose(getState().fb, propose).then(res => {
+            dispatch({
+                type: '@PROPOSE/SUBMIT',
+                payload:res.data
+            });
+            
+            history.replace(`/wp/${res.data.w_id}`);
+            dispatch(deliverAlert('提交成功','success',3000));
+        }).catch(res => {
+             if(res.status === 400){
+                dispatch(deliverAlert('請先登入','warnig',3000));
             }
-        }),
-    }
+            else if(res.status === 401){
+                dispatch(deliverAlert('工作坊不存在','danger',3000));
+                history.replace(`/`);
+            }
+            else{
+                dispatch(deliverAlert('讀取失敗','danger',3000));
+                history.replace(`/`);
+            }
+        });
+    });
+    // let p = new Promise((resolve,reject)=>{
+    //     setTimeout(() => {
+    //         resolve({ code: 200, w_id: 12345 });
+    //     }, 600);
+    // }).then(ret=>{
+    //     return ret;
+    // });
+    // return{
+    //     type: '@PROPOSE/SUBMIT',
+    //     payload: p.then(ret => {
+    //         if (ret.code === 200) {
+    //             history.push(`/wp/${ret.w_id}`);
+    //         }
+    //     }),
+    // }
         // return{
         //     type: '@PROPOSE/PROPOSE_SUBMIT',
         //     img_url:img_url,
