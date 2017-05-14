@@ -60,7 +60,7 @@ export function ppUpdate(img_url,start_datetime,end_datetime,location,content,ti
         price:price,
         payload: p.then(ret => {
             if (ret.code === 200) {
-                history.replace(`/wp/${ret.w_id}`);
+                history.replace(`/wm/${ret.w_id}`);
             }
         }),
     }
@@ -89,6 +89,8 @@ export function getPost(w_id){
                 deadline: '2017-11-11',
                 introduction: '2. 公開分享此貼文，並標註兩個人並留言 @____ @____ 5/12､5/13快來台大音樂節玩，還有台灣虎航機票可以抽！！！',
                 price: '10000',
+                phase:'over',
+                attended:false
             });
         }, 600);
     }).then(ret=>{
@@ -105,6 +107,8 @@ export function getPost(w_id){
                 deadline:ret.deadline,
                 introduction:ret.introduction,
                 price:ret.price,
+                phase:ret.phase,
+                attended:ret.attended
             }
         });
 
