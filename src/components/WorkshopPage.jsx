@@ -34,7 +34,7 @@ class WorkshopPage extends Component{
             introduction: '2. 公開分享此貼文，並標註兩個人並留言 @____ @____ 5/12､5/13快來台大音樂節玩，還有台灣虎航機票可以抽！！！',
             price: '10000',
             name:'LALALAND',
-            state:4 ,
+            phase:'reached' ,
             attended:false,
         }
     }
@@ -45,20 +45,21 @@ class WorkshopPage extends Component{
        })
     }
     render(){
-        const {img_url,start_datetime,end_datetime,location,content,title,max_number,deadline,introduction,price,name,state,attended} = this.state;
-        //add name, state, attended in js
+        const {img_url,start_datetime,end_datetime,location,content,title,max_number,deadline,introduction,price,name,phase,attended} = this.state;
+        //add name, state, attended in js undone
         const commentUrl = `www.nthu-stage/wp/${this.props.match.params.id}`;
         const btnStr = attended? "我不能去了QQ" : "我想要報名！";
-        const colorList = ['info', 'danger', 'warning', 'success', 'default', 'default'];
-        const badgeColor = colorList[state];
-        const strList = ['審核中', '審核失敗', '調查中', '已達標', '未達標', '已結束'];
-        const badgeStr =  strList[state];
+        const colorList = ['primary', 'danger', 'warning', 'danger', 'success', 'default'];
+        const badgeColor = phase==='judging'?colorList[0]:phase==='judge_na'?colorList[1]:phase==='investigating'?colorList[2]:phase==='unreached'?colorList[3]:phase==='reached'?colorList[4]:colorList[5];
+        const strList = ['審核中', '審核失敗', '調查中', '未達標', '已達標', '已結束'];
+        const badgeStr =  phase==='judging'?strList[0]:phase==='judge_na'?strList[1]:phase==='investigating'?strList[2]:phase==='unreached'?strList[3]:phase==='reached'?strList[4]:strList[5]; 
         return(
             <div className="container workshopPage">
                 <div className="coverImg">
                     <img src={img_url}  alt=''/>
                 </div>
-                <h2><Badge color={badgeColor}>{badgeStr}</Badge>{title}</h2>
+                <h3><Badge color={badgeColor} className="badge" >{badgeStr}</Badge></h3>
+                <h2>{title}</h2>
                 <hr/>
                 <div className="workshop-info">
                     <ListGroup>

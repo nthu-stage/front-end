@@ -24,3 +24,6 @@ h3{
 .workshop-info{
     margin:1rem auto;
 }
+.badge{
+    float: left
+}
