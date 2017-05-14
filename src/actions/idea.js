@@ -12,7 +12,16 @@ export function comeUpWithIdea(idea) {
             history.replace(`/i/${res.data.i_id}`);
             dispatch(deliverAlert('許願成功', 'success', 3000));
         }).catch(res => {
-            dispatch(deliverAlert('許願失敗', 'danger', 3000));
+            switch (res.status) {
+                case 400:
+                    dispatch(deliverAlert('內容有誤', 'danger', 3000));
+                    break;
+                case 401:
+                    dispatch(deliverAlert('請先登入', 'warning', 3000));
+                    break;
+                default:
+                    dispatch(deliverAlert('許願失敗', 'danger', 3000));
+            }
         });
     });
 }
@@ -25,7 +34,13 @@ export function searchIdea(searchText, order) {
                 payload: res.data,
             });
         }).catch(res => {
-            dispatch(deliverAlert('搜尋失敗', 'danger', 3000));
+            switch (res.status) {
+                case 400:
+                    dispatch(deliverAlert('內容有誤', 'danger', 3000));
+                    break;
+                default:
+                    dispatch(deliverAlert('搜尋失敗', 'danger', 3000));
+            }
         });
     });
 }
@@ -36,7 +51,16 @@ export function updateIdea(idea) {
             history.replace(`/i/${idea.i_id}`);
             dispatch(deliverAlert('編輯成功', 'success', 3000));
         }).catch(res => {
-            dispatch(deliverAlert('編輯失敗', 'danger', 3000));
+            switch (res.status) {
+                case 400:
+                    dispatch(deliverAlert('內容有誤', 'danger', 3000));
+                    break;
+                case 401:
+                    dispatch(deliverAlert('請先登入', 'warning', 3000));
+                    break;
+                default:
+                    dispatch(deliverAlert('編輯失敗', 'danger', 3000));
+            }
         });
     });
 }
@@ -48,7 +72,16 @@ export function deleteIdea(i_id) {
             history.replace(`/i/`);
             dispatch(deliverAlert('刪除成功', 'success', 3000));
         }).catch(res => {
-            dispatch(deliverAlert('刪除失敗', 'danger', 3000));
+            switch (res.status) {
+                case 400:
+                    dispatch(deliverAlert('願望不存在', 'danger', 3000));
+                    break;
+                case 401:
+                    dispatch(deliverAlert('請先登入', 'warning', 3000));
+                    break;
+                default:
+                    dispatch(deliverAlert('刪除失敗', 'danger', 3000));
+            }
         });
     });
 }
@@ -62,7 +95,16 @@ export function likeSearchIdea(i_id) {
                 payload: res.data,
             });
         }).catch(res => {
-            dispatch(deliverAlert('喜歡失敗', 'danger', 3000));
+            switch (res.status) {
+                case 400:
+                    dispatch(deliverAlert('願望不存在', 'danger', 3000));
+                    break;
+                case 401:
+                    dispatch(deliverAlert('請先登入', 'warning', 3000));
+                    break;
+                default:
+                    dispatch(deliverAlert('喜歡失敗', 'danger', 3000));
+            }
         });
     });
 }
@@ -76,7 +118,16 @@ export function showViewEditIdea(i_id) {
                 payload: res.data,
             });
         }).catch(res => {
-            dispatch(deliverAlert('讀取失敗', 'danger', 3000));
+            switch (res.status) {
+                case 400:
+                    dispatch(deliverAlert('願望不存在', 'danger', 3000));
+                    break;
+                case 401:
+                    dispatch(deliverAlert('請先登入', 'warning', 3000));
+                    break;
+                default:
+                    dispatch(deliverAlert('讀取失敗', 'danger', 3000));
+            }
         });
     });
 }
@@ -90,7 +141,16 @@ export function likeViewEditIdea(i_id) {
                 payload: res.data,
             });
         }).catch(res => {
-            dispatch(deliverAlert('喜歡失敗', 'danger', 3000));
+            switch (res.status) {
+                case 400:
+                    dispatch(deliverAlert('願望不存在', 'danger', 3000));
+                    break;
+                case 401:
+                    dispatch(deliverAlert('請先登入', 'warning', 3000));
+                    break;
+                default:
+                    dispatch(deliverAlert('喜歡失敗', 'danger', 3000));
+            }
         });
     });
 }

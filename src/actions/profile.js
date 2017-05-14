@@ -9,7 +9,13 @@ export function showProfile() {
                 payload: res.data,
             });
         }).catch(res => {
-            dispatch(deliverAlert('讀取失敗', 'danger', 3000));
+            switch (res.status) {
+                case 401:
+                    dispatch(deliverAlert('請先登入', 'warning', 3000));
+                    break;
+                default:
+                    dispatch(deliverAlert('讀取失敗', 'danger', 3000));
+            }
         });
     });
 }
@@ -22,7 +28,13 @@ export function updateAvailableTime(availableTime) {
                 payload: res.data,
             });
         }).catch(res => {
-            dispatch(deliverAlert('修改失敗', 'danger', 3000));
+            switch (res.status) {
+                case 401:
+                    dispatch(deliverAlert('請先登入', 'warning', 3000));
+                    break;
+                default:
+                    dispatch(deliverAlert('修改失敗', 'danger', 3000));
+            }
         });
     });
 }
