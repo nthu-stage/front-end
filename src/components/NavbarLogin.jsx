@@ -7,8 +7,7 @@ import { bindActionCreators } from 'redux';
 import Cookies from 'universal-cookie';
 const cookies = new Cookies();
 
-import fbLogin from '../actions/fbLogin';
-import { deliverAlert } from '../actions/alert';
+import { regOrLogin, logout } from '../actions/profile';
 
 import './NavbarLogin.css';
 
@@ -20,7 +19,9 @@ class NavbarLogin extends Component {
             dropdownOpen: false
         };
 
-        this.props.fbLogin(cookies.get('fb') || null);
+        if (cookies.get('fb')) {
+            this.props.regOrLogin(cookies.get('fb'));
+        }
 
         this.handleResponse = this.handleResponse.bind(this);
         this.handleLogout = this.handleLogout.bind(this);
@@ -31,14 +32,13 @@ class NavbarLogin extends Component {
         let { name, picture } = data.profile;
         let { expiresIn, userID, signedRequest } = data.tokenDetail;
         let fb = { name, picture_url: picture.data.url, userID, signedRequest };
-        this.props.fbLogin(fb);
         cookies.set('fb', fb, { maxAge: expiresIn });
-        this.props.deliverAlert('登入成功！', 'success', 3000);
+        this.props.regOrLogin(fb);
     }
 
     handleLogout() {
         cookies.remove('fb');
-        this.props.fbLogin(null);
+        this.props.logout();
     }
 
     toggle() {
@@ -91,8 +91,8 @@ function mapStateToProps({ fb }) {
 
 function mapDispatchToProps(dispatch) {
     return bindActionCreators({
-        fbLogin,
-        deliverAlert,
+        regOrLogin,
+        logout,
     }, dispatch);
 }
 

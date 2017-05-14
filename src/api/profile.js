@@ -13,3 +13,9 @@ export function editAvailableTime(fb, availableTime) {
     let { userID, signedRequest } = fb;
     return axios.put(url, availableTime, { headers: { userID, signedRequest } });
 }
+
+export function registerOrLogin(fb) {
+    let url = `${baseUrl}/profile`;
+    let { userID, signedRequest } = fb;
+    return axios.post(url, fb, { headers: { userID, signedRequest } });
+}

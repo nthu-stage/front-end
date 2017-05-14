@@ -1,6 +1,7 @@
 import axios from 'axios';
 
-const baseUrl = 'http://localhost:3090';
+const baseUrl = 'http://NTHUStage-dev.us-west-2.elasticbeanstalk.com/api';
+// const baseUrl = 'http://localhost:3090';
 
 export function createIdea(fb, idea) {
     let url = `${baseUrl}/ideas`;
@@ -14,7 +15,7 @@ export function listIdea(fb, searchText, order) {
         let { userID, signedRequest } = fb;
         return axios.get(url, { headers: { userID, signedRequest } });
     } else {
-        return axios.get(url, { headers: { userID: null, signedRequest: null } });
+        return axios.get(url);
     }
 }
 
@@ -42,6 +43,6 @@ export function showIdea(fb, i_id) {
         let { userID, signedRequest } = fb;
         return axios.get(url, { headers: { userID, signedRequest } });
     } else {
-        return axios.get(url, { headers: { userID: null, signedRequest: null } });
+        return axios.get(url);
     }
 }

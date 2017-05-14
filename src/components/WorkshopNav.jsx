@@ -17,6 +17,8 @@ class WorkshopNav extends Component {
             searchText: '',
             stateFilter: 3,
         };
+
+        this.props.searchWorkshop(this.state.searchText, this.state.stateFilter);
     }
 
     handleSubmit(event) {
