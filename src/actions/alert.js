@@ -1,3 +1,10 @@
+export function deliverAlert(msg, type, delay){
+    return (dispatch) => {
+        dispatch(showAlert(msg, type));
+        dispatch(hideAlert(delay));
+    };
+}
+
 export function showAlert(msg, type){
     return {
         type: 'ALERT_SHOW',

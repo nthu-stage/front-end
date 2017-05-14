@@ -1,5 +1,4 @@
 export default function (state = null, action) {
-    console.log(state);
     switch (action.type) {
         case 'ALERT_SHOW':
             return action.payload;
@@ -8,6 +7,6 @@ export default function (state = null, action) {
             next_state.isOpen = action.payload;
             return next_state;
         default:
-            return { msg: '', type: 'success', isOpen: false };
+            return { msg: '', type: 'success', isOpen: false, delay: 0 };
     }
 }
