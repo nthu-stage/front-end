@@ -7,3 +7,33 @@ export function createIdea(fb, idea) {
     let { userID, signedRequest } = fb;
     return axios.post(url, idea, { headers: { userID, signedRequest } });
 }
+
+export function listIdea(fb, searchText, order) {
+    let url = `${baseUrl}/ideas?searchText=${searchText}&order=${order}`;
+    let { userID, signedRequest } = fb;
+    return axios.get(url, { headers: { userID, signedRequest } });
+}
+
+export function editIdea(fb, idea) {
+    let url = `${baseUrl}/ideas/${idea.i_id}`;
+    let { userID, signedRequest } = fb;
+    return axios.put(url, idea, { headers: { userID, signedRequest } });
+}
+
+export function removeIdea(fb, i_id) {
+    let url = `${baseUrl}/ideas/${i_id}`;
+    let { userID, signedRequest } = fb;
+    return axios.delete(url, { headers: { userID, signedRequest } });
+}
+
+export function likeIdea(fb, i_id) {
+    let url = `${baseUrl}/ideas/${i_id}`;
+    let { userID, signedRequest } = fb;
+    return axios.post(url, { headers: { userID, signedRequest } });
+}
+
+export function showIdea(fb, i_id) {
+    let url = `${baseUrl}/ideas/${i_id}`;
+    let { userID, signedRequest } = fb;
+    return axios.get(url, { headers: { userID, signedRequest } });
+}
