@@ -8,7 +8,7 @@ class WorkshopList extends Component {
         if (this.props.ws) {
             return (
                 <div className="row">
-                    {this.props.ws.map(workshop => <WorkshopListItem key={workshop.id} {...workshop}/>)}
+                    {this.props.ws.map(workshop => <WorkshopListItem key={workshop.w_id} {...workshop}/>)}
                 </div>
             );
         }

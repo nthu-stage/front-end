@@ -5,6 +5,7 @@ import { bindActionCreators } from 'redux';
 
 import { searchIdea } from '../actions/idea';
 import IdeaNewModal from './IdeaNewModal';
+import { deliverAlert } from '../actions/alert';
 
 import './IdeaNav.css';
 
@@ -38,15 +39,23 @@ class IdeaNav extends Component {
     }
 
     newTeachToggle() {
-        this.setState({
-            newTeachModal: !this.state.newTeachModal,
-        });
+        if (this.props.fb) {
+            this.setState({
+                newTeachModal: !this.state.newTeachModal,
+            });
+        } else {
+            this.props.deliverAlert('請先登入', 'warning', 3000);
+        }
     }
 
     newLearnToggle() {
-        this.setState({
-            newLearnModal: !this.state.newLearnModal,
-        });
+        if (this.props.fb) {
+            this.setState({
+                newLearnModal: !this.state.newLearnModal,
+            });
+        } else {
+            this.props.deliverAlert('請先登入', 'warning', 3000);
+        }
     }
 
     viewEditToggle() {
@@ -82,10 +91,17 @@ class IdeaNav extends Component {
     }
 }
 
+function mapStateToProps({ fb }) {
+    return {
+        fb,
+    }
+}
+
 function mapDispatchToProps(dispatch) {
     return bindActionCreators({
         searchIdea,
+        deliverAlert,
     }, dispatch);
 }
 
-export default connect(null, mapDispatchToProps)(IdeaNav);
+export default connect(mapStateToProps, mapDispatchToProps)(IdeaNav);

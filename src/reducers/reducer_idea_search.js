@@ -14,7 +14,6 @@ export default function (state = [], action) {
             }
             return next_state;
         case 'IDEA_COME_UP_WITH':
-            console.log('IDEA_COME_UP_WITH', action);
             next_state = state.slice();
             next_state.push({
                 i_id: 123456,
