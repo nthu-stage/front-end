@@ -1,91 +1,67 @@
 import history from '../history';
 import { deliverAlert } from './alert';
-import { submitPropose } from '../api/workshopManage'
+import { submitPropose , submitUpdate } from '../api/workshopManage'
 import { getPostFromApi } from '../api/workshop'
 export function ppSubmit(propose){
     return ((dispatch, getState) => {
-        submitPropose(getState().fb, propose).then(res => {
-            dispatch({
-                type: '@PROPOSE/SUBMIT',
-                payload:res.data
+        if(getState().fb){
+            submitPropose(getState().fb, propose).then(res => {
+                dispatch({
+                    type: '@PROPOSE/SUBMIT',
+                    payload:res.data
+                });
+                
+                history.replace(`/wp/${res.data.w_id}`);
+                dispatch(deliverAlert('提交成功','success',3000));
+            }).catch(err => {
+                if(err.response.status === 400){
+                    dispatch(deliverAlert('請先登入','warnig',3000));
+                }
+                else if(err.response.status === 401){
+                    dispatch(deliverAlert('工作坊不存在','danger',3000));
+                    history.replace(`/`);
+                }
+                else{
+                    dispatch(deliverAlert('讀取失敗','danger',3000));
+                    history.replace(`/`);
+                }
             });
-            
-            history.replace(`/wp/${res.data.w_id}`);
-            dispatch(deliverAlert('提交成功','success',3000));
-        }).catch(err => {
-             if(err.response.status === 400){
-                dispatch(deliverAlert('請先登入','warnig',3000));
-            }
-            else if(err.response.status === 401){
-                dispatch(deliverAlert('工作坊不存在','danger',3000));
-                history.replace(`/`);
-            }
-            else{
-                dispatch(deliverAlert('讀取失敗','danger',3000));
-                history.replace(`/`);
-            }
-        });
+        } else {
+            history.replace('/');
+            dispatch(deliverAlert('請先登入', 'warning', 3000));
+        }
+        
     });
-    // let p = new Promise((resolve,reject)=>{
-    //     setTimeout(() => {
-    //         resolve({ code: 200, w_id: 12345 });
-    //     }, 600);
-    // }).then(ret=>{
-    //     return ret;
-    // });
-    // return{
-    //     type: '@PROPOSE/SUBMIT',
-    //     payload: p.then(ret => {
-    //         if (ret.code === 200) {
-    //             history.push(`/wp/${ret.w_id}`);
-    //         }
-    //     }),
-    // }
-        // return{
-        //     type: '@PROPOSE/PROPOSE_SUBMIT',
-        //     img_url:img_url,
-        //     start_datetime:start_datetime,
-        //     end_datetime:end_datetime,
-        //     location:location,
-        //     content:content,
-        //     title:title,
-        //     min_number:min_number,
-        //     max_number:max_number,
-        //     deadline:deadline,
-        //     introduction:introduction,
-        //     price:price,
-        //     payload:{
-        //         w_id:100000,
-        //         code:200
-        //         /////undone
-        //     }
-
-
-        // }
 }
 export function ppUpdate(propose,w_id){
     return ((dispatch, getState) => {
-        submitUpdate(getState().fb, propose, w_id).then(res => {
-            dispatch({
-                type: '@MANAGE/UPDATE',
-                payload:res.data
+        if(getState().fb){
+            submitUpdate(getState().fb, propose, w_id).then(res => {
+                dispatch({
+                    type: '@MANAGE/UPDATE',
+                    payload:res.data
+                });
+                
+                history.replace(`/wm/${w_id}`);
+                dispatch(deliverAlert('提交成功','success',3000));
+            }).catch(err => {
+                if(err.response.status === 400){
+                    dispatch(deliverAlert('請先登入','warnig',3000));
+                }
+                else if(err.response.status === 401){
+                    dispatch(deliverAlert('工作坊不存在','danger',3000));
+                    history.replace(`/`);
+                }
+                else{
+                    dispatch(deliverAlert('讀取失敗','danger',3000));
+                    history.replace(`/`);
+                }
             });
-            
-            history.replace(`/wm/${w_id}`);
-            dispatch(deliverAlert('提交成功','success',3000));
-        }).catch(err => {
-             if(err.response.status === 400){
-                dispatch(deliverAlert('請先登入','warnig',3000));
-            }
-            else if(err.response.status === 401){
-                dispatch(deliverAlert('工作坊不存在','danger',3000));
-                history.replace(`/`);
-            }
-            else{
-                dispatch(deliverAlert('讀取失敗','danger',3000));
-                history.replace(`/`);
-            }
-        });
+        } else {
+            history.replace('/');
+            dispatch(deliverAlert('請先登入', 'warning', 3000));
+        }
+        
     });
     // let p = new Promise((resolve,reject)=>{
     //     setTimeout(() => {
