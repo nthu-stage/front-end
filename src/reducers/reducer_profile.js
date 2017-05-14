@@ -14,11 +14,11 @@ export default function (state = null, action) {
     switch (action.type) {
         case 'PROFILE_SHOW':
             next_state = JSON.parse(JSON.stringify(action.payload));
-            next_state.propose.map(w => {
+            next_state.propose.forEach(w => {
                 w.start_datetime = date2yymmddhhmmss(new Date(w.start_datetime));
                 w.deadline = date2yymmddhhmmss(new Date(w.deadline));
             });
-            next_state.attend.map(w => {
+            next_state.attend.forEach(w => {
                 w.start_datetime = date2yymmddhhmmss(new Date(w.start_datetime));
             });
             return next_state;
