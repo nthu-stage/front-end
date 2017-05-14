@@ -28,14 +28,12 @@ class NavbarLogin extends Component {
     }
 
     handleResponse(data) {
-        console.log(data);
         let { name, picture } = data.profile;
         let { expiresIn, userID, signedRequest } = data.tokenDetail;
         let fb = { name, picture_url: picture.data.url, userID, signedRequest };
         this.props.fbLogin(fb);
         cookies.set('fb', fb, { maxAge: expiresIn });
         this.props.deliverAlert('登入成功！', 'success', 3000);
-        console.log(userID, signedRequest);
     }
 
     handleLogout() {

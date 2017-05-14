@@ -4,16 +4,27 @@ import { Card, CardText, CardBlock, CardTitle } from 'reactstrap';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Share } from 'react-facebook';
+import history from '../history';
 
 import { likeSearchIdea } from '../actions/idea';
 import './IdeaListItem.css';
 
 class IdeaListItem extends Component {
+    constructor(props) {
+        super(props);
+
+        this.handleOnClick = this.handleOnClick.bind(this);
+    }
+
+    handleOnClick(url) {
+        history.replace(url);
+    }
+
     render() {
         const { i_id, idea_type, skill, goal, like_number, liked } = this.props;
         return (
             <div className="col col-12 col-sm-6 col-md-4 col-lg-3 mt-3">
-                <Card tag={Link} to={`/i/${i_id}`} className="idea-list-item unlink">
+                <Card onClick={e => this.handleOnClick(`/i/${i_id}`)} className="idea-list-item unlink">
                     <CardBlock>
                         <div className="idea-list-item-content">
                             <CardTitle>{`我想${idea_type === 'teach' ? '教' : '學'}${skill}`}</CardTitle>

@@ -10,8 +10,12 @@ export function createIdea(fb, idea) {
 
 export function listIdea(fb, searchText, order) {
     let url = `${baseUrl}/ideas?searchText=${searchText}&order=${order}`;
-    let { userID, signedRequest } = fb;
-    return axios.get(url, { headers: { userID, signedRequest } });
+    if (fb) {
+        let { userID, signedRequest } = fb;
+        return axios.get(url, { headers: { userID, signedRequest } });
+    } else {
+        return axios.get(url, { headers: { userID: null, signedRequest: null } });
+    }
 }
 
 export function editIdea(fb, idea) {
@@ -34,6 +38,10 @@ export function likeIdea(fb, i_id) {
 
 export function showIdea(fb, i_id) {
     let url = `${baseUrl}/ideas/${i_id}`;
-    let { userID, signedRequest } = fb;
-    return axios.get(url, { headers: { userID, signedRequest } });
+    if (fb) {
+        let { userID, signedRequest } = fb;
+        return axios.get(url, { headers: { userID, signedRequest } });
+    } else {
+        return axios.get(url, { headers: { userID: null, signedRequest: null } });
+    }
 }
