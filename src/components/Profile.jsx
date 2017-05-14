@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Table, Button, Badge } from 'reactstrap';
+import { Table, Badge } from 'reactstrap';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Button, Modal, ModalHeader, ModalBody, ModalFooter, Form, FormGroup, Label, Input, TabContent, TabPane } from 'reactstrap';
+import { Button, Modal, ModalBody, ModalFooter, Form, FormGroup, Label, Input, TabContent, TabPane } from 'reactstrap';
 import { BarChart, Bar, XAxis, Tooltip } from 'recharts';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
@@ -80,7 +80,7 @@ class IdeaViewEditModal extends Component {
                                     <p>{`我想${idea_type === 'teach' ? '教' : '學'}${skill}`}</p>
                                     <p>{`${idea_type === 'teach' ? '讓你' : '希望'}可以${goal}`}</p>
                                     <p>{`範例網頁連結：${web_url}`}</p>
-                                    <p>{`範例圖片連結：${web_url}`}</p>
+                                    <p>{`範例圖片連結：${image_url}`}</p>
                                     <div className="text-center mt-3">
                                         <h6>大家有空的時間</h6>
                                         <BarChart width={300}
