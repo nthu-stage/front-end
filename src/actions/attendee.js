@@ -1,4 +1,4 @@
-import getAttendeeFromApi from '../api/workshop';
+import { getAttendeeFromApi } from '../api/workshop';
 import { deliverAlert } from './alert.js';
 export function getAttendee(w_id){
     return((dispatch, getState) => {

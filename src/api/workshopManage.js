@@ -6,8 +6,8 @@ export function submitPropose(fb,propose){
     let { userID, signedRequest } = fb;
     return axios.post(url, propose, { headers: { userID, signedRequest } });
 }
-export function submitUpdate(fb,propose){
-    let url = `${baseUrl}/workshops`;
+export function submitUpdate(fb,propose,w_id){
+    let url = `${baseUrl}/workshops/${w_id}`;
     let { userID, signedRequest } = fb;
-    return axios.post(url, propose, { headers: { userID, signedRequest } });
+    return axios.put(url, propose, { headers: { userID, signedRequest } });
 }
