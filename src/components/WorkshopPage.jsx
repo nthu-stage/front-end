@@ -88,13 +88,14 @@ class WorkshopPage extends Component{
         )
     }
     handleSubmit(){
-        this.props.wspSubmit();
+        this.props.wspSubmit(this.props.match.params.id);
     }
 }
 function mapStateToProps(state) {
     return {
         wsp:state.wsp,
         wm:state.wm,
+        fb:state.fb
     }
 }
 

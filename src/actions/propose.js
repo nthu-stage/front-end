@@ -63,33 +63,56 @@ export function ppSubmit(propose){
 
         // }
 }
-export function ppUpdate(img_url,start_datetime,end_datetime,location,content,title,min_number,max_number,deadline,introduction,price,w_id){
-    let p = new Promise((resolve,reject)=>{
-        setTimeout(() => {
-            resolve({ code: 200, w_id: 12345 });
-        }, 600);
-    }).then(ret=>{
-        return ret;
-    });
-    return{
-        type: '@MANAGE/UPDATE',
-        img_url:img_url,
-        start_datetime:start_datetime,
-        end_datetime:end_datetime,
-        location:location,
-        content:content,
-        title:title,
-        min_number:min_number,
-        max_number:max_number,
-        deadline:deadline,
-        introduction:introduction,
-        price:price,
-        payload: p.then(ret => {
-            if (ret.code === 200) {
-                history.replace(`/wm/${ret.w_id}`);
+export function ppUpdate(propose,w_id){
+    return ((dispatch, getState) => {
+        submitUpdate(getState().fb, propose, w_id).then(res => {
+            dispatch({
+                type: '@MANAGE/UPDATE',
+                payload:res.data
+            });
+            
+            history.replace(`/wm/${w_id}`);
+            dispatch(deliverAlert('提交成功','success',3000));
+        }).catch(err => {
+             if(err.response.status === 400){
+                dispatch(deliverAlert('請先登入','warnig',3000));
             }
-        }),
-    }
+            else if(err.response.status === 401){
+                dispatch(deliverAlert('工作坊不存在','danger',3000));
+                history.replace(`/`);
+            }
+            else{
+                dispatch(deliverAlert('讀取失敗','danger',3000));
+                history.replace(`/`);
+            }
+        });
+    });
+    // let p = new Promise((resolve,reject)=>{
+    //     setTimeout(() => {
+    //         resolve({ code: 200, w_id: 12345 });
+    //     }, 600);
+    // }).then(ret=>{
+    //     return ret;
+    // });
+    // return{
+    //     type: '@MANAGE/UPDATE',
+    //     img_url:img_url,
+    //     start_datetime:start_datetime,
+    //     end_datetime:end_datetime,
+    //     location:location,
+    //     content:content,
+    //     title:title,
+    //     min_number:min_number,
+    //     max_number:max_number,
+    //     deadline:deadline,
+    //     introduction:introduction,
+    //     price:price,
+    //     payload: p.then(ret => {
+    //         if (ret.code === 200) {
+    //             history.replace(`/wm/${ret.w_id}`);
+    //         }
+    //     }),
+    // }
 }
 export function getPost(w_id){
     return ((dispatch, getState) => {
