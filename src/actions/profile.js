@@ -48,14 +48,14 @@ export function updateAvailableTime(availableTime) {
     });
 }
 
-export function regOrLogin(profile) {
+export function regOrLogin(profile, alert) {
     return ((dispatch, getState) => {
         registerOrLogin(profile).then(res => {
             dispatch({
                 type: 'FB_LOGIN',
                 payload: profile,
             });
-            dispatch(deliverAlert('登入成功', 'success', 3000));
+            if (alert) dispatch(deliverAlert('登入成功', 'success', 3000));
         }).catch(err => {
             dispatch({
                 type: 'FB_LOGIN',
