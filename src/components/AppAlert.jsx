@@ -7,6 +7,7 @@ import { hideAlert } from '../actions/alert';
 
 class AppAlert extends Component {
     render() {
+        if (!this.props.alert) return <div />;
         let { msg, type, isOpen } = this.props.alert;
         return (
             <Alert color={type} isOpen={isOpen} toggle={() => this.props.hideAlert(0)}>{msg}</Alert>

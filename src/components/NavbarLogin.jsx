@@ -20,7 +20,7 @@ class NavbarLogin extends Component {
         };
 
         if (cookies.get('fb')) {
-            this.props.regOrLogin(cookies.get('fb'));
+            this.props.regOrLogin(cookies.get('fb'), false);
         }
 
         this.handleResponse = this.handleResponse.bind(this);
@@ -33,7 +33,7 @@ class NavbarLogin extends Component {
         let { expiresIn, userID, signedRequest } = data.tokenDetail;
         let fb = { name, picture_url: picture.data.url, userID, signedRequest };
         cookies.set('fb', fb, { maxAge: expiresIn });
-        this.props.regOrLogin(fb);
+        this.props.regOrLogin(fb, true);
     }
 
     handleLogout() {

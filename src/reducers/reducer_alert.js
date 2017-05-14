@@ -7,6 +7,6 @@ export default function (state = null, action) {
             next_state.isOpen = action.payload;
             return next_state;
         default:
-            return { msg: '', type: 'success', isOpen: false, delay: 0 };
+            return state;
     }
 }

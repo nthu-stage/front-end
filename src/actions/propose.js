@@ -61,7 +61,6 @@ export function ppUpdate(propose,w_id){
             history.replace('/');
             dispatch(deliverAlert('請先登入', 'warning', 3000));
         }
-        
     });
     // let p = new Promise((resolve,reject)=>{
     //     setTimeout(() => {
@@ -114,10 +113,10 @@ export function getPost(w_id){
     });
     // let p = new Promise((resolve,reject)=>{
     //     setTimeout(() => {
-    //         resolve({ 
+    //         resolve({
     //             code: 200,
     //             w_id: 12345,
-    //             img_url : "https://images-cdn.9gag.com/images/thumbnail-facebook/9155182_1388247030.7007_yqylen_n.jpg", 
+    //             img_url : "https://images-cdn.9gag.com/images/thumbnail-facebook/9155182_1388247030.7007_yqylen_n.jpg",
     //             date:'',
     //             startTime:'',
     //             endTime:'',
@@ -141,7 +140,7 @@ export function getPost(w_id){
     //     }, 600);
     // }).then(ret=>{
     //         return{
-                
+
     //             img_url:ret.img_url,
     //             start_datetime:ret.start_datetime,
     //             end_datetime:ret.end_datetime,
@@ -162,16 +161,13 @@ export function getPost(w_id){
     //     type: '@MANAGE/INIT',
     //     payload: p,
     // }
-    
+
 }
 export function isLogin(){
     return ((dispatch, getState) => {
         if(!getState().fb){
-            dispatch(deliverAlert('請先登入','warning',3000));
             history.replace('/');
+            dispatch(deliverAlert('請先登入','warning',3000));
         }
     })
 }
-
-
-
