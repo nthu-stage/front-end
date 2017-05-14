@@ -11,7 +11,7 @@ export function ppSubmit(img_url,start_datetime,end_datetime,location,content,ti
         type: '@PROPOSE/SUBMIT',
         payload: p.then(ret => {
             if (ret.code === 200) {
-                history.push(`wp/${ret.w_id}`);
+                history.push(`/wp/${ret.w_id}`);
             }
         }),
     }
@@ -60,7 +60,7 @@ export function ppUpdate(img_url,start_datetime,end_datetime,location,content,ti
         price:price,
         payload: p.then(ret => {
             if (ret.code === 200) {
-                history.replace(`wp/${ret.w_id}`);
+                history.replace(`/wp/${ret.w_id}`);
             }
         }),
     }

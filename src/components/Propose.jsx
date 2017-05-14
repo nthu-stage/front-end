@@ -72,10 +72,10 @@ class Propose extends Component{
                 <h3>Detail</h3>
                 <hr/>
                 <div>
-                    <Form>
+                    <Form onSubmit={this.handleSubmit} >
                         <FormGroup>
                             <Label for="startDate">開始日期</Label>
-                            <Input type="date" name="startDate" id="startDate" onChange={this.handleStartDateChange} required/>
+                            <Input type="date" name="startDate" id="startDate" onChange={this.handleStartDateChange} required />
                         </FormGroup>    
                         <FormGroup>
                             <Label for="startTime">開始時間</Label>
@@ -90,7 +90,7 @@ class Propose extends Component{
                             <Input type="time" name="endTime" id="endTime" onChange={this.handleEndTimeChange} required/>
                         </FormGroup>
                         <FormGroup>
-                            <Label for="deadline">截止日期</Label>
+                            <Label for="deadline">報名截止</Label>
                             <Input type="date" name="deadline" id="deadline" onChange={this.handleDeadlineChange} required/>
                         </FormGroup>
                         <FormGroup>
@@ -121,7 +121,7 @@ class Propose extends Component{
                             <Label for="content">詳細介紹</Label>
                             <Input type="textarea" name="content" id="content" rows="10" onChange={this.handleContentChange} required/>
                         </FormGroup>
-                        <Button color="primary" type="submit" size="lg" block onClick={this.handleSubmit}>我要提案</Button>
+                        <Button color="primary" type="submit" size="lg" block >我要提案</Button>
                     </Form>
                 </div>
             </div>

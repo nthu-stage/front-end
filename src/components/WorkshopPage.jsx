@@ -48,7 +48,7 @@ class WorkshopPage extends Component{
         const {img_url,start_datetime,end_datetime,location,content,title,max_number,deadline,introduction,price,name,state,attended} = this.state;
         //add name, state, attended in js
         const commentUrl = `www.nthu-stage/wp/${this.props.match.params.id}`;
-        const btnStr = attended? "我不能去了QQ" : "我想要報名!!";
+        const btnStr = attended? "我不能去了QQ" : "我想要報名！";
         const colorList = ['info', 'danger', 'warning', 'success', 'default', 'default'];
         const badgeColor = colorList[state];
         const strList = ['審核中', '審核失敗', '調查中', '已達標', '未達標', '已結束'];
@@ -62,13 +62,13 @@ class WorkshopPage extends Component{
                 <hr/>
                 <div className="workshop-info">
                     <ListGroup>
-                        <ListGroupItem>開始時間:　{start_datetime}</ListGroupItem>
-                        <ListGroupItem>結束時間:　{end_datetime}</ListGroupItem>
-                        <ListGroupItem>地　　點:　{location}</ListGroupItem>
-                        <ListGroupItem>人數上限:　{max_number}</ListGroupItem>
-                        <ListGroupItem>截止期限:　{deadline}</ListGroupItem>
-                        <ListGroupItem>價　　格:　{price}</ListGroupItem>
-                        <ListGroupItem>講　　者:　{name}</ListGroupItem>
+                        <ListGroupItem>開始時間：　{start_datetime}</ListGroupItem>
+                        <ListGroupItem>結束時間：　{end_datetime}</ListGroupItem>
+                        <ListGroupItem>地　　點：　{location}</ListGroupItem>
+                        <ListGroupItem>人數上限：　{max_number}</ListGroupItem>
+                        <ListGroupItem>報名截止：　{deadline}</ListGroupItem>
+                        <ListGroupItem>價　　格：　{price}</ListGroupItem>
+                        <ListGroupItem>講　　者：　{name}</ListGroupItem>
                     </ListGroup>
                 </div>
                 <h3>簡介</h3>
