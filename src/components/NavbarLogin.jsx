@@ -8,7 +8,7 @@ import Cookies from 'universal-cookie';
 const cookies = new Cookies();
 
 import fbLogin from '../actions/fbLogin';
-import { showAlert, hideAlert } from '../actions/alert';
+import { deliverAlert } from '../actions/alert';
 
 import './NavbarLogin.css';
 
@@ -34,8 +34,7 @@ class NavbarLogin extends Component {
         let fb = { name, picture_url: picture.data.url, userID, signedRequest };
         this.props.fbLogin(fb);
         cookies.set('fb', fb, { maxAge: expiresIn });
-        this.props.showAlert('登入成功！', 'success');
-        this.props.hideAlert(3000);
+        this.props.deliverAlert('登入成功！', 'success', 3000);
         console.log(userID, signedRequest);
     }
 
@@ -95,8 +94,7 @@ function mapStateToProps({ fb }) {
 function mapDispatchToProps(dispatch) {
     return bindActionCreators({
         fbLogin,
-        showAlert,
-        hideAlert,
+        deliverAlert,
     }, dispatch);
 }
 
