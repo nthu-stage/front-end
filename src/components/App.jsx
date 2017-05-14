@@ -13,15 +13,12 @@ import {
 import FacebookProvider from 'react-facebook';
 
 import NavbarLogin from './NavbarLogin';
-import AppAlert from './AppAlert';
 import Workshop from './Workshop';
 import Idea from './Idea';
 import WorkshopPage from './WorkshopPage';
 import Propose from './Propose';
 import Profile from './Profile';
 import WorkshopManage from './WorkshopManage';
-
-import './App.css';
 
 export default class App extends Component {
     constructor(props) {
@@ -57,12 +54,13 @@ export default class App extends Component {
                                         <NavItem>
                                             <NavLink tag={Link} to='/pp'>我要提案</NavLink>
                                         </NavItem>
-                                        <NavbarLogin />
+                                        <NavItem className="my-auto">
+                                            <NavbarLogin />
+                                        </NavItem>
                                     </Nav>
                                 </Collapse>
                             </div>
                         </Navbar>
-                        <AppAlert />
                         <Route exact path="/" component={Workshop} />
                         <Route exact path="/i" component={Idea} />
                         <Route path="/i/:id" component={Idea} />
