@@ -49,6 +49,7 @@ class WorkshopManagePropose extends Component{
             deadline: '2017-11-11',
             introduction: 'haha',
             price: '10000',
+            phase:'over'
         }
     }
 
@@ -72,13 +73,14 @@ class WorkshopManagePropose extends Component{
     }
 
     render(){
-        const {img_url,start_datetime,end_datetime,location,content,title,min_number,max_number,deadline,introduction,price} = this.state;
+        const {img_url,start_datetime,end_datetime,location,content,title,min_number,max_number,deadline,introduction,price, phase} = this.state;
         const timeForStart = start_datetime.split(' ');
         const start_date = timeForStart[0];
         const startTime = timeForStart[1];
         const timeForEnd = end_datetime.split(' ');
         const end_date = timeForEnd[0];
         const endTime = timeForEnd[1];
+        const editable = (phase === 'over' || phase === 'unreached') ? false :  true;
         console.log(this.state);
         return(
             <div className="container propose">
@@ -95,7 +97,7 @@ class WorkshopManagePropose extends Component{
                 </Form>
                 <h3>Detail</h3>
                 <hr/>
-                <div>{false?
+                <div>{editable?
                     <Form onSubmit={this.handleSubmit}>
                         <FormGroup>
                             <Label for="startDate">開始日期</Label>
@@ -179,7 +181,7 @@ class WorkshopManagePropose extends Component{
                         </FormGroup>
                         <FormGroup required>
                             <Label for="location">地點</Label>
-                            <Input type="text" name="location" id="location" value={location} onChange={this.handleLocChange} required readOnly/>
+                            <Input type="text" name="location" id="location" value={location} onChange={this.handleLocChange} required />
                         </FormGroup>
                         <FormGroup>
                             <Label for="price">價格</Label>

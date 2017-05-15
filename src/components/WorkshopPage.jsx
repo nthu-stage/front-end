@@ -46,7 +46,7 @@ class WorkshopPage extends Component{
     }
     render(){
         const {img_url,start_datetime,end_datetime,location,content,title,max_number,deadline,introduction,price,name,phase,attended} = this.state;
-        //add name, state, attended in js undone
+        //add name, phase, attended in js undone
         const commentUrl = `www.nthu-stage/wp/${this.props.match.params.id}`;
         const btnStr = attended? "我不能去了QQ" : "我想要報名！";
         const colorList = ['primary', 'danger', 'warning', 'danger', 'success', 'default'];
