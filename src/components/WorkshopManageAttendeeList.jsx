@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import fileDownload from "react-file-download";
-//import stringify from 'csv-stringify';
+import {CSVLink, CSVDownload} from 'react-csv';
 ////undone
 import {
     Row,
@@ -34,6 +34,7 @@ class WorkshopManageAttendeeList extends Component {
     render(){
         const {attendees} = this.state;
         console.log("list",attendees);
+        let attendList ='';
         let children = (
             <ListGroupItem className='empty d-flex justify-content-center align-items-center'>
                 <div className='empty-text'>目前沒有人報名喔ㄏㄏ</div>
@@ -53,7 +54,7 @@ class WorkshopManageAttendeeList extends Component {
                     <Col sm={6}>
                         <h3>報名人列表</h3>
                     </Col>
-                    <Button onClick={()=>fileDownload(JSON.stringify(attendees),"1.json")}>匯出</Button>
+                    <CSVLink data={attendees} filename={"參加名單.csv"} className="btn btn-info" >匯出</CSVLink>
                 </Row>
                 <ListGroup>{children}</ListGroup>
             </div>
