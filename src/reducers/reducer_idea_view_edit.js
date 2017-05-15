@@ -1,4 +1,4 @@
-export default function (state = [], action) {
+export default function (state = null, action) {
     let next_state;
     switch (action.type) {
         case 'IDEA_SHOW_VIEW_EDIT':
