@@ -59,7 +59,6 @@ class IdeaViewEditModal extends Component {
 
     render() {
         if (this.props.ideaViewEdit) {
-
             const { modal, toggle } = this.props;
             const { i_id, idea_type, skill, goal, like_number, web_url, image_url, picture_url, name, isEditor, liked, mostAvaiTime } = this.props.ideaViewEdit;
             return (

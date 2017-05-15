@@ -143,6 +143,7 @@ export function showViewEditIdea(i_id) {
         }).catch(err => {
             switch (err.response.status) {
                 case 400:
+                    history.replace(`/i`);
                     dispatch(deliverAlert('願望不存在', 'danger', 3000));
                     break;
                 default:
