@@ -49,7 +49,8 @@ class WorkshopManagePropose extends Component{
             deadline: '2017-11-11',
             introduction: 'haha',
             price: '10000',
-            phase:'over'
+            phase:'over',
+            name:'LaLaLand',
         }
     }
 
@@ -74,31 +75,28 @@ class WorkshopManagePropose extends Component{
 
     render(){
         const {img_url,start_datetime,end_datetime,location,content,title,min_number,max_number,deadline,introduction,price, phase} = this.state;
+        const { masking } = this.props.wsp;
         const timeForStart = start_datetime.split(' ');
         const start_date = timeForStart[0];
         const startTime = timeForStart[1];
         const timeForEnd = end_datetime.split(' ');
         const end_date = timeForEnd[0];
         const endTime = timeForEnd[1];
-        const editable = (phase === 'over' || phase === 'unreached') ? false :  true;
+        const editable = (phase === 'judging' || phase === 'judge_na' || phase === 'unreached') ? false :  true; //[‘judging’ | ‘judge_na’ | V‘investigating’ | ‘unreached’ | V‘reached’ | V‘over’]
         console.log(this.state);
         return(
-            <div className="container propose">
+            <div className={`container propose ${masking? 'mask' : '' }`}>
                 <div className="coverImg">
                     <img src={img_url}  alt=''/>
                 </div>
-                <Form>
-                    <FormGroup row>
-                        <Label for="exampleUrl" sm={2}>Image url</Label>
-                        <Col sm={10}>
-                            <Input type="url" name="url" id="exampleUrl" placeholder="Give me an image url!!" onChange={this.handleInputChange}/>
-                        </Col>
-                    </FormGroup>
-                </Form>
                 <h3>Detail</h3>
                 <hr/>
                 <div>{editable?
                     <Form onSubmit={this.handleSubmit}>
+                        <FormGroup>
+                            <Label for="exampleUrl" >圖片網址</Label>
+                            <Input type="url" name="url" id="exampleUrl" value={img_url} onChange={this.handleInputChange} required/>
+                        </FormGroup>
                         <FormGroup>
                             <Label for="startDate">開始日期</Label>
                             <Input type="date" name="startDate" id="startDate" value={start_date} onChange={this.handleStartDateChange} required />
@@ -152,6 +150,10 @@ class WorkshopManagePropose extends Component{
                     :
                     <Form onSubmit={this.handleSubmit}>
                         <FormGroup>
+                            <Label for="exampleUrl" >圖片網址</Label>
+                            <Input type="url" name="url" id="exampleUrl" value={img_url} onChange={this.handleInputChange} required readOnly/>
+                        </FormGroup>
+                        <FormGroup>
                             <Label for="startDate">開始日期</Label>
                             <Input type="date" name="startDate" id="startDate" value={start_date} onChange={this.handleStartDateChange} required readOnly/>
                         </FormGroup>    
@@ -181,23 +183,23 @@ class WorkshopManagePropose extends Component{
                         </FormGroup>
                         <FormGroup required>
                             <Label for="location">地點</Label>
-                            <Input type="text" name="location" id="location" value={location} onChange={this.handleLocChange} required />
+                            <Input type="text" name="location" id="location" value={location} onChange={this.handleLocChange} required readOnly/>
                         </FormGroup>
                         <FormGroup>
                             <Label for="price">價格</Label>
-                            <Input type="number" name="price" id="price" value={price} onChange={this.handlePriceChange} required/>
+                            <Input type="number" name="price" id="price" value={price} onChange={this.handlePriceChange} required readOnly/>
                         </FormGroup>
                         <FormGroup>
                             <Label for="title">主題</Label>
-                            <Input type="text" name="title" id="title" value={title} onChange={this.handleTitleChange} required/>
+                            <Input type="text" name="title" id="title" value={title} onChange={this.handleTitleChange} required readOnly/>
                         </FormGroup>
                         <FormGroup>
                             <Label for="introduction">簡介</Label>
-                            <Input type="textarea" name="introduction" id="introduction" rows="5" value={introduction} onChange={this.handleIntroChange} required/>
+                            <Input type="textarea" name="introduction" id="introduction" rows="5" value={introduction} onChange={this.handleIntroChange} required readOnly/>
                         </FormGroup>
                         <FormGroup>
                             <Label for="content">詳細介紹</Label>
-                            <Input type="textarea" name="content" id="content" rows="10" value={content} onChange={this.handleContentChange} required/>
+                            <Input type="textarea" name="content" id="content" rows="10" value={content} onChange={this.handleContentChange} required readOnly/>
                         </FormGroup>
                         <Button color="primary" type="submit" size="lg" block >提交修改</Button>
                     </Form>
@@ -318,7 +320,8 @@ class WorkshopManagePropose extends Component{
 
 function mapStateToProps(state) {
     return {
-        wm:state.wm
+        wm:state.wm,
+        wsp:state.wsp
     }
 }
 function mapDispatchToProps(dispatch) {

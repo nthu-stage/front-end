@@ -35,7 +35,6 @@ class WorkshopPage extends Component{
             price: '10000',
             name:'LALALAND',
             phase:'reached' ,
-            attended:false,
         }
     }
     componentWillReceiveProps(next){
@@ -46,6 +45,8 @@ class WorkshopPage extends Component{
     }
     render(){
         const {img_url,start_datetime,end_datetime,location,content,title,max_number,deadline,introduction,price,name,phase,attended} = this.state;
+        const { masking } = this.props.wsp;
+        console.log(masking);
         //add name, phase, attended in js undone
         const commentUrl = `www.nthu-stage/wp/${this.props.match.params.id}`;
         const btnStr = attended? "我不能去了QQ" : "我想要報名！";
@@ -54,7 +55,7 @@ class WorkshopPage extends Component{
         const strList = ['審核中', '審核失敗', '調查中', '未達標', '已達標', '已結束'];
         const badgeStr =  phase==='judging'?strList[0]:phase==='judge_na'?strList[1]:phase==='investigating'?strList[2]:phase==='unreached'?strList[3]:phase==='reached'?strList[4]:strList[5]; 
         return(
-            <div className="container workshopPage">
+            <div className={`container workshopPage ${masking? 'mask' : ''}`}>
                 <div className="coverImg">
                     <img src={img_url}  alt=''/>
                 </div>

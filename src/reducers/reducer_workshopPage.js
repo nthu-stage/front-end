@@ -1,11 +1,23 @@
-
-export default function workshopPage(state = null, action) {
+const initState = {
+    masking:true
+}
+export default function workshopPage(state = initState, action) {
     switch (action.type) {
         case '@WORKSHOPPAGE/WORKSHOPPAGE_SUBMIT':
         console.log(action.payload);
             return{
                 ...state,
                 attended:action.payload.attended,
+            }
+        case '@WORKSHOPPAGE/LOADING':
+            return{
+                ...state,
+                masking:true
+            }
+        case '@WORKSHOPPAGE/LOADING_DONE':
+            return{
+                ...state,
+                masking:false
             }
         default: return state;
     }

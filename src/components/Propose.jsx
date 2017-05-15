@@ -63,18 +63,14 @@ class Propose extends Component{
                 <div className="coverImg">
                     <img src={img_url}  alt='' />
                 </div>
-                <Form>
-                    <FormGroup row>
-                        <Label for="exampleUrl" sm={2}>Image url</Label>
-                        <Col sm={10}>
-                            <Input type="url" name="url" id="exampleUrl" placeholder="Give me an image url!!" onChange={this.handleInputChange}/>
-                        </Col>
-                    </FormGroup>
-                </Form>
                 <h3>Detail</h3>
                 <hr/>
                 <div>
                     <Form onSubmit={this.handleSubmit} >
+                        <FormGroup>
+                            <Label for="exampleUrl" >圖片網址</Label>
+                            <Input type="url" name="url" id="exampleUrl" placeholder="ex:http://imgur/1234567" onChange={this.handleInputChange} required/>
+                        </FormGroup>
                         <FormGroup>
                             <Label for="startDate">開始日期</Label>
                             <Input type="date" name="startDate" id="startDate" onChange={this.handleStartDateChange} required />

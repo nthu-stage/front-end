@@ -27,17 +27,17 @@ export function isAttended(fb,w_id){
     let url = `${baseUrl}/workshops/${w_id}`;
     if(fb){
         let { userID, signedRequest } = fb;
-        return axios.post(url, w_id, { headers: { userID, signedRequest } });
+        return axios.post(url, { headers: { userID, signedRequest } });
     }else{
         return
     }
 }
 ////////////後端沒做 undone
 export function getAttendeeFromApi(fb, w_id){
-    let url = `${baseUrl}/workshops/${w_id}`;
+    let url = `${baseUrl}/dashboard/${w_id}`;
     if(fb){
         let { userID, signedRequest } = fb;
-        return axios.post(url, w_id, { headers: { userID, signedRequest } });
+        return axios.get(url,{ headers: { userID, signedRequest } });
     } else {
         return
     }
