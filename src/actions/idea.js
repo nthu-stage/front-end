@@ -47,6 +47,7 @@ export function searchIdea(searchText, order) {
                 default:
                     dispatch(deliverAlert('搜尋失敗', 'danger', 3000));
             }
+            console.log(err.response);
         });
     });
 }
@@ -82,7 +83,7 @@ export function deleteIdea(i_id) {
     return ((dispatch, getState) => {
         if (getState().fb) {
             removeIdea(getState().fb, i_id).then(res => {
-                history.replace(`/i/`);
+                history.replace(`/i`);
                 dispatch(deliverAlert('刪除成功', 'success', 3000));
             }).catch(err => {
                 switch (err.response.status) {
@@ -125,6 +126,7 @@ export function likeSearchIdea(i_id) {
                     default:
                         dispatch(deliverAlert('喜歡失敗', 'danger', 3000));
                 }
+                console.log('like Idea', err.response);
             });
         } else {
             dispatch(deliverAlert('請先登入', 'warning', 3000));

@@ -37,7 +37,7 @@ class Propose extends Component{
         this.handleContentChange = this.handleContentChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
         this.state = {
-            img_url : "https://placeholdit.imgix.net/~text?txtsize=33&txt=1600%C3%97400&w=1600&h=400",
+            img_url : "https://placeholdit.imgix.net/~text?txtsize=33&txt=1500%C3%97600&w=1500&h=600",
             start_date:'',
             end_date:'',
             startTime:'',
@@ -74,7 +74,7 @@ class Propose extends Component{
                         <FormGroup>
                             <Label for="startDate">開始日期</Label>
                             <Input type="date" name="startDate" id="startDate" onChange={this.handleStartDateChange} required />
-                        </FormGroup>    
+                        </FormGroup>
                         <FormGroup>
                             <Label for="startTime">開始時間</Label>
                             <Input type="time" name="startTime" id="startTime" onChange={this.handleStartTimeChange} required/>
@@ -82,7 +82,7 @@ class Propose extends Component{
                         <FormGroup>
                             <Label for="endDate">結束日期</Label>
                             <Input type="date" name="endDate" id="endDate" onChange={this.handleEndDateChange} required/>
-                        </FormGroup> 
+                        </FormGroup>
                         <FormGroup>
                             <Label for="endTime">結束時間</Label>
                             <Input type="time" name="endTime" id="endTime" onChange={this.handleEndTimeChange} required/>

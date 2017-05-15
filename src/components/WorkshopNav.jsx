@@ -43,7 +43,7 @@ class WorkshopNav extends Component {
                 </div>
                 <div className="col col-md-3">
                     <ButtonGroup className="workshop-nav-filter">
-                        <Button color={prop ? 'info' : 'secondary'} onClick={e => this.handleFilter(1 - prop, goal)}>提案中</Button>
+                        <Button color={prop ? 'info' : 'secondary'} onClick={e => this.handleFilter(1 - prop, goal)}>調查中</Button>
                         <Button color={goal ? 'info' : 'secondary'} onClick={e => this.handleFilter(prop, 1 - goal)}>已達標</Button>
                     </ButtonGroup>
                 </div>
