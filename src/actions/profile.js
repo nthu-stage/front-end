@@ -62,6 +62,7 @@ export function regOrLogin(profile, alert) {
                 payload: null,
             });
             dispatch(deliverAlert('登入失敗', 'danger', 3000));
+            console.log(err.response);
         });
     });
 }

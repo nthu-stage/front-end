@@ -29,9 +29,10 @@ class NavbarLogin extends Component {
     }
 
     handleResponse(data) {
-        let { name, picture } = data.profile;
+        console.log(data);
+        let { name, picture, email, id } = data.profile;
         let { expiresIn, userID, signedRequest } = data.tokenDetail;
-        let fb = { name, picture_url: picture.data.url, userID, signedRequest };
+        let fb = { name, email, fb_userid: id, picture_url: picture.data.url, userID, signedRequest };
         cookies.set('fb', fb, { maxAge: expiresIn });
         this.props.regOrLogin(fb, true);
     }
