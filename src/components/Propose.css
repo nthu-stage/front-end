@@ -4,8 +4,9 @@
 
 }
 .coverImg img{
-    height: 35vw;
-    width: 81vw;
+    /*height: 35vw;
+    width: 81vw;*/
+    width: 100%;
     border-radius: 3px; 
     margin: 0.5rem auto 0.5rem auto;
     display: block;
