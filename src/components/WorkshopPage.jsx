@@ -34,13 +34,13 @@ class WorkshopPage extends Component{
             introduction: '2. 公開分享此貼文，並標註兩個人並留言 @____ @____ 5/12､5/13快來台大音樂節玩，還有台灣虎航機票可以抽！！！',
             price: '10000',
             name:'LALALAND',
-            phase:'reached' ,
+            phase:'judging' ,
         }
     }
     componentWillReceiveProps(next){
        this.setState({
            ...next.wm,
-           attended:next.wsp,
+           attended:next.wsp.attended,
        })
     }
     render(){

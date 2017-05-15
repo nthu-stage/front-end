@@ -37,7 +37,7 @@ class Propose extends Component{
         this.handleContentChange = this.handleContentChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
         this.state = {
-            img_url : "https://images-cdn.9gag.com/images/thumbnail-facebook/9155182_1388247030.7007_yqylen_n.jpg",
+            img_url : "https://placeholdit.imgix.net/~text?txtsize=33&txt=1600%C3%97400&w=1600&h=400",
             start_date:'',
             end_date:'',
             startTime:'',
