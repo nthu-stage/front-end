@@ -37,7 +37,7 @@ class Propose extends Component{
         this.handleContentChange = this.handleContentChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
         this.state = {
-            img_url : "https://placeholdit.imgix.net/~text?txtsize=33&txt=1500%C3%97600&w=1500&h=600",
+            image_url : "https://placeholdit.imgix.net/~text?txtsize=33&txt=1500%C3%97600&w=1500&h=600",
             start_date:'',
             end_date:'',
             startTime:'',
@@ -57,11 +57,11 @@ class Propose extends Component{
     }
 
     render(){
-        const {img_url} = this.state;
+        const {image_url} = this.state;
         return(
             <div className="container propose">
                 <div className="coverImg">
-                    <img src={img_url}  alt='' />
+                    <img src={image_url}  alt='' />
                 </div>
                 <h3>Detail</h3>
                 <hr/>
@@ -129,7 +129,7 @@ class Propose extends Component{
         const url = e.target.value;
         console.log(url);
         this.setState({
-            img_url:url
+            image_url:url
         });
     }
     handleStartDateChange(e){
@@ -211,7 +211,7 @@ class Propose extends Component{
     }
     handleSubmit(e){
         e.preventDefault();
-        const {img_url,
+        const {image_url,
             start_date,
             end_date,
             startTime,
@@ -226,7 +226,7 @@ class Propose extends Component{
             price} = this.state;
         const start_datetime =`${start_date} ${startTime}`;
         const end_datetime = `${end_date} ${endTime}`;
-        this.props.ppSubmit({img_url,start_datetime,end_datetime,location,content,title,min_number,max_number,deadline,introduction,price});
+        this.props.ppSubmit({image_url,start_datetime,end_datetime,location,content,title,min_number,max_number,deadline,introduction,price});
     }
 
 

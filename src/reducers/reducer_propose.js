@@ -1,6 +1,6 @@
 import history from '../history';
 const initPropose={
-    img_url:'',
+    image_url:'',
     start_datetime:'',
     end_datetime:'',
     location:'',
@@ -22,7 +22,7 @@ export default function (state = initPropose, action) {
         case '@PROPOSE/PROPOSE_UPDATE':
             return {
                 ...state,
-                img_url:action.img,
+                image_url:action.img,
                 time:action.time,
                 location:action.location,
                 speaker:action.speaker,
@@ -31,9 +31,6 @@ export default function (state = initPropose, action) {
 ///////wait for api
             };
         default: return state;
-            
+
     }
 }
-
-
-

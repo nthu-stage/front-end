@@ -34,7 +34,7 @@ class WorkshopManagePropose extends Component{
         this.handleContentChange = this.handleContentChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
         this.state = {
-            img_url : "https://images-cdn.9gag.com/images/thumbnail-facebook/9155182_1388247030.7007_yqylen_n.jpg", 
+            image_url : "https://images-cdn.9gag.com/images/thumbnail-facebook/9155182_1388247030.7007_yqylen_n.jpg", 
             start_date:'',
             end_date:'',
             startTime:'',
@@ -74,7 +74,7 @@ class WorkshopManagePropose extends Component{
     }
 
     render(){
-        const {img_url,start_datetime,end_datetime,location,content,title,min_number,max_number,deadline,introduction,price, phase} = this.state;
+        const {image_url,start_datetime,end_datetime,location,content,title,min_number,max_number,deadline,introduction,price, phase} = this.state;
         const { masking } = this.props.wsp;
         const timeForStart = start_datetime.split(' ');
         const start_date = timeForStart[0];
@@ -87,7 +87,7 @@ class WorkshopManagePropose extends Component{
         return(
             <div className={`container propose ${masking? 'mask' : '' }`}>
                 <div className="coverImg">
-                    <img src={img_url}  alt=''/>
+                    <img src={image_url}  alt=''/>
                 </div>
                 <h3>Detail</h3>
                 <hr/>
@@ -95,7 +95,7 @@ class WorkshopManagePropose extends Component{
                     <Form onSubmit={this.handleSubmit}>
                         <FormGroup>
                             <Label for="exampleUrl" >圖片網址</Label>
-                            <Input type="url" name="url" id="exampleUrl" value={img_url} onChange={this.handleInputChange} required/>
+                            <Input type="url" name="url" id="exampleUrl" value={image_url} onChange={this.handleInputChange} required/>
                         </FormGroup>
                         <FormGroup>
                             <Label for="startDate">開始日期</Label>
@@ -151,7 +151,7 @@ class WorkshopManagePropose extends Component{
                     <Form onSubmit={this.handleSubmit}>
                         <FormGroup>
                             <Label for="exampleUrl" >圖片網址</Label>
-                            <Input type="url" name="url" id="exampleUrl" value={img_url} onChange={this.handleInputChange} required readOnly/>
+                            <Input type="url" name="url" id="exampleUrl" value={image_url} onChange={this.handleInputChange} required readOnly/>
                         </FormGroup>
                         <FormGroup>
                             <Label for="startDate">開始日期</Label>
@@ -212,7 +212,7 @@ class WorkshopManagePropose extends Component{
         const url = e.target.value;
         console.log(url);
         this.setState({
-            img_url:url
+            image_url:url
         });
     }
     handleStartDateChange(e){
@@ -298,7 +298,7 @@ class WorkshopManagePropose extends Component{
     }
     handleSubmit(e){
         e.preventDefault();
-        const {img_url,
+        const {image_url,
             start_date,
             end_date,
             startTime,
@@ -314,7 +314,7 @@ class WorkshopManagePropose extends Component{
         const start_datetime =`${start_date} ${startTime}`;
         const end_datetime = `${end_date} ${endTime}`;
         console.log(this.state);
-        this.props.ppUpdate({img_url,start_datetime,end_datetime,location,content,title,min_number,max_number,deadline,introduction,price},this.props.w_id);
+        this.props.ppUpdate({image_url,start_datetime,end_datetime,location,content,title,min_number,max_number,deadline,introduction,price},this.props.w_id);
     }
 }
 

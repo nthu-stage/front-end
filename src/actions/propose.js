@@ -10,7 +10,7 @@ export function ppSubmit(propose){
                     type: '@PROPOSE/SUBMIT',
                     payload:res.data
                 });
-                
+
                 history.replace(`/wp/${res.data.w_id}`);
                 dispatch(deliverAlert('提交成功','success',3000));
             }).catch(err => {
@@ -25,12 +25,13 @@ export function ppSubmit(propose){
                     dispatch(deliverAlert('讀取失敗','danger',3000));
                     history.replace(`/`);
                 }
+                console.log(err.response);
             });
         } else {
             history.replace('/');
             dispatch(deliverAlert('請先登入', 'warning', 3000));
         }
-        
+
     });
 }
 export function ppUpdate(propose,w_id){
@@ -41,7 +42,7 @@ export function ppUpdate(propose,w_id){
                     type: '@MANAGE/UPDATE',
                     payload:res.data
                 });
-                
+
                 history.replace(`/wm/${w_id}`);
                 dispatch(deliverAlert('提交成功','success',3000));
             }).catch(err => {
@@ -65,7 +66,7 @@ export function ppUpdate(propose,w_id){
     });
 }
 export function getPost(w_id){
-    
+
     return ((dispatch, getState) => {
         dispatch({
             type: '@WORKSHOPPAGE/LOADING'
