@@ -21,7 +21,7 @@ export default class WorkshopListItem extends Component {
         let invest_countdown = dateDiffInDays(new Date(Date.now()), new Date(pre_deadline));
         let attend_countdown = dateDiffInDays(new Date(Date.now()), new Date(deadline));
         return (
-            <div className="col col-12 col-sm-6 col-md-4 col-lg-3 mt-3">
+            <div className="col col-12 col-sm-6 col-md-4 mt-3">
                 <Card className="unlink" tag={Link} to={`/wp/${w_id}`}>
                     <CardImg className="workshop-list-item-img" top width="100%" src={image_url} alt="Card image cap" />
                     <CardBlock>
