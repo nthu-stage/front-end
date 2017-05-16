@@ -19,7 +19,7 @@ class WorkshopPage extends Component{
 
         this.handleSubmit = this.handleSubmit.bind(this);
         this.state = {
-            img_url : "https://images-cdn.9gag.com/images/thumbnail-facebook/9155182_1388247030.7007_yqylen_n.jpg", 
+            image_url : "https://images-cdn.9gag.com/images/thumbnail-facebook/9155182_1388247030.7007_yqylen_n.jpg", 
             date:'',
             startTime:'',
             endTime:'',
@@ -44,7 +44,7 @@ class WorkshopPage extends Component{
        })
     }
     render(){
-        const {img_url,start_datetime,end_datetime,location,content,title,max_number,deadline,introduction,price,name,phase,attended} = this.state;
+        const {image_url,start_datetime,end_datetime,location,content,title,max_number,deadline,introduction,price,name,phase,attended} = this.state;
         const { masking } = this.props.wsp;
         console.log(masking);
         //add name, phase, attended in js undone
@@ -57,7 +57,7 @@ class WorkshopPage extends Component{
         return(
             <div className={`container workshopPage ${masking? 'mask' : ''}`}>
                 <div className="coverImg">
-                    <img src={img_url}  alt=''/>
+                    <img src={image_url}  alt=''/>
                 </div>
                 <h3><Badge color={badgeColor} className="badge" >{badgeStr}</Badge></h3>
                 <h2>{title}</h2>

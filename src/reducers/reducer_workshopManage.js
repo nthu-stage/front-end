@@ -1,6 +1,6 @@
 
 const initManage={
-    img_url:'',
+    image_url:'',
     start_datetime:'',
     end_datetime:'',
     location:'',
@@ -18,7 +18,7 @@ export default function workshopManage(state = initManage, action) {
             return action.payload;
             // return{
             //     ...state,
-            //     img_url:action.img_url,
+            //     image_url:action.image_url,
             //     start_datetime:action.start_datetime,
             //     end_datetime:action.end_datetime,
             //     location:action.location,
