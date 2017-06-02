@@ -6,7 +6,7 @@ const baseUrl = 'http://NTHUStage-dev.us-west-2.elasticbeanstalk.com/api';
 export function displayProfile(fb) {
     let url = `${baseUrl}/profile`;
     let { userID, signedRequest } = fb;
-    return axios.get(url, null, { headers: { userID, signedRequest } });
+    return axios.get(url, { headers: { userID, signedRequest } });
 }
 
 export function editAvailableTime(fb, availableTime) {

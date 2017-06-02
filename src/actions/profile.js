@@ -11,13 +11,13 @@ export function showProfile() {
                     payload: res.data,
                 });
             }).catch(err => {
-                switch (err.response.status) {
-                    case 400:
-                        dispatch(deliverAlert('內容有誤', 'danger', 3000));
-                        break;
-                    default:
-                        dispatch(deliverAlert('讀取失敗', 'danger', 3000));
-                }
+                // switch (err.response.status) {
+                //     case 400:
+                //         dispatch(deliverAlert('內容有誤', 'danger', 3000));
+                //         break;
+                //     default:
+                //         dispatch(deliverAlert('讀取失敗', 'danger', 3000));
+                // }
             });
         } else {
             history.replace('/');
