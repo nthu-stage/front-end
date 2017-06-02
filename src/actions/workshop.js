@@ -1,3 +1,4 @@
+import history from '../history';
 import {deliverAlert} from './alert';
 import {
     listWorkshop as listWorkshopFromApi,
@@ -9,7 +10,7 @@ import {
     updateWorkshop as updateWorkshopFromApi
 } from '../api/workshop';
 
-export function searchWorkshop(searchText, stateFilter) {
+export function listWorkshop(searchText, stateFilter) {
     return ((dispatch, getState) => {
         listWorkshopFromApi(getState().fb, searchText, stateFilter).then(res => {
             dispatch({type: 'WORKSHOP_SEARCH', payload: res.data});
@@ -25,7 +26,7 @@ export function searchWorkshop(searchText, stateFilter) {
     });
 }
 
-export function wsDelete(id) {
+export function deleteWorkshop(id) {
     return ((dispatch, getState) => {
         if (getState().fb) {
             deleteWorkshopFromApi(getState().fb, id).then(res => {
@@ -52,7 +53,7 @@ export function wsDelete(id) {
     });
 }
 
-export function wspSubmit(w_id) {
+export function attendWorkshop(w_id) {
     return ((dispatch, getState) => {
         if (getState().fb) {
             attendWorkshopFromApi(getState().fb, w_id).then(res => {
@@ -80,23 +81,23 @@ export function wspSubmit(w_id) {
     });
 }
 
-export function ppSubmit(propose) {
+export function proposeWorkshop(propose) {
     return ((dispatch, getState) => {
         if (getState().fb) {
             proposeWorkshopFromApi(getState().fb, propose).then(res => {
                 dispatch({type: '@PROPOSE/SUBMIT', payload: res.data});
-
                 history.replace(`/wp/${res.data.w_id}`);
                 dispatch(deliverAlert('提交成功', 'success', 3000));
             }).catch(err => {
-                if (err.response.status === 400) {
-                    dispatch(deliverAlert('請先登入', 'warning', 3000));
-                } else if (err.response.status === 401) {
-                    dispatch(deliverAlert('工作坊不存在', 'danger', 3000));
-                    history.replace('/');
-                } else {
-                    dispatch(deliverAlert('讀取失敗', 'danger', 3000));
-                    history.replace('/');
+                switch (err.response.status) {
+                    case 400:
+                        dispatch(deliverAlert('內容有誤', 'danger', 3000));
+                        break;
+                    case 401:
+                        dispatch(deliverAlert('請先登入', 'warning', 3000));
+                        break;
+                    default:
+                        dispatch(deliverAlert('提案失敗', 'danger', 3000));
                 }
                 console.log(err.response);
             });
@@ -107,7 +108,7 @@ export function ppSubmit(propose) {
 
     });
 }
-export function ppUpdate(propose, w_id) {
+export function updateWorkshop(propose, w_id) {
     return ((dispatch, getState) => {
         if (getState().fb) {
             updateWorkshopFromApi(getState().fb, propose, w_id).then(res => {
@@ -115,15 +116,16 @@ export function ppUpdate(propose, w_id) {
                 history.replace(`/wm/${w_id}`);
                 dispatch(deliverAlert('提交成功', 'success', 3000));
             }).catch(err => {
-                console.log(err);
-                if (err.response.status === 400) {
-                    dispatch(deliverAlert('請先登入', 'warning', 3000));
-                } else if (err.response.status === 401) {
-                    dispatch(deliverAlert('工作坊不存在', 'danger', 3000));
-                    history.replace('/');
-                } else {
-                    dispatch(deliverAlert('讀取失敗', 'danger', 3000));
-                    history.replace('/');
+                switch (err.response.status) {
+                    case 400:
+                        dispatch(deliverAlert('內容有誤', 'danger', 3000));
+                        break;
+                    case 401:
+                        history.replace('/');
+                        dispatch(deliverAlert('請先登入', 'warning', 3000));
+                        break;
+                    default:
+                        dispatch(deliverAlert('編輯失敗', 'danger', 3000));
                 }
             });
         } else {
@@ -132,29 +134,30 @@ export function ppUpdate(propose, w_id) {
         }
     });
 }
-export function getPost(w_id) {
+export function showWorkshop(w_id) {
     return ((dispatch, getState) => {
         dispatch({type: '@WORKSHOPPAGE/LOADING'});
         showWorkshopFromApi(getState().fb, w_id).then(res => {
             dispatch({type: '@MANAGE/INIT', payload: res.data});
             dispatch({type: '@WORKSHOPPAGE/LOADING_DONE'})
         }).catch(err => {
-            // console.log(err);
-            if (err.response.status === 400) {
-                dispatch(deliverAlert('請先登入', 'warning', 3000));
-            } else if (err.response.status === 401) {
-                dispatch(deliverAlert('工作坊不存在', 'danger', 3000));
-                history.replace('/');
-            } else {
-                dispatch(deliverAlert('讀取失敗', 'danger', 3000));
-                history.replace('/');
+            switch (err.response.status) {
+                case 400:
+                    dispatch(deliverAlert('工作坊不存在', 'danger', 3000));
+                    break;
+                case 401:
+                    history.replace('/');
+                    dispatch(deliverAlert('請先登入', 'warning', 3000));
+                    break;
+                default:
+                    dispatch(deliverAlert('讀取失敗', 'danger', 3000));
             }
         });
     });
 
 }
 
-export function getAttendee(w_id) {
+export function listAttendee(w_id) {
     return ((dispatch, getState) => {
         if (getState().fb) {
             listAttendeeFromApi(getState().fb, w_id).then(res => {

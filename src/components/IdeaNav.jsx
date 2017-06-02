@@ -3,7 +3,7 @@ import { Button, Form, ButtonGroup, Input } from 'reactstrap';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
-import { searchIdea } from '../actions/idea';
+import { listIdea } from '../actions/idea';
 import IdeaNewModal from './IdeaNewModal';
 import { deliverAlert } from '../actions/alert';
 
@@ -26,18 +26,18 @@ class IdeaNav extends Component {
             order: 'new',
         };
 
-        this.props.searchIdea(this.state.searchText, this.state.order);
+        this.props.listIdea(this.state.searchText, this.state.order);
     }
 
     handleSubmit(event) {
         event.preventDefault();
-        this.props.searchIdea(this.state.searchText, this.state.order);
+        this.props.listIdea(this.state.searchText, this.state.order);
     }
 
     handleFilter(order) {
         if (this.state.order === order) return;
         this.setState({ order });
-        this.props.searchIdea(this.state.searchText, order);
+        this.props.listIdea(this.state.searchText, order);
     }
 
     newTeachToggle() {
@@ -101,7 +101,7 @@ function mapStateToProps({ fb }) {
 
 function mapDispatchToProps(dispatch) {
     return bindActionCreators({
-        searchIdea,
+        listIdea,
         deliverAlert,
     }, dispatch);
 }

@@ -3,7 +3,7 @@ import { Button, Form, ButtonGroup, Input } from 'reactstrap';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
-import { searchWorkshop } from '../actions/workshop';
+import { listWorkshop } from '../actions/workshop';
 
 import './WorkshopNav.css';
 
@@ -18,17 +18,17 @@ class WorkshopNav extends Component {
             stateFilter: 3,
         };
 
-        this.props.searchWorkshop(this.state.searchText, this.state.stateFilter);
+        this.props.listWorkshop(this.state.searchText, this.state.stateFilter);
     }
 
     handleSubmit(event) {
         event.preventDefault();
-        this.props.searchWorkshop(this.state.searchText, this.state.stateFilter);
+        this.props.listWorkshop(this.state.searchText, this.state.stateFilter);
     }
 
     handleFilter(prop, goal) {
         this.setState({stateFilter: (prop << 1) + goal});
-        this.props.searchWorkshop(this.state.searchText, (prop << 1) + goal);
+        this.props.listWorkshop(this.state.searchText, (prop << 1) + goal);
     }
 
     render() {
@@ -54,7 +54,7 @@ class WorkshopNav extends Component {
 
 function mapDispatchToProps(dispatch) {
     return bindActionCreators({
-        searchWorkshop,
+        listWorkshop,
     }, dispatch);
 }
 

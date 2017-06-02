@@ -9,7 +9,7 @@ import {
     FormGroup
 } from 'reactstrap';
 
-import {ppUpdate, getPost} from '../actions/workshop.js';
+import {updateWorkshop, showWorkshop} from '../actions/workshop.js';
 
 import './Propose.css';
 
@@ -17,7 +17,7 @@ class WorkshopManagePropose extends Component {
     constructor(props) {
         super(props);
 
-        this.props.getPost(this.props.w_id);
+        this.props.showWorkshop(this.props.w_id);
 
         this.handleSubmit = this.handleSubmit.bind(this);
         this.state = {
@@ -59,7 +59,7 @@ class WorkshopManagePropose extends Component {
         next_state.start_datetime = new Date(`${start_date} ${start_time} GMT+0800 (CST)`).getTime() / 1000;
         next_state.end_datetime = new Date(`${end_date} ${end_time} GMT+0800 (CST)`).getTime() / 1000;
         next_state.deadline = new Date(`${deadline_date} ${deadline_time} GMT+0800 (CST)`).getTime() / 1000;
-        this.props.ppUpdate(next_state, this.props.w_id);
+        this.props.updateWorkshop(next_state, this.props.w_id);
     }
 
     render() {
@@ -164,8 +164,8 @@ function mapStateToProps({wm, wsp}) {
 
 function mapDispatchToProps(dispatch) {
     return bindActionCreators({
-        ppUpdate: ppUpdate,
-        getPost: getPost
+        updateWorkshop: updateWorkshop,
+        showWorkshop: showWorkshop
     }, dispatch);
 }
 

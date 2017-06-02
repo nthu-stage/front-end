@@ -4,13 +4,13 @@ import {CSVLink} from 'react-csv';
 ////undone
 import {Row, Col, ListGroup, ListGroupItem} from 'reactstrap';
 import WorkshopAttendee from './WorkshopAttendee';
-import {getAttendee} from '../actions/workshop.js'
+import {listAttendee} from '../actions/workshop.js'
 import {bindActionCreators} from 'redux';
 
 class WorkshopManageAttendeeList extends Component {
     constructor(props) {
         super(props);
-        this.props.getAttendee(this.props.w_id);
+        this.props.listAttendee(this.props.w_id);
         this.state = {
             attendees: []
         }
@@ -56,7 +56,7 @@ function mapStateToProps({ wsa }) {
 
 function mapDispatchToProps(dispatch) {
     return bindActionCreators({
-        getAttendee: getAttendee
+        listAttendee: listAttendee
     }, dispatch);
 }
 

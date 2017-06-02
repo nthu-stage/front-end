@@ -37,9 +37,9 @@ export function comeUpWithIdea(idea) {
     });
 }
 
-export function searchIdea(searchText, order) {
+export function listIdea(searchText, order) {
     return ((dispatch, getState) => {
-        console.log('searchIdea', getState());
+        console.log('listIdea', getState());
         listIdeaFromApi(cookies.get('fb'), searchText, order).then(res => {
             dispatch({type: 'IDEA_SEARCH', payload: res.data});
         }).catch(err => {
@@ -134,7 +134,7 @@ export function likeSearchIdea(i_id) {
     });
 }
 
-export function showViewEditIdea(i_id) {
+export function showIdea(i_id) {
     i_id = parseInt(i_id, 10);
     return ((dispatch, getState) => {
         showIdeaFromApi(cookies.get('fb'), i_id).then(res => {

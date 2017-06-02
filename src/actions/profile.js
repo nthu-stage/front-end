@@ -1,11 +1,11 @@
 import history from '../history';
 import {deliverAlert} from './alert';
-import {displayProfile, editAvailableTime, registerOrLogin} from '../api/profile';
+import {showProfile as showProfileFromApi, updateAvailableTime as updateAvailableTimeFromApi, registerOrLogin} from '../api/profile';
 
 export function showProfile() {
     return ((dispatch, getState) => {
         if (getState().fb) {
-            displayProfile(getState().fb).then(res => {
+            showProfileFromApi(getState().fb).then(res => {
                 dispatch({type: 'PROFILE_SHOW', payload: res.data});
             }).catch(err => {
                 switch (err.response.status) {
@@ -25,7 +25,7 @@ export function showProfile() {
 
 export function updateAvailableTime(availableTime) {
     return ((dispatch, getState) => {
-        editAvailableTime(getState().fb, availableTime).then(res => {
+        updateAvailableTimeFromApi(getState().fb, availableTime).then(res => {
             dispatch({type: 'PROFILE_UPDATE_AVAILABLE_TIME', payload: res.data});
         }).catch(err => {
             switch (err.response.status) {

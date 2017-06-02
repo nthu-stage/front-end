@@ -15,7 +15,7 @@ import {
 
 import WorkshopAttendeeList from './WorkshopManageAttendeeList';
 import WorkshopManagePropose from './WorkshopManagePropose';
-import {wsDelete} from '../actions/workshop.js';
+import {deleteWorkshop} from '../actions/workshop.js';
 import {isLogin} from '../actions/workshop.js';
 
 import './WorkshopManage.css';
@@ -56,7 +56,7 @@ class WorkshopManage extends Component {
 
     handleDelete() {
         this.deleteModalToggle();
-        this.props.wsDelete(this.props.match.params.id);
+        this.props.deleteWorkshop(this.props.match.params.id);
     }
 
     render() {
@@ -112,8 +112,8 @@ function mapStateToProps({ wm, fb }) {
 
 function mapDispatchToProps(dispatch) {
     return bindActionCreators({
-        wsDelete: wsDelete,
-        isLogin: isLogin
+        deleteWorkshop,
+        isLogin
     }, dispatch);
 }
 

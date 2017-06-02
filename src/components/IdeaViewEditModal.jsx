@@ -5,14 +5,14 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { Share } from 'react-facebook';
 
-import { showViewEditIdea, likeViewEditIdea, updateIdea, deleteIdea } from '../actions/idea';
+import { showIdea, likeViewEditIdea, updateIdea, deleteIdea } from '../actions/idea';
 import './IdeaViewEditModal.css';
 
 class IdeaViewEditModal extends Component {
     constructor(props) {
         super(props);
 
-        this.props.showViewEditIdea(this.props.match.params.i_id);
+        this.props.showIdea(this.props.match.params.i_id);
 
         this.handleDelete = this.handleDelete.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -159,7 +159,7 @@ function mapStateToProps({ fb, ideaViewEdit }) {
 
 function mapDispatchToProps(dispatch) {
     return bindActionCreators({
-        showViewEditIdea,
+        showIdea,
         likeViewEditIdea,
         updateIdea,
         deleteIdea,

@@ -9,7 +9,7 @@ import {
     FormGroup,
     Col
 } from 'reactstrap';
-import {ppSubmit, isLogin} from '../actions/workshop';
+import {proposeWorkshop, isLogin} from '../actions/workshop';
 import './Propose.css';
 
 class Propose extends Component {
@@ -21,19 +21,19 @@ class Propose extends Component {
         this.handleSubmit = this.handleSubmit.bind(this);
         this.state = {
             image_url: 'https://placeholdit.imgix.net/~text?txtsize=33&txt=1500%C3%97600&w=1500&h=600',
-            title: '',
-            start_date: '',
-            start_time: '',
-            end_date: '',
-            end_time: '',
-            min_number: '',
-            max_number: '',
-            deadline_date: '',
-            deadline_time: '',
-            location: '',
-            introduction: '',
-            content: '',
-            price: ''
+            title: '1',
+            start_date: '2017-06-14',
+            start_time: '10:00',
+            end_date: '2017-06-14',
+            end_time: '12:00',
+            min_number: '10',
+            max_number: '20',
+            deadline_date: '2017-06-10',
+            deadline_time: '23:59',
+            location: '1',
+            introduction: '1',
+            content: '1',
+            price: '1'
         }
     }
 
@@ -51,7 +51,7 @@ class Propose extends Component {
         next_state.start_datetime = new Date(`${start_date} ${start_time} GMT+0800 (CST)`).getTime() / 1000;
         next_state.end_datetime = new Date(`${end_date} ${end_time} GMT+0800 (CST)`).getTime() / 1000;
         next_state.deadline = new Date(`${deadline_date} ${deadline_time} GMT+0800 (CST)`).getTime() / 1000;
-        this.props.ppSubmit(next_state, this.props.w_id);
+        this.props.proposeWorkshop(next_state, this.props.w_id);
     }
 
     render() {
@@ -151,8 +151,8 @@ function mapStateToProps({ pp }) {
 
 function mapDispatchToProps(dispatch) {
     return bindActionCreators({
-        ppSubmit: ppSubmit,
-        isLogin: isLogin
+        proposeWorkshop,
+        isLogin
     }, dispatch);
 }
 
