@@ -6,7 +6,7 @@ export default function (state = [], action) {
         case 'IDEA_LIKE_SEARCH':
             next_state = state.slice();
             for (let idea of next_state) {
-                if (idea.i_id === action.payload.i_id) {
+                if (idea.i_id === parseInt(action.payload.i_id, 10)) {
                     idea.like_number = action.payload.like_number;
                     idea.liked = action.payload.liked;
                     break;

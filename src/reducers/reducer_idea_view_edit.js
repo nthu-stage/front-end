@@ -9,10 +9,8 @@ export default function (state = null, action) {
             return next_state;
         case 'IDEA_LIKE_VIEW_EDIT':
             next_state = Object.assign({}, state);;
-            if (next_state.i_id === action.payload.i_id) {
-                next_state.like_number = action.payload.like_number;
-                next_state.liked = action.payload.liked;
-            }
+            next_state.like_number = action.payload.like_number;
+            next_state.liked = action.payload.liked;
             return next_state;
         default:
             return state;

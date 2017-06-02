@@ -4,9 +4,8 @@ import { NavItem, NavLink, Dropdown, DropdownToggle, DropdownMenu, DropdownItem,
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import Cookies from 'universal-cookie';
-const cookies = new Cookies();
 
+import cookies from '../cookies';
 import { regOrLogin, logout } from '../actions/profile';
 
 import './NavbarLogin.css';
