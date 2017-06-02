@@ -3,7 +3,7 @@ import axios from 'axios';
 // const baseUrl = 'http://NTHUStage-dev.us-west-2.elasticbeanstalk.com/api';
 const baseUrl = 'http://localhost:3090';
 
-export function createIdea(fb, idea) {
+export function comeUpWithIdea(fb, idea) {
     let url = `${baseUrl}/ideas`;
     let { userID, signedRequest } = fb;
     return axios.post(url, idea, { headers: { userID, signedRequest } });
@@ -19,13 +19,13 @@ export function listIdea(fb, searchText, order) {
     }
 }
 
-export function editIdea(fb, idea) {
+export function updateIdea(fb, idea) {
     let url = `${baseUrl}/ideas/${idea.i_id}`;
     let { userID, signedRequest } = fb;
     return axios.put(url, idea, { headers: { userID, signedRequest } });
 }
 
-export function removeIdea(fb, i_id) {
+export function deleteIdea(fb, i_id) {
     let url = `${baseUrl}/ideas/${i_id}`;
     let { userID, signedRequest } = fb;
     return axios.delete(url, null, { headers: { userID, signedRequest } });

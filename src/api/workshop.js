@@ -13,9 +13,8 @@ export function listWorkshop(fb, searchText, stateFilter) {
     }
 }
 
-export function getPostFromApi(fb, w_id) {
+export function showWorkshop(fb, w_id) {
     let url = `${baseUrl}/workshops/${w_id}`;
-
     if(fb){
         let { userID, signedRequest } = fb;
         return axios.get(url, { headers: { userID, signedRequest } });
@@ -24,7 +23,7 @@ export function getPostFromApi(fb, w_id) {
     }
 
 }
-export function isAttended(fb,w_id){
+export function attendWorkshop(fb,w_id){
     let url = `${baseUrl}/workshops/${w_id}`;
     if(fb){
         let { userID, signedRequest } = fb;
@@ -34,7 +33,7 @@ export function isAttended(fb,w_id){
     }
 }
 ////////////後端沒做 undone
-export function getAttendeeFromApi(fb, w_id){
+export function listAttendee(fb, w_id){
     let url = `${baseUrl}/dashboard/${w_id}`;
     if(fb){
         let { userID, signedRequest } = fb;
@@ -50,7 +49,7 @@ export function deleteWorkshop(fb,w_id){
     return axios.delete(url, null, { headers: { userID, signedRequest } });
 }
 
-export function submitPropose(fb, propose) {
+export function proposeWorkshop(fb, propose) {
     let url = `${baseUrl}/workshops`;
     let {userID, signedRequest} = fb;
     return axios.post(url, propose, {
@@ -61,7 +60,7 @@ export function submitPropose(fb, propose) {
     });
 }
 
-export function submitUpdate(fb, propose, w_id) {
+export function updateWorkshop(fb, propose, w_id) {
     let url = `${baseUrl}/workshops/${w_id}`;
     console.log('submitUpdate', propose, w_id, url);
     let {userID, signedRequest} = fb;
