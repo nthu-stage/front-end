@@ -1,4 +1,4 @@
-function date2yymmddhhmmss(d) {
+function date2string(d) {
     return (
         d.getFullYear() + '/' +
         ('00' + (d.getMonth() + 1)).slice(-2) + '/' +
@@ -13,13 +13,14 @@ export default function (state = null, action) {
     let next_state;
     switch (action.type) {
         case 'PROFILE_SHOW':
+            // console.log(action);
             next_state = JSON.parse(JSON.stringify(action.payload));
             next_state.propose.forEach(w => {
-                w.start_datetime = date2yymmddhhmmss(new Date(w.start_datetime));
-                w.deadline = date2yymmddhhmmss(new Date(w.deadline));
+                w.start_datetime = date2string(new Date(w.start_datetime));
+                w.deadline = date2string(new Date(w.deadline));
             });
             next_state.attend.forEach(w => {
-                w.start_datetime = date2yymmddhhmmss(new Date(w.start_datetime));
+                w.start_datetime = date2string(new Date(w.start_datetime));
             });
             return next_state;
         case 'PROFILE_UPDATE_AVAILABLE_TIME':
