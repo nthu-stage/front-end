@@ -6,6 +6,7 @@
     "axios": "^0.16.1",
     "bootstrap": "^4.0.0-alpha.6",
     "jsonfile": "^3.0.0",
+    "moment": "^2.18.1",
     "react": "^15.5.4",
     "react-addons-css-transition-group": "^15.5.2",
     "react-addons-transition-group": "^15.5.2",

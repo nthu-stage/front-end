@@ -35,7 +35,6 @@ export function ppUpdate(propose, w_id) {
         if (getState().fb) {
             submitUpdate(getState().fb, propose, w_id).then(res => {
                 dispatch({type: '@MANAGE/UPDATE', payload: res.data});
-
                 history.replace(`/wm/${w_id}`);
                 dispatch(deliverAlert('提交成功', 'success', 3000));
             }).catch(err => {
@@ -63,6 +62,7 @@ export function getPost(w_id) {
             dispatch({type: '@MANAGE/INIT', payload: res.data});
             dispatch({type: '@WORKSHOPPAGE/LOADING_DONE'})
         }).catch(err => {
+            // console.log(err);
             if (err.response.status === 400) {
                 dispatch(deliverAlert('請先登入', 'warning', 3000));
             } else if (err.response.status === 401) {

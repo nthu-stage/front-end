@@ -7,7 +7,7 @@ export function listWorkshop(fb, searchText, stateFilter) {
     let url = `${baseUrl}/workshops?searchText=${searchText}&stateFilter=${stateFilter}`;
     if (fb) {
         let { userID, signedRequest } = fb;
-        return axios.get(url, null, { headers: { userID, signedRequest } });
+        return axios.get(url, { headers: { userID, signedRequest } });
     } else {
         return axios.get(url);
     }
@@ -18,7 +18,7 @@ export function getPostFromApi(fb, w_id) {
 
     if(fb){
         let { userID, signedRequest } = fb;
-        return axios.get(url, null, { headers: { userID, signedRequest } });
+        return axios.get(url, { headers: { userID, signedRequest } });
     }else{
         return axios.get(url);
     }
@@ -38,7 +38,7 @@ export function getAttendeeFromApi(fb, w_id){
     let url = `${baseUrl}/dashboard/${w_id}`;
     if(fb){
         let { userID, signedRequest } = fb;
-        return axios.get(url, null, { headers: { userID, signedRequest } });
+        return axios.get(url, { headers: { userID, signedRequest } });
     } else {
         return
     }
