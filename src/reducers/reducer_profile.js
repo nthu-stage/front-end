@@ -13,7 +13,6 @@ export default function (state = null, action) {
     let next_state;
     switch (action.type) {
         case 'PROFILE_SHOW':
-            // console.log(action);
             next_state = JSON.parse(JSON.stringify(action.payload));
             next_state.propose.forEach(w => {
                 w.start_datetime = date2string(new Date(w.start_datetime));
