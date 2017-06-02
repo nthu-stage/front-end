@@ -7,24 +7,23 @@ export function listWorkshop(fb, searchText, stateFilter) {
     let url = `${baseUrl}/workshops?searchText=${searchText}&stateFilter=${stateFilter}`;
     if (fb) {
         let { userID, signedRequest } = fb;
-        return axios.get(url, null, { headers: { userID, signedRequest } });
+        return axios.get(url, { headers: { userID, signedRequest } });
     } else {
         return axios.get(url);
     }
 }
 
-export function getPostFromApi(fb, w_id) {
+export function showWorkshop(fb, w_id) {
     let url = `${baseUrl}/workshops/${w_id}`;
-
     if(fb){
         let { userID, signedRequest } = fb;
-        return axios.get(url, null, { headers: { userID, signedRequest } });
+        return axios.get(url, { headers: { userID, signedRequest } });
     }else{
         return axios.get(url);
     }
 
 }
-export function isAttended(fb,w_id){
+export function attendWorkshop(fb,w_id){
     let url = `${baseUrl}/workshops/${w_id}`;
     if(fb){
         let { userID, signedRequest } = fb;
@@ -34,12 +33,41 @@ export function isAttended(fb,w_id){
     }
 }
 ////////////後端沒做 undone
-export function getAttendeeFromApi(fb, w_id){
+export function listAttendee(fb, w_id){
     let url = `${baseUrl}/dashboard/${w_id}`;
     if(fb){
         let { userID, signedRequest } = fb;
-        return axios.get(url, null, { headers: { userID, signedRequest } });
+        return axios.get(url, { headers: { userID, signedRequest } });
     } else {
         return
     }
+}
+
+export function deleteWorkshop(fb,w_id){
+    let url = `${baseUrl}/workshops/${w_id}`;
+    let { userID, signedRequest } = fb;
+    return axios.delete(url, null, { headers: { userID, signedRequest } });
+}
+
+export function proposeWorkshop(fb, propose) {
+    let url = `${baseUrl}/workshops`;
+    let {userID, signedRequest} = fb;
+    return axios.post(url, propose, {
+        headers: {
+            userID,
+            signedRequest
+        }
+    });
+}
+
+export function updateWorkshop(fb, propose, w_id) {
+    let url = `${baseUrl}/workshops/${w_id}`;
+    console.log('submitUpdate', propose, w_id, url);
+    let {userID, signedRequest} = fb;
+    return axios.put(url, propose, {
+        headers: {
+            userID,
+            signedRequest
+        }
+    });
 }

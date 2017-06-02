@@ -1,40 +1,29 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import fileDownload from "react-file-download";
-import {CSVLink, CSVDownload} from 'react-csv';
+import {CSVLink} from 'react-csv';
 ////undone
-import {
-    Row,
-    Col,
-    ListGroup,
-    ListGroupItem,
-    Button
-} from 'reactstrap';
+import {Row, Col, ListGroup, ListGroupItem} from 'reactstrap';
 import WorkshopAttendee from './WorkshopAttendee';
-import {getAttendee} from '../actions/attendee.js'
+import {listAttendee} from '../actions/workshop.js'
 import {bindActionCreators} from 'redux';
 
 class WorkshopManageAttendeeList extends Component {
     constructor(props) {
         super(props);
-        this.props.getAttendee(this.props.w_id);
-        this.state={
-            attendees:[]
+        this.props.listAttendee(this.props.w_id);
+        this.state = {
+            attendees: []
         }
     }
-    componentWillReceiveProps(next){
-        
-        console.log('componentWillReceiveProps', next.wsa);
+
+    componentWillReceiveProps(next) {
         this.setState({
-            ...next.wsa,
+            ...next.wsa
         })
     }
 
-    
-    render(){
+    render() {
         const {attendees} = this.state;
-        console.log("list",attendees);
-        let attendList ='';
         let children = (
             <ListGroupItem className='empty d-flex justify-content-center align-items-center'>
                 <div className='empty-text'>目前沒有人報名喔ㄏㄏ</div>
@@ -43,18 +32,17 @@ class WorkshopManageAttendeeList extends Component {
         if (attendees.length) {
             children = attendees.map(p => (
                 <ListGroupItem key={p.name} action>
-                    <WorkshopAttendee {...p} />
+                    <WorkshopAttendee {...p}/>
                 </ListGroupItem>
             ));
         }
-        console.log(attendees);
         return (
-            <div className='conyainer'>
+            <div className='container'>
                 <Row>
                     <Col sm={6}>
                         <h3>報名人列表</h3>
                     </Col>
-                    <CSVLink data={attendees} filename={"參加名單.csv"} className="btn btn-info" >匯出</CSVLink>
+                    <CSVLink data={attendees} filename={"參加名單.csv"} className="btn btn-info">匯出</CSVLink>
                 </Row>
                 <ListGroup>{children}</ListGroup>
             </div>
@@ -62,16 +50,14 @@ class WorkshopManageAttendeeList extends Component {
     }
 }
 
-function mapStateToProps(state) {
-    return {
-        wsa:state.wsa
-    }
+function mapStateToProps({ wsa }) {
+    return {wsa};
 }
+
 function mapDispatchToProps(dispatch) {
     return bindActionCreators({
-        getAttendee:getAttendee,
+        listAttendee: listAttendee
     }, dispatch);
 }
 
-
-export default connect(mapStateToProps,mapDispatchToProps)(WorkshopManageAttendeeList);
+export default connect(mapStateToProps, mapDispatchToProps)(WorkshopManageAttendeeList);

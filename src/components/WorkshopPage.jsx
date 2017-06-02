@@ -4,8 +4,8 @@ import {bindActionCreators} from 'redux';
 import {Comments} from 'react-facebook';
 import {ListGroup, ListGroupItem, Button, Badge} from 'reactstrap';
 
-import {wspSubmit} from '../actions/workshopPage.js';
-import {getPost} from '../actions/propose.js'
+import {attendWorkshop} from '../actions/workshop.js';
+import {showWorkshop} from '../actions/workshop.js'
 
 import './WorkshopPage.css';
 
@@ -13,7 +13,7 @@ class WorkshopPage extends Component {
     constructor(props) {
         super(props);
 
-        this.props.getPost(this.props.match.params.id);
+        this.props.showWorkshop(this.props.match.params.id);
 
         this.handleSubmit = this.handleSubmit.bind(this);
         this.state = {
@@ -121,7 +121,7 @@ class WorkshopPage extends Component {
         )
     }
     handleSubmit() {
-        this.props.wspSubmit(this.props.match.params.id);
+        this.props.attendWorkshop(this.props.match.params.id);
     }
 }
 function mapStateToProps(state) {
@@ -130,8 +130,8 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
     return bindActionCreators({
-        wspSubmit: wspSubmit,
-        getPost: getPost
+        attendWorkshop: attendWorkshop,
+        showWorkshop: showWorkshop
     }, dispatch);
 }
 

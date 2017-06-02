@@ -1,335 +1,172 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
-import{
+import {
     Button,
     Input,
     Label,
     Form,
-    FormGroup,
-    Col,
+    FormGroup
 } from 'reactstrap';
-import './Propose.css';
-import {ppUpdate, getPost} from '../actions/propose.js';
 
-class WorkshopManagePropose extends Component{
-    constructor(props){
+import {updateWorkshop, showWorkshop} from '../actions/workshop.js';
+
+import './Propose.css';
+
+class WorkshopManagePropose extends Component {
+    constructor(props) {
         super(props);
 
-        this.props.getPost(this.props.w_id);
+        this.props.showWorkshop(this.props.w_id);
 
-        this.inputUrl = null; ////
-        this.handleInputChange = this.handleInputChange.bind(this);
-        this.handleStartDateChange = this.handleStartDateChange.bind(this);
-        this.handleStartTimeChange = this.handleStartTimeChange.bind(this);
-        this.handleEndDateChange = this.handleEndDateChange.bind(this);
-        this.handleEndTimeChange = this.handleEndTimeChange.bind(this);
-        this.handleIntroChange = this.handleIntroChange.bind(this);
-        this.handleMaxChange = this.handleMaxChange.bind(this);
-        this.handleMinChange = this.handleMinChange.bind(this);
-        this.handlePriceChange = this.handlePriceChange.bind(this);
-        this.handleLocChange = this.handleLocChange.bind(this);
-        this.handleTitleChange = this.handleTitleChange.bind(this);
-        this.handleIntroChange = this.handleIntroChange.bind(this);
-        this.handleContentChange = this.handleContentChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
         this.state = {
-            image_url : "https://images-cdn.9gag.com/images/thumbnail-facebook/9155182_1388247030.7007_yqylen_n.jpg", 
-            start_date:'',
-            end_date:'',
-            startTime:'',
-            endTime:'',
-            location:'1',
-            content:'1',
-            title: 'kkkkkkk',
-            start_datetime: '2017-11-11 18:11',
-            end_datetime: '2017-11-11 18:11',
+            image_url: '',
+            title: '',
+            start_date: '',
+            start_time: '',
+            end_date: '',
+            end_time: '',
             min_number: '',
-            max_number: '888',
-            deadline: '2017-11-11',
-            introduction: 'haha',
-            price: '10000',
-            phase:'over',
-            name:'LaLaLand',
+            max_number: '',
+            deadline_date: '',
+            deadline_time: '',
+            location: '',
+            introduction: '',
+            content: '',
+            price: '',
+            phase: ''
         }
     }
 
-    componentWillReceiveProps(next){
-        
-        console.log('componentWillReceiveProps', next.wm);
-        const {start_datetime,end_datetime} = next.wm;
-        const timeForStart = start_datetime.split(' ');
-        const start_date = timeForStart[0];
-        const startTime = timeForStart[1];
-        const timeForEnd = end_datetime.split(' ');
-        const end_date = timeForEnd[0];
-        const endTime = timeForEnd[1];
+    componentWillReceiveProps(next) {
         this.setState({
-            ...next.wm,
-            startTime:startTime,
-            endTime:endTime,
-            start_date:start_date,
-            end_date:end_date
+            ...next.wm
         })
     }
 
-    render(){
-        const {image_url,start_datetime,end_datetime,location,content,title,min_number,max_number,deadline,introduction,price, phase} = this.state;
-        const { masking } = this.props.wsp;
-        const timeForStart = start_datetime.split(' ');
-        const start_date = timeForStart[0];
-        const startTime = timeForStart[1];
-        const timeForEnd = end_datetime.split(' ');
-        const end_date = timeForEnd[0];
-        const endTime = timeForEnd[1];
-        const editable = (phase === 'judging' || phase === 'judge_na' || phase === 'unreached') ? false :  true; //[‘judging’ | ‘judge_na’ | V‘investigating’ | ‘unreached’ | V‘reached’ | V‘over’]
-        console.log(this.state);
-        return(
-            <div className={`container propose ${masking? 'mask' : '' }`}>
+    handleSubmit(e) {
+        e.preventDefault();
+        let next_state = JSON.parse(JSON.stringify(this.state));
+        let {
+            start_date,
+            start_time,
+            end_date,
+            end_time,
+            deadline_date,
+            deadline_time
+        } = next_state;
+        next_state.start_datetime = new Date(`${start_date} ${start_time} GMT+0800 (CST)`).getTime() / 1000;
+        next_state.end_datetime = new Date(`${end_date} ${end_time} GMT+0800 (CST)`).getTime() / 1000;
+        next_state.deadline = new Date(`${deadline_date} ${deadline_time} GMT+0800 (CST)`).getTime() / 1000;
+        this.props.updateWorkshop(next_state, this.props.w_id);
+    }
+
+    render() {
+        let {
+            image_url,
+            title,
+            start_date,
+            start_time,
+            end_date,
+            end_time,
+            min_number,
+            max_number,
+            deadline_date,
+            deadline_time,
+            location,
+            introduction,
+            content,
+            price,
+            phase
+        } = this.state;
+        const readOnly = (phase === 'judging' || phase === 'judge_na' || phase === 'unreached');
+        const {masking} = this.props.wsp;
+
+        return (
+            <div className={`container propose ${masking
+                ? 'mask'
+                : ''}`}>
                 <div className="coverImg">
-                    <img src={image_url}  alt=''/>
+                    <img src={image_url} alt=''/>
                 </div>
                 <h3>Detail</h3>
                 <hr/>
-                <div>{editable?
+                <div>
                     <Form onSubmit={this.handleSubmit}>
                         <FormGroup>
-                            <Label for="exampleUrl" >圖片網址</Label>
-                            <Input type="url" name="url" id="exampleUrl" value={image_url} onChange={this.handleInputChange} required/>
+                            <Label>圖片網址</Label>
+                            <Input type="url" value={image_url} onChange={e => this.setState({image_url: e.target.value})} required readOnly={readOnly}/>
                         </FormGroup>
                         <FormGroup>
-                            <Label for="startDate">開始日期</Label>
-                            <Input type="date" name="startDate" id="startDate" value={start_date} onChange={this.handleStartDateChange} required />
-                        </FormGroup>    
-                        <FormGroup>
-                            <Label for="startTime">開始時間</Label>
-                            <Input type="time" name="startTime" id="startTime" value={startTime} onChange={this.handleStartTimeChange} required />
+                            <Label>開始日期</Label>
+                            <Input type="date" value={start_date} onChange={e => this.setState({start_date: e.target.value})} required readOnly={readOnly}/>
                         </FormGroup>
                         <FormGroup>
-                            <Label for="endDate">結束日期</Label>
-                            <Input type="date" name="endDate" id="endDate" value={end_date} onChange={this.handleEndDateChange} required/>
-                        </FormGroup> 
-                        <FormGroup>
-                            <Label for="endTime">結束時間</Label>
-                            <Input type="time" name="endTime" id="endTime" value={endTime} onChange={this.handleEndTimeChange} required/>
+                            <Label>開始時間</Label>
+                            <Input type="time" value={start_time} onChange={e => this.setState({start_time: e.target.value})} required readOnly={readOnly}/>
                         </FormGroup>
                         <FormGroup>
-                            <Label for="deadline">報名截止</Label>
-                            <Input type="date" name="deadline" id="deadline" value={deadline} onChange={this.handleDeadlineChange} required/>
+                            <Label>結束日期</Label>
+                            <Input type="date" value={end_date} onChange={e => this.setState({end_date: e.target.value})} required readOnly={readOnly}/>
                         </FormGroup>
                         <FormGroup>
-                            <Label for="max_number">最大人數</Label>
-                            <Input type="number" name="max_number" id="max_number" value={max_number} onChange={this.handleMaxChange} required/>
+                            <Label>結束時間</Label>
+                            <Input type="time" value={end_time} onChange={e => this.setState({end_time: e.target.value})} required readOnly={readOnly}/>
                         </FormGroup>
                         <FormGroup>
-                            <Label for="min_number">最少人數</Label>
-                            <Input type="number" name="min_number" id="min_number" value={min_number} onChange={this.handleMinChange} required/>
-                        </FormGroup>
-                        <FormGroup required>
-                            <Label for="location">地點</Label>
-                            <Input type="text" name="location" id="location" value={location} onChange={this.handleLocChange} required/>
+                            <Label>報名截止日期</Label>
+                            <Input type="date" value={deadline_date} onChange={e => this.setState({deadline_date: e.target.value})} required readOnly={readOnly}/>
                         </FormGroup>
                         <FormGroup>
-                            <Label for="price">價格</Label>
-                            <Input type="number" name="price" id="price" value={price} onChange={this.handlePriceChange} required/>
+                            <Label>報名截止時間</Label>
+                            <Input type="time" value={deadline_time} onChange={e => this.setState({deadline_time: e.target.value})} required readOnly={readOnly}/>
                         </FormGroup>
                         <FormGroup>
-                            <Label for="title">主題</Label>
-                            <Input type="text" name="title" id="title" value={title} onChange={this.handleTitleChange} required/>
+                            <Label>最大人數</Label>
+                            <Input type="number" value={max_number} onChange={e => this.setState({max_number: e.target.value})} required readOnly={readOnly}/>
                         </FormGroup>
                         <FormGroup>
-                            <Label for="introduction">簡介</Label>
-                            <Input type="textarea" name="introduction" id="introduction" rows="5" value={introduction} onChange={this.handleIntroChange} required/>
+                            <Label>最少人數</Label>
+                            <Input type="number" value={min_number} onChange={e => this.setState({min_number: e.target.value})} required readOnly={readOnly}/>
                         </FormGroup>
                         <FormGroup>
-                            <Label for="content">詳細介紹</Label>
-                            <Input type="textarea" name="content" id="content" rows="10" value={content} onChange={this.handleContentChange} required/>
+                            <Label>地點</Label>
+                            <Input type="text" value={location} onChange={e => this.setState({location: e.target.value})} required readOnly={readOnly}/>
                         </FormGroup>
-                        <Button color="primary" type="submit" size="lg" block >提交修改</Button>
+                        <FormGroup>
+                            <Label>價格</Label>
+                            <Input type="number" value={price} onChange={e => this.setState({price: e.target.value})} required readOnly={readOnly}/>
+                        </FormGroup>
+                        <FormGroup>
+                            <Label>主題</Label>
+                            <Input type="text" value={title} onChange={e => this.setState({title: e.target.value})} required readOnly={readOnly}/>
+                        </FormGroup>
+                        <FormGroup>
+                            <Label>簡介</Label>
+                            <Input type="textarea" rows="5" value={introduction} onChange={e => this.setState({introduction: e.target.value})} required readOnly={readOnly}/>
+                        </FormGroup>
+                        <FormGroup>
+                            <Label>詳細介紹</Label>
+                            <Input type="textarea" rows="10" value={content} onChange={e => this.setState({content: e.target.value})} required readOnly={readOnly}/>
+                        </FormGroup>
+                        <Button color="primary" type="submit" size="lg" block>提交修改</Button>
                     </Form>
-                    :
-                    <Form onSubmit={this.handleSubmit}>
-                        <FormGroup>
-                            <Label for="exampleUrl" >圖片網址</Label>
-                            <Input type="url" name="url" id="exampleUrl" value={image_url} onChange={this.handleInputChange} required readOnly/>
-                        </FormGroup>
-                        <FormGroup>
-                            <Label for="startDate">開始日期</Label>
-                            <Input type="date" name="startDate" id="startDate" value={start_date} onChange={this.handleStartDateChange} required readOnly/>
-                        </FormGroup>    
-                        <FormGroup>
-                            <Label for="startTime">開始時間</Label>
-                            <Input type="time" name="startTime" id="startTime" value={startTime} onChange={this.handleStartTimeChange} required readOnly/>
-                        </FormGroup>
-                        <FormGroup>
-                            <Label for="endDate">結束日期</Label>
-                            <Input type="date" name="endDate" id="endDate" value={end_date} onChange={this.handleEndDateChange} required readOnly/>
-                        </FormGroup> 
-                        <FormGroup>
-                            <Label for="endTime">結束時間</Label>
-                            <Input type="time" name="endTime" id="endTime" value={endTime} onChange={this.handleEndTimeChange} required readOnly />
-                        </FormGroup>
-                        <FormGroup>
-                            <Label for="deadline">報名截止</Label>
-                            <Input type="date" name="deadline" id="deadline" value={deadline} onChange={this.handleDeadlineChange} required readOnly/>
-                        </FormGroup>
-                        <FormGroup>
-                            <Label for="max_number">最大人數</Label>
-                            <Input type="number" name="max_number" id="max_number" value={max_number} onChange={this.handleMaxChange} required readOnly/>
-                        </FormGroup>
-                        <FormGroup>
-                            <Label for="min_number">最少人數</Label>
-                            <Input type="number" name="min_number" id="min_number" value={min_number} onChange={this.handleMinChange} required readOnly/>
-                        </FormGroup>
-                        <FormGroup required>
-                            <Label for="location">地點</Label>
-                            <Input type="text" name="location" id="location" value={location} onChange={this.handleLocChange} required readOnly/>
-                        </FormGroup>
-                        <FormGroup>
-                            <Label for="price">價格</Label>
-                            <Input type="number" name="price" id="price" value={price} onChange={this.handlePriceChange} required readOnly/>
-                        </FormGroup>
-                        <FormGroup>
-                            <Label for="title">主題</Label>
-                            <Input type="text" name="title" id="title" value={title} onChange={this.handleTitleChange} required readOnly/>
-                        </FormGroup>
-                        <FormGroup>
-                            <Label for="introduction">簡介</Label>
-                            <Input type="textarea" name="introduction" id="introduction" rows="5" value={introduction} onChange={this.handleIntroChange} required readOnly/>
-                        </FormGroup>
-                        <FormGroup>
-                            <Label for="content">詳細介紹</Label>
-                            <Input type="textarea" name="content" id="content" rows="10" value={content} onChange={this.handleContentChange} required readOnly/>
-                        </FormGroup>
-                        <Button color="primary" type="submit" size="lg" block >提交修改</Button>
-                    </Form>
-                    }
                 </div>
             </div>
         )
     }
-    handleInputChange(e){
-        const url = e.target.value;
-        console.log(url);
-        this.setState({
-            image_url:url
-        });
-    }
-    handleStartDateChange(e){
-        const date = e.target.value;
-        console.log(date);
-        this.setState({
-            start_datetime:`${date} ${this.state.startTime}`,
-            start_date:date
-        });
-    }
-    handleEndDateChange(e){
-        const date = e.target.value;
-        console.log(date);
-        this.setState({
-            end_datetime:`${date} ${this.state.endTime}`,
-            end_date:date
-        });
-    }
-    handleStartTimeChange(e){
-        const time = e.target.value;
-        console.log(time);
-        this.setState({
-            start_datetime:`${this.state.start_date} ${time}`,
-            startTime:time
-        });
-    }
-    handleEndTimeChange(e){
-        const time = e.target.value;
-        console.log(time);
-        this.setState({
-            end_datetime:`${this.state.end_date} ${time}`,
-            endTime:time
-        });
-    }
-    handleDeadlineChange(e){
-        const deadline = e.target.value;
-        this.setState({
-            deadline:deadline,
-        });
-    }
-    handleMaxChange(e){
-        const n = e.target.value;
-        this.setState({
-            max_number: n,
-        });
-    }
-    handleMinChange(e){
-        const n = e.target.value;
-        this.setState({
-            min_number: n,
-        });
-    }
-    handleLocChange(e){
-        const location = e.target.value;
-        console.log(location);
-        this.setState({
-            location:location
-        });
-    }
-    handlePriceChange(e){
-        const p = e.target.value;
-        this.setState({
-            price:p
-        });
-    }
-    handleTitleChange(e){
-        const title = e.target.value;
-        this.setState({
-            title:title
-        });
-    }
-    handleIntroChange(e){
-        const content = e.target.value;
-        this.setState({
-            introduction:content
-        });
-    }
-    handleContentChange(e){
-        const content = e.target.value;
-        this.setState({
-            content:content
-        });
-    }
-    handleSubmit(e){
-        e.preventDefault();
-        const {image_url,
-            start_date,
-            end_date,
-            startTime,
-            endTime,
-            location,
-            content,
-            title,
-            min_number,
-            max_number,
-            deadline,
-            introduction,
-            price} = this.state;
-        const start_datetime =`${start_date} ${startTime}`;
-        const end_datetime = `${end_date} ${endTime}`;
-        console.log(this.state);
-        this.props.ppUpdate({image_url,start_datetime,end_datetime,location,content,title,min_number,max_number,deadline,introduction,price},this.props.w_id);
-    }
 }
 
-function mapStateToProps(state) {
-    return {
-        wm:state.wm,
-        wsp:state.wsp
-    }
+function mapStateToProps({wm, wsp}) {
+    return {wm, wsp};
 }
+
 function mapDispatchToProps(dispatch) {
     return bindActionCreators({
-        ppUpdate:ppUpdate,
-        getPost:getPost
+        updateWorkshop: updateWorkshop,
+        showWorkshop: showWorkshop
     }, dispatch);
 }
 
-
-export default connect(mapStateToProps,mapDispatchToProps)(WorkshopManagePropose);
+export default connect(mapStateToProps, mapDispatchToProps)(WorkshopManagePropose);
