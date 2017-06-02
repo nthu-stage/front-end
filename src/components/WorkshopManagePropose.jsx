@@ -19,26 +19,23 @@ class WorkshopManagePropose extends Component {
 
         this.props.getPost(this.props.w_id);
 
-        this.inputUrl = null; ////
         this.handleSubmit = this.handleSubmit.bind(this);
         this.state = {
             image_url: '',
-            startDate: '',
-            endDate: '',
-            startTime: '',
-            endTime: '',
-            location: '',
-            content: '',
             title: '',
-            start_datetime: '',
-            end_datetime: '',
+            start_date: '',
+            start_time: '',
+            end_date: '',
+            end_time: '',
             min_number: '',
             max_number: '',
-            deadline: '',
+            deadline_date: '',
+            deadline_time: '',
+            location: '',
             introduction: '',
+            content: '',
             price: '',
-            phase: '',
-            name: ''
+            phase: ''
         }
     }
 
@@ -130,11 +127,11 @@ class WorkshopManagePropose extends Component {
                             <Input type="number" value={max_number} onChange={e => this.setState({max_number: e.target.value})} required readOnly={readOnly}/>
                         </FormGroup>
                         <FormGroup>
-                            <Label for="min_number">最少人數</Label>
+                            <Label>最少人數</Label>
                             <Input type="number" value={min_number} onChange={e => this.setState({min_number: e.target.value})} required readOnly={readOnly}/>
                         </FormGroup>
                         <FormGroup>
-                            <Label for="location">地點</Label>
+                            <Label>地點</Label>
                             <Input type="text" value={location} onChange={e => this.setState({location: e.target.value})} required readOnly={readOnly}/>
                         </FormGroup>
                         <FormGroup>
