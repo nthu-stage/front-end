@@ -9,7 +9,7 @@ import {
     FormGroup,
     Col
 } from 'reactstrap';
-import {ppSubmit, isLogin} from '../actions/propose';
+import {ppSubmit, isLogin} from '../actions/workshop';
 import './Propose.css';
 
 class Propose extends Component {

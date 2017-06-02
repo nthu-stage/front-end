@@ -15,8 +15,8 @@ import {
 
 import WorkshopAttendeeList from './WorkshopManageAttendeeList';
 import WorkshopManagePropose from './WorkshopManagePropose';
-import {wsDelete} from '../actions/deleteWorkshop.js';
-import {isLogin} from '../actions/propose.js';
+import {wsDelete} from '../actions/workshop.js';
+import {isLogin} from '../actions/workshop.js';
 
 import './WorkshopManage.css';
 

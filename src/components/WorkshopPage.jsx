@@ -4,8 +4,8 @@ import {bindActionCreators} from 'redux';
 import {Comments} from 'react-facebook';
 import {ListGroup, ListGroupItem, Button, Badge} from 'reactstrap';
 
-import {wspSubmit} from '../actions/workshopPage.js';
-import {getPost} from '../actions/propose.js'
+import {wspSubmit} from '../actions/workshop.js';
+import {getPost} from '../actions/workshop.js'
 
 import './WorkshopPage.css';
 

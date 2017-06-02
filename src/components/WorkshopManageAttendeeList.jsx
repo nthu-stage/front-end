@@ -4,7 +4,7 @@ import {CSVLink} from 'react-csv';
 ////undone
 import {Row, Col, ListGroup, ListGroupItem} from 'reactstrap';
 import WorkshopAttendee from './WorkshopAttendee';
-import {getAttendee} from '../actions/attendee.js'
+import {getAttendee} from '../actions/workshop.js'
 import {bindActionCreators} from 'redux';
 
 class WorkshopManageAttendeeList extends Component {
@@ -50,8 +50,8 @@ class WorkshopManageAttendeeList extends Component {
     }
 }
 
-function mapStateToProps(state) {
-    return {wsa: state.wsa}
+function mapStateToProps({ wsa }) {
+    return {wsa};
 }
 
 function mapDispatchToProps(dispatch) {

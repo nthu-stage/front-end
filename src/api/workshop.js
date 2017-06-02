@@ -43,3 +43,32 @@ export function getAttendeeFromApi(fb, w_id){
         return
     }
 }
+
+export function deleteWorkshop(fb,w_id){
+    let url = `${baseUrl}/workshops/${w_id}`;
+    let { userID, signedRequest } = fb;
+    return axios.delete(url, null, { headers: { userID, signedRequest } });
+}
+
+export function submitPropose(fb, propose) {
+    let url = `${baseUrl}/workshops`;
+    let {userID, signedRequest} = fb;
+    return axios.post(url, propose, {
+        headers: {
+            userID,
+            signedRequest
+        }
+    });
+}
+
+export function submitUpdate(fb, propose, w_id) {
+    let url = `${baseUrl}/workshops/${w_id}`;
+    console.log('submitUpdate', propose, w_id, url);
+    let {userID, signedRequest} = fb;
+    return axios.put(url, propose, {
+        headers: {
+            userID,
+            signedRequest
+        }
+    });
+}

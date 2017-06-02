@@ -1,15 +1,12 @@
 import history from '../history';
-import { deliverAlert } from './alert';
-import { displayProfile, editAvailableTime, registerOrLogin } from '../api/profile';
+import {deliverAlert} from './alert';
+import {displayProfile, editAvailableTime, registerOrLogin} from '../api/profile';
 
 export function showProfile() {
     return ((dispatch, getState) => {
         if (getState().fb) {
             displayProfile(getState().fb).then(res => {
-                dispatch({
-                    type: 'PROFILE_SHOW',
-                    payload: res.data,
-                });
+                dispatch({type: 'PROFILE_SHOW', payload: res.data});
             }).catch(err => {
                 switch (err.response.status) {
                     case 400:
@@ -29,10 +26,7 @@ export function showProfile() {
 export function updateAvailableTime(availableTime) {
     return ((dispatch, getState) => {
         editAvailableTime(getState().fb, availableTime).then(res => {
-            dispatch({
-                type: 'PROFILE_UPDATE_AVAILABLE_TIME',
-                payload: res.data,
-            });
+            dispatch({type: 'PROFILE_UPDATE_AVAILABLE_TIME', payload: res.data});
         }).catch(err => {
             switch (err.response.status) {
                 case 400:
@@ -51,16 +45,12 @@ export function updateAvailableTime(availableTime) {
 export function regOrLogin(profile, alert) {
     return ((dispatch, getState) => {
         registerOrLogin(profile).then(res => {
-            dispatch({
-                type: 'FB_LOGIN',
-                payload: profile,
-            });
-            if (alert) dispatch(deliverAlert('登入成功', 'success', 3000));
-        }).catch(err => {
-            dispatch({
-                type: 'FB_LOGIN',
-                payload: null,
-            });
+            dispatch({type: 'FB_LOGIN', payload: profile});
+            if (alert)
+                dispatch(deliverAlert('登入成功', 'success', 3000));
+            }
+        ).catch(err => {
+            dispatch({type: 'FB_LOGIN', payload: null});
             dispatch(deliverAlert('登入失敗', 'danger', 3000));
             console.log(err.response);
         });
@@ -70,10 +60,7 @@ export function regOrLogin(profile, alert) {
 export function logout() {
     return ((dispatch, getState) => {
         history.replace('/');
-        dispatch({
-            type: 'FB_LOGIN',
-            payload: null,
-        });
+        dispatch({type: 'FB_LOGIN', payload: null});
         dispatch(deliverAlert('已登出', 'info', 3000));
     });
 }

@@ -9,7 +9,7 @@ import {
     FormGroup
 } from 'reactstrap';
 
-import {ppUpdate, getPost} from '../actions/propose.js';
+import {ppUpdate, getPost} from '../actions/workshop.js';
 
 import './Propose.css';
 

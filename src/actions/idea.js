@@ -1,16 +1,20 @@
 import history from '../history';
-import { deliverAlert } from './alert';
-import { createIdea, listIdea, editIdea, removeIdea, likeIdea, showIdea } from '../api/idea';
+import {deliverAlert} from './alert';
+import {
+    createIdea,
+    listIdea,
+    editIdea,
+    removeIdea,
+    likeIdea,
+    showIdea
+} from '../api/idea';
 import cookies from '../cookies';
 
 export function comeUpWithIdea(idea) {
     return ((dispatch, getState) => {
         if (cookies.get('fb')) {
             createIdea(cookies.get('fb'), idea).then(res => {
-                dispatch({
-                    type: 'IDEA_COME_UP_WITH',
-                    payload: res.data,
-                });
+                dispatch({type: 'IDEA_COME_UP_WITH', payload: res.data});
                 history.replace(`/i/${res.data.i_id}`);
                 dispatch(deliverAlert('許願成功', 'success', 3000));
             }).catch(err => {
@@ -37,10 +41,7 @@ export function searchIdea(searchText, order) {
     return ((dispatch, getState) => {
         console.log('searchIdea', getState());
         listIdea(cookies.get('fb'), searchText, order).then(res => {
-            dispatch({
-                type: 'IDEA_SEARCH',
-                payload: res.data,
-            });
+            dispatch({type: 'IDEA_SEARCH', payload: res.data});
         }).catch(err => {
             switch (err.response.status) {
                 case 400:
@@ -113,10 +114,7 @@ export function likeSearchIdea(i_id) {
     return ((dispatch, getState) => {
         if (cookies.get('fb')) {
             likeIdea(cookies.get('fb'), i_id).then(res => {
-                dispatch({
-                    type: 'IDEA_LIKE_SEARCH',
-                    payload: res.data,
-                });
+                dispatch({type: 'IDEA_LIKE_SEARCH', payload: res.data});
             }).catch(err => {
                 switch (err.response.status) {
                     case 400:
@@ -140,10 +138,7 @@ export function showViewEditIdea(i_id) {
     i_id = parseInt(i_id, 10);
     return ((dispatch, getState) => {
         showIdea(cookies.get('fb'), i_id).then(res => {
-            dispatch({
-                type: 'IDEA_SHOW_VIEW_EDIT',
-                payload: res.data,
-            });
+            dispatch({type: 'IDEA_SHOW_VIEW_EDIT', payload: res.data});
         }).catch(err => {
             switch (err.response.status) {
                 case 400:
@@ -162,10 +157,7 @@ export function likeViewEditIdea(i_id) {
     return ((dispatch, getState) => {
         if (cookies.get('fb')) {
             likeIdea(cookies.get('fb'), i_id).then(res => {
-                dispatch({
-                    type: 'IDEA_LIKE_VIEW_EDIT',
-                    payload: res.data,
-                });
+                dispatch({type: 'IDEA_LIKE_VIEW_EDIT', payload: res.data});
             }).catch(err => {
                 switch (err.response.status) {
                     case 400:
