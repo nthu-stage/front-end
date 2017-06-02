@@ -1,11 +1,12 @@
 import history from '../history';
 import { deliverAlert } from './alert';
 import { createIdea, listIdea, editIdea, removeIdea, likeIdea, showIdea } from '../api/idea';
+import cookies from '../cookies';
 
 export function comeUpWithIdea(idea) {
     return ((dispatch, getState) => {
-        if (getState().fb) {
-            createIdea(getState().fb, idea).then(res => {
+        if (cookies.get('fb')) {
+            createIdea(cookies.get('fb'), idea).then(res => {
                 dispatch({
                     type: 'IDEA_COME_UP_WITH',
                     payload: res.data,
@@ -34,7 +35,8 @@ export function comeUpWithIdea(idea) {
 
 export function searchIdea(searchText, order) {
     return ((dispatch, getState) => {
-        listIdea(getState().fb, searchText, order).then(res => {
+        console.log('searchIdea', getState());
+        listIdea(cookies.get('fb'), searchText, order).then(res => {
             dispatch({
                 type: 'IDEA_SEARCH',
                 payload: res.data,
@@ -54,8 +56,8 @@ export function searchIdea(searchText, order) {
 
 export function updateIdea(idea) {
     return ((dispatch, getState) => {
-        if (getState().fb) {
-            editIdea(getState().fb, idea).then(res => {
+        if (cookies.get('fb')) {
+            editIdea(cookies.get('fb'), idea).then(res => {
                 history.replace(`/i/${idea.i_id}`);
                 dispatch(deliverAlert('編輯成功', 'success', 3000));
             }).catch(err => {
@@ -81,8 +83,8 @@ export function updateIdea(idea) {
 export function deleteIdea(i_id) {
     i_id = parseInt(i_id, 10);
     return ((dispatch, getState) => {
-        if (getState().fb) {
-            removeIdea(getState().fb, i_id).then(res => {
+        if (cookies.get('fb')) {
+            removeIdea(cookies.get('fb'), i_id).then(res => {
                 history.replace(`/i`);
                 dispatch(deliverAlert('刪除成功', 'success', 3000));
             }).catch(err => {
@@ -109,8 +111,8 @@ export function deleteIdea(i_id) {
 export function likeSearchIdea(i_id) {
     i_id = parseInt(i_id, 10);
     return ((dispatch, getState) => {
-        if (getState().fb) {
-            likeIdea(getState().fb, i_id).then(res => {
+        if (cookies.get('fb')) {
+            likeIdea(cookies.get('fb'), i_id).then(res => {
                 dispatch({
                     type: 'IDEA_LIKE_SEARCH',
                     payload: res.data,
@@ -137,7 +139,7 @@ export function likeSearchIdea(i_id) {
 export function showViewEditIdea(i_id) {
     i_id = parseInt(i_id, 10);
     return ((dispatch, getState) => {
-        showIdea(getState().fb, i_id).then(res => {
+        showIdea(cookies.get('fb'), i_id).then(res => {
             dispatch({
                 type: 'IDEA_SHOW_VIEW_EDIT',
                 payload: res.data,
@@ -158,8 +160,8 @@ export function showViewEditIdea(i_id) {
 export function likeViewEditIdea(i_id) {
     i_id = parseInt(i_id, 10);
     return ((dispatch, getState) => {
-        if (getState().fb) {
-            likeIdea(getState().fb, i_id).then(res => {
+        if (cookies.get('fb')) {
+            likeIdea(cookies.get('fb'), i_id).then(res => {
                 dispatch({
                     type: 'IDEA_LIKE_VIEW_EDIT',
                     payload: res.data,
