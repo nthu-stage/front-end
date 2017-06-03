@@ -1,12 +1,20 @@
-import React, { Component } from 'react';
-import { Login } from 'react-facebook';
-import { NavItem, NavLink, Dropdown, DropdownToggle, DropdownMenu, DropdownItem, Button } from 'reactstrap';
-import { Link } from 'react-router-dom';
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
+import React, {Component} from 'react';
+import {Login} from 'react-facebook';
+import {
+    NavItem,
+    NavLink,
+    Dropdown,
+    DropdownToggle,
+    DropdownMenu,
+    DropdownItem,
+    Button
+} from 'reactstrap';
+import {Link} from 'react-router-dom';
+import {connect} from 'react-redux';
+import {bindActionCreators} from 'redux';
 
-import cookies from '../cookies';
-import { regOrLogin, logout } from '../actions/profile';
+import {cookies, history} from '../common';
+import {regOrLogin} from '../actions/profile';
 
 import './NavbarLogin.css';
 
@@ -15,7 +23,8 @@ class NavbarLogin extends Component {
         super(props);
 
         this.state = {
-            dropdownOpen: false
+            dropdownOpen: false,
+            fb: cookies.get('fb')
         };
 
         if (cookies.get('fb')) {
@@ -28,17 +37,25 @@ class NavbarLogin extends Component {
     }
 
     handleResponse(data) {
-        console.log(data);
-        let { name, picture, email, id } = data.profile;
-        let { expiresIn, userID, signedRequest } = data.tokenDetail;
-        let fb = { name, email, fb_userid: id, picture_url: picture.data.url, userID, signedRequest };
-        cookies.set('fb', fb, { maxAge: expiresIn });
+        console.log('handle fb login', data);
+        let {name, picture, email} = data.profile;
+        let {expiresIn, userID, signedRequest} = data.tokenDetail;
+        let fb = {
+            name,
+            email,
+            picture_url: picture.data.url,
+            userID,
+            signedRequest
+        };
+        cookies.set('fb', fb, {maxAge: expiresIn});
+        this.setState({fb});
         this.props.regOrLogin(fb, true);
     }
 
     handleLogout() {
         cookies.remove('fb');
-        this.props.logout();
+        this.setState({fb: null});
+        history.replace('/');
     }
 
     toggle() {
@@ -48,13 +65,13 @@ class NavbarLogin extends Component {
     }
 
     render() {
-        if (this.props.fb) {
+        if (this.state.fb) {
             return (
                 <div>
                     <NavItem className="my-auto hidden-xs-down">
                         <Dropdown isOpen={this.state.dropdownOpen} toggle={this.toggle}>
                             <DropdownToggle caret className="facebook-picture">
-                                <img src={this.props.fb.picture_url} alt="fb" />
+                                <img src={this.state.fb.picture_url} alt="fb"/>
                             </DropdownToggle>
                             <DropdownMenu>
                                 <DropdownItem tag={Link} to='/pf'>個人頁面</DropdownItem>
@@ -76,24 +93,19 @@ class NavbarLogin extends Component {
                     <Login className="hidden-xs-down" fields={['name', 'email', 'picture']} onResponse={this.handleResponse}>
                         <Button color="primary" className="navbar-btn ml-2 mr-2 facebook-button hidden-xs-down">登入</Button>
                     </Login>
-                    <Login className="hidden-sm-up" fields={['name', 'email', 'picture']} onResponse={this.handleResponse}><NavLink href="" className="nav-link hidden-sm-up">FB 登入</NavLink></Login>
+                    <Login className="hidden-sm-up" fields={['name', 'email', 'picture']} onResponse={this.handleResponse}>
+                        <NavLink href="" className="nav-link hidden-sm-up">FB 登入</NavLink>
+                    </Login>
                 </NavItem>
             );
         }
     }
 }
 
-function mapStateToProps({ fb }) {
-    return {
-        fb,
-    }
-}
-
 function mapDispatchToProps(dispatch) {
     return bindActionCreators({
-        regOrLogin,
-        logout,
+        regOrLogin
     }, dispatch);
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(NavbarLogin);
+export default connect(null, mapDispatchToProps)(NavbarLogin);

@@ -4,7 +4,7 @@ import { Card, CardText, CardBlock, CardTitle } from 'reactstrap';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Share } from 'react-facebook';
-import history from '../history';
+import {history} from '../common';
 
 import { likeSearchIdea } from '../actions/idea';
 import './IdeaListItem.css';

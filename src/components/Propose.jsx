@@ -9,14 +9,14 @@ import {
     FormGroup,
     Col
 } from 'reactstrap';
-import {proposeWorkshop, isLogin} from '../actions/workshop';
+import {proposeWorkshop, authenticated} from '../actions/common';
 import './Propose.css';
 
 class Propose extends Component {
     constructor(props) {
         super(props);
 
-        this.props.isLogin();
+        this.props.authenticated();
 
         this.handleSubmit = this.handleSubmit.bind(this);
         this.state = {
@@ -152,7 +152,7 @@ function mapStateToProps({ pp }) {
 function mapDispatchToProps(dispatch) {
     return bindActionCreators({
         proposeWorkshop,
-        isLogin
+        authenticated
     }, dispatch);
 }
 

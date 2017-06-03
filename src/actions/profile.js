@@ -1,11 +1,11 @@
-import history from '../history';
+import {cookies, history} from '../common';
 import {deliverAlert} from './alert';
 import {showProfile as showProfileFromApi, updateAvailableTime as updateAvailableTimeFromApi, registerOrLogin} from '../api/profile';
 
 export function showProfile() {
     return ((dispatch, getState) => {
-        if (getState().fb) {
-            showProfileFromApi(getState().fb).then(res => {
+        if (cookies.get('fb')) {
+            showProfileFromApi(cookies.get('fb')).then(res => {
                 dispatch({type: 'PROFILE_SHOW', payload: res.data});
             }).catch(err => {
                 switch (err.response.status) {
@@ -25,7 +25,7 @@ export function showProfile() {
 
 export function updateAvailableTime(availableTime) {
     return ((dispatch, getState) => {
-        updateAvailableTimeFromApi(getState().fb, availableTime).then(res => {
+        updateAvailableTimeFromApi(cookies.get('fb'), availableTime).then(res => {
             dispatch({type: 'PROFILE_UPDATE_AVAILABLE_TIME', payload: res.data});
         }).catch(err => {
             switch (err.response.status) {
@@ -45,22 +45,13 @@ export function updateAvailableTime(availableTime) {
 export function regOrLogin(profile, alert) {
     return ((dispatch, getState) => {
         registerOrLogin(profile).then(res => {
-            dispatch({type: 'FB_LOGIN', payload: profile});
             if (alert)
                 dispatch(deliverAlert('登入成功', 'success', 3000));
             }
         ).catch(err => {
-            dispatch({type: 'FB_LOGIN', payload: null});
+            cookies.remove('fb');
             dispatch(deliverAlert('登入失敗', 'danger', 3000));
-            console.log(err.response);
+            console.log(err);
         });
-    });
-}
-
-export function logout() {
-    return ((dispatch, getState) => {
-        history.replace('/');
-        dispatch({type: 'FB_LOGIN', payload: null});
-        dispatch(deliverAlert('已登出', 'info', 3000));
     });
 }

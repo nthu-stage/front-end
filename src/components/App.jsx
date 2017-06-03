@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import history from '../history';
+import {history} from '../common';
 import { Router, Route, Link } from 'react-router-dom';
 import {
     Collapse,
