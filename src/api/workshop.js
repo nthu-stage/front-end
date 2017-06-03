@@ -1,13 +1,19 @@
 import axios from 'axios';
 
-// const baseUrl = 'http://NTHUStage-dev.us-west-2.elasticbeanstalk.com/api';
-const baseUrl = 'http://localhost:3090';
+const baseUrl = 'http://NTHUStage-dev.us-west-2.elasticbeanstalk.com/api';
+// const baseUrl = 'http://localhost:3090';
 
 export function listWorkshop(fb, searchText, stateFilter) {
+    stateFilter = 'all';
     let url = `${baseUrl}/workshops?searchText=${searchText}&stateFilter=${stateFilter}`;
     if (fb) {
-        let { userID, signedRequest } = fb;
-        return axios.get(url, { headers: { userID, signedRequest } });
+        let {userID, signedRequest} = fb;
+        return axios.get(url, {
+            headers: {
+                userID,
+                signedRequest
+            }
+        });
     } else {
         return axios.get(url);
     }
@@ -15,38 +21,58 @@ export function listWorkshop(fb, searchText, stateFilter) {
 
 export function showWorkshop(fb, w_id) {
     let url = `${baseUrl}/workshops/${w_id}`;
-    if(fb){
-        let { userID, signedRequest } = fb;
-        return axios.get(url, { headers: { userID, signedRequest } });
-    }else{
+    if (fb) {
+        let {userID, signedRequest} = fb;
+        return axios.get(url, {
+            headers: {
+                userID,
+                signedRequest
+            }
+        });
+    } else {
         return axios.get(url);
     }
 
 }
-export function attendWorkshop(fb,w_id){
+export function attendWorkshop(fb, w_id) {
     let url = `${baseUrl}/workshops/${w_id}`;
-    if(fb){
-        let { userID, signedRequest } = fb;
-        return axios.post(url, null, { headers: { userID, signedRequest } });
-    }else{
+    if (fb) {
+        let {userID, signedRequest} = fb;
+        return axios.post(url, null, {
+            headers: {
+                userID,
+                signedRequest
+            }
+        });
+    } else {
         return
     }
 }
 ////////////後端沒做 undone
-export function listAttendee(fb, w_id){
+export function listAttendee(fb, w_id) {
     let url = `${baseUrl}/dashboard/${w_id}`;
-    if(fb){
-        let { userID, signedRequest } = fb;
-        return axios.get(url, { headers: { userID, signedRequest } });
+    if (fb) {
+        let {userID, signedRequest} = fb;
+        return axios.get(url, {
+            headers: {
+                userID,
+                signedRequest
+            }
+        });
     } else {
         return
     }
 }
 
-export function deleteWorkshop(fb,w_id){
+export function deleteWorkshop(fb, w_id) {
     let url = `${baseUrl}/workshops/${w_id}`;
-    let { userID, signedRequest } = fb;
-    return axios.delete(url, null, { headers: { userID, signedRequest } });
+    let {userID, signedRequest} = fb;
+    return axios.delete(url, null, {
+        headers: {
+            userID,
+            signedRequest
+        }
+    });
 }
 
 export function proposeWorkshop(fb, propose) {

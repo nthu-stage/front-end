@@ -14,6 +14,12 @@ class IdeaListItem extends Component {
         super(props);
 
         this.handleOnClick = this.handleOnClick.bind(this);
+        this.handleOnLike = this.handleOnLike.bind(this);
+    }
+
+    handleOnLike(e, i_id) {
+        e.stopPropagation();
+        this.props.likeSearchIdea(i_id);
     }
 
     handleOnClick(url) {
@@ -39,7 +45,8 @@ class IdeaListItem extends Component {
                                 </Share>
                             </div>
                             <div className="col text-right">
-                                <Link className="unlink" to={`/i/`}><i onClick={e => this.props.likeSearchIdea(i_id)} className={`fa fa-lg ${liked ? 'fa-heart' : 'fa-heart-o'}`}> {like_number}</i></Link>
+                                <Link className="unlink" to={`/i/`}></Link>
+                                <i onClick={e => this.handleOnLike(e, i_id)} className={`fa fa-lg ${liked ? 'fa-heart' : 'fa-heart-o'}`}> {like_number}</i>
                             </div>
                         </div>
                     </CardBlock>
