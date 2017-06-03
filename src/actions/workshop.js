@@ -39,7 +39,7 @@ export function proposeWorkshop(propose) {
 export function listWorkshop(searchText, stateFilter) {
     return ((dispatch, getState) => {
         listWorkshopFromApi(cookies.get('fb'), searchText, stateFilter).then(res => {
-            dispatch({type: '@WORKSHOP/SEARCH', payload: res.data});
+            dispatch({type: '@WORKSHOP/LIST', payload: res.data});
         }).catch(err => {
             switch (err.response.status) {
                 case 400:
