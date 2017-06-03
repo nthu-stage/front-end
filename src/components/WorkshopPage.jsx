@@ -59,6 +59,9 @@ class WorkshopPage extends Component {
     }
 
     render() {
+        if (this.props.loadingBar) {
+            return <div />;
+        }
         const {
             image_url,
             title,
@@ -74,33 +77,28 @@ class WorkshopPage extends Component {
             phase,
             attended
         } = this.state;
-        const {masking} = this.props.workshopShow;
         const commentUrl = `www.nthu-stage/wp/${this.props.match.params.id}`;
         const btnStr = attended
             ? "取消報名"
             : "我要報名";
-        const phase2color = {
+        const badgeColor = {
             judging: 'primary',
             judge_na: 'danger',
             investigating: 'warning',
             unreached: 'danger',
             reached: 'success',
             over: 'default'
-        };
-        const phase2str = {
+        }[phase];
+        const badgeStr = {
             judging: '審核中',
             judge_na: '審核失敗',
             investigating: '調查中',
             unreached: '未達標',
             reached: '已達標',
             over: '已結束'
-        };
-        const badgeColor = phase2color[phase];
-        const badgeStr = phase2str[phase];
+        }[phase];
         return (
-            <div className={`container my-3 ${masking
-                ? 'mask'
-                : ''}`}>
+            <div className="container my-3">
                 <Card>
                     <CardHeader className="text-center" tag="h3">
                         <Badge className="workshop-page-badge" color={badgeColor}>{badgeStr}</Badge>{title}
@@ -134,8 +132,8 @@ class WorkshopPage extends Component {
     }
 }
 
-function mapStateToProps({workshopShow}) {
-    return {workshopShow};
+function mapStateToProps({loadingBar, workshopShow}) {
+    return {loadingBar, workshopShow};
 }
 
 function mapDispatchToProps(dispatch) {

@@ -1,6 +1,6 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import {history} from '../common';
-import { Router, Route, Link } from 'react-router-dom';
+import {Router, Route, Link} from 'react-router-dom';
 import {
     Collapse,
     Navbar,
@@ -8,8 +8,11 @@ import {
     NavbarBrand,
     Nav,
     NavItem,
-    NavLink
+    NavLink,
+    Button
 } from 'reactstrap';
+import LoadingBar from 'react-redux-loading-bar';
+import {showLoading, hideLoading} from 'react-redux-loading-bar';
 import FacebookProvider from 'react-facebook';
 
 import AppNavLogin from './AppNavLogin';
@@ -45,7 +48,8 @@ export default class App extends Component {
                         <Navbar color="faded" light toggleable>
                             <div className="container">
                                 <NavbarToggler right onClick={this.toggle}/>
-                                <NavbarBrand tag={Link} to='/'><i className="fa fa-cubes fa-lg mr-2" aria-hidden="true"></i>NTHU Stage</NavbarBrand>
+                                <NavbarBrand tag={Link} to='/'>
+                                    <i className="fa fa-cubes fa-lg mr-2" aria-hidden="true"></i>NTHU Stage</NavbarBrand>
                                 <Collapse isOpen={this.state.isOpen} navbar>
                                     <Nav className="ml-auto" navbar>
                                         <NavItem>
@@ -57,21 +61,22 @@ export default class App extends Component {
                                         <NavItem>
                                             <NavLink tag={Link} to='/pp'>我要提案</NavLink>
                                         </NavItem>
-                                        <AppNavLogin />
+                                        <AppNavLogin/>
                                     </Nav>
                                 </Collapse>
                             </div>
                         </Navbar>
-                        <AppAlert />
-                        <Route exact path="/" component={Workshop} />
-                        <Route exact path="/i" component={Idea} />
-                        <Route path="/i/:id" component={Idea} />
-                        <Route exact path="/wp" component={WorkshopPage} />
-                        <Route path="/wp/:id" component={WorkshopPage} />
-                        <Route path="/pp" component={WorkshopPropose} />
-                        <Route path="/pf" component={Profile} />
-                        <Route exact path="/wm" component={WorkshopManage} />
-                        <Route path="/wm/:id" component={WorkshopManage} />
+                        <LoadingBar/>
+                        <AppAlert/>
+                        <Route exact path="/" component={Workshop}/>
+                        <Route exact path="/i" component={Idea}/>
+                        <Route path="/i/:id" component={Idea}/>
+                        <Route exact path="/wp" component={WorkshopPage}/>
+                        <Route path="/wp/:id" component={WorkshopPage}/>
+                        <Route path="/pp" component={WorkshopPropose}/>
+                        <Route path="/pf" component={Profile}/>
+                        <Route exact path="/wm" component={WorkshopManage}/>
+                        <Route path="/wm/:id" component={WorkshopManage}/>
                     </div>
                 </FacebookProvider>
             </Router>

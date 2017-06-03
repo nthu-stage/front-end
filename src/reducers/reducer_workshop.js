@@ -4,10 +4,6 @@ function date2string(d) {
     return (d.getFullYear() + '/' + ('00' + (d.getMonth() + 1)).slice(-2) + '/' + ('00' + d.getDate()).slice(-2) + ' ' + ('00' + d.getHours()).slice(-2) + ':' + ('00' + d.getMinutes()).slice(-2) + ':' + ('00' + d.getSeconds()).slice(-2));
 }
 
-const initState = {
-    masking: true
-}
-
 export function WorkshopListReducer(state = null, action) {
     switch (action.type) {
         case '@WORKSHOP/LIST':
@@ -17,7 +13,7 @@ export function WorkshopListReducer(state = null, action) {
     }
 }
 
-export function WorkshopShowReducer(state = initState, action) {
+export function WorkshopShowReducer(state = {}, action) {
     let next_state;
     switch (action.type) {
         case '@WORKSHOP/SHOW':
@@ -39,22 +35,12 @@ export function WorkshopShowReducer(state = initState, action) {
             return {
                 ...state,
                 attended: action.payload.attended
-            }
-        case '@WORKSHOP/LOADING':
-            return {
-                ...state,
-                masking: true
-            }
-        case '@WORKSHOP/LOADING_DONE':
-            return {
-                ...state,
-                masking: false
-            }
+            };
         case '@WORKSHOP/ATTENDEE':
             return {
                 ...state,
                 attendees: action.payload.list
-            }
+            };
         default:
             return state;
     }
