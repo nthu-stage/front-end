@@ -18,6 +18,7 @@ function dateDiffInDays(a, b) {
 export default class WorkshopListItem extends Component {
     render() {
         let { w_id, image_url, title, min_number, max_number, deadline, pre_deadline, introduction, price, phase, attendees_number } = this.props;
+
         let invest_countdown = dateDiffInDays(new Date(Date.now()), new Date(pre_deadline));
         let attend_countdown = dateDiffInDays(new Date(Date.now()), new Date(deadline));
         return (
