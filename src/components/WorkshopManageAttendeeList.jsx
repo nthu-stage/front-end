@@ -1,28 +1,21 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
-import {Row, Col, ListGroup, ListGroupItem, Table} from 'reactstrap';
+import {Row, Col, Table} from 'reactstrap';
 import {CSVLink} from 'react-csv';
 
 import {listAttendee} from '../actions/workshop.js'
 
 class WorkshopManageAttendeeList extends Component {
-    constructor(props) {
-        super(props);
+    componentWillMount() {
         this.props.listAttendee(this.props.w_id);
-        this.state = {
-            attendees: []
-        }
-    }
-
-    componentWillReceiveProps(next) {
-        this.setState({
-            ...next.workshopShow
-        });
     }
 
     render() {
-        let {attendees} = this.state;
+        if (!this.props.workshopShow.attendees) {
+            return <div />;
+        }
+        let {attendees} = this.props.workshopShow;
         if (attendees.length === 0) {
             return (
                 <h3>尚無人報名</h3>
@@ -46,8 +39,8 @@ class WorkshopManageAttendeeList extends Component {
                         </tr>
                     </thead>
                     <tbody>
-                        {attendees.map((p, i) => (
-                            <tr>
+                        {attendees.map(p => (
+                            <tr key={p.email}>
                                 <td>{p.name}</td>
                                 <td>{p.email}</td>
                             </tr>

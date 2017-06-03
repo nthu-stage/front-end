@@ -6,8 +6,6 @@ import {
     TabContent,
     TabPane,
     Button,
-    Row,
-    Col,
     Modal,
     ModalHeader,
     ModalBody,
@@ -23,14 +21,9 @@ import WorkshopManagePropose from './WorkshopManagePropose';
 import {deleteWorkshop} from '../actions/workshop';
 import {authenticate} from '../actions/common';
 
-import './WorkshopManage.css';
-
 class WorkshopManage extends Component {
     constructor(props) {
         super(props);
-
-        this.props.authenticate();
-
         this.state = {
             activeTab: '1',
             modal: false,
@@ -40,6 +33,10 @@ class WorkshopManage extends Component {
         this.deleteModalToggle = this.deleteModalToggle.bind(this);
         this.deleteNestedModalToggle = this.deleteNestedModalToggle.bind(this);
         this.handleDelete = this.handleDelete.bind(this);
+    }
+
+    componentWillMount() {
+        this.props.authenticate();
     }
 
     tabToggle(tab) {

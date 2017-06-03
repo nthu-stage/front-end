@@ -30,6 +30,7 @@ export function WorkshopShowReducer(state = {}, action) {
             next_state.end_time = moment(end_datetime).format('hh:mm:ss');
             next_state.deadline_date = moment(deadline).format('YYYY-MM-DD');
             next_state.deadline_time = moment(deadline).format('hh:mm:ss');
+            next_state.attendees = state.attendees;
             return next_state;
         case '@WORKSHOP/ATTEND':
             return {
@@ -39,7 +40,7 @@ export function WorkshopShowReducer(state = {}, action) {
         case '@WORKSHOP/ATTENDEE':
             return {
                 ...state,
-                attendees: action.payload.list
+                attendees: action.payload
             };
         default:
             return state;

@@ -177,6 +177,17 @@ export function listAttendee(w_id) {
             dispatch(showLoading());
             listAttendeeFromApi(cookies.get('fb'), w_id).then(res => {
                 dispatch({type: '@WORKSHOP/ATTENDEE', payload: res.data});
+            }).catch(err => {
+                switch (err.response.status) {
+                    case 400:
+                        dispatch(deliverAlert('工作坊不存在', 'danger', 3000));
+                        break;
+                    case 401:
+                        dispatch(deliverAlert('請先登入', 'warning', 3000));
+                        break;
+                    default:
+                        dispatch(deliverAlert('讀取失敗', 'danger', 3000));
+                }
             }).then(() => {
                 dispatch(hideLoading());
             });

@@ -5,14 +5,9 @@ import {Button, Input, Label, Form, FormGroup} from 'reactstrap';
 
 import {updateWorkshop, showWorkshop} from '../actions/workshop.js';
 
-import './WorkshopPropose.css';
-
 class WorkshopManagePropose extends Component {
     constructor(props) {
         super(props);
-
-        this.props.showWorkshop(this.props.w_id);
-
         this.handleSubmit = this.handleSubmit.bind(this);
         this.state = {
             image_url: '',
@@ -31,6 +26,10 @@ class WorkshopManagePropose extends Component {
             price: '',
             phase: ''
         }
+    }
+
+    componentWillMount() {
+        this.props.showWorkshop(this.props.w_id);
     }
 
     componentWillReceiveProps(next) {
@@ -82,7 +81,7 @@ class WorkshopManagePropose extends Component {
             <div className={`${masking
                 ? 'mask'
                 : ''}`}>
-                <img className="workhop-banner" src={image_url} alt=""/>
+                <img className="workshop-banner" src={image_url} alt=""/>
                 <div className="mt-3">
                     <Form onSubmit={this.handleSubmit}>
                         <FormGroup>

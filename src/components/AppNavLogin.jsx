@@ -27,13 +27,15 @@ class AppNavLogin extends Component {
             fb: cookies.get('fb')
         };
 
-        if (cookies.get('fb')) {
-            this.props.regOrLogin(cookies.get('fb'), false);
-        }
-
         this.handleResponse = this.handleResponse.bind(this);
         this.handleLogout = this.handleLogout.bind(this);
         this.toggle = this.toggle.bind(this);
+    }
+
+    componentWillMount() {
+        if (cookies.get('fb')) {
+            this.props.regOrLogin(cookies.get('fb'), false);
+        }
     }
 
     handleResponse(data) {
@@ -52,6 +54,7 @@ class AppNavLogin extends Component {
     }
 
     handleLogout() {
+        // cookies.set('fb', null, {maxAge: 0});
         cookies.remove('fb');
         this.setState({fb: null});
         history.replace('/');

@@ -8,11 +8,9 @@ import {
     NavbarBrand,
     Nav,
     NavItem,
-    NavLink,
-    Button
+    NavLink
 } from 'reactstrap';
 import LoadingBar from 'react-redux-loading-bar';
-import {showLoading, hideLoading} from 'react-redux-loading-bar';
 import FacebookProvider from 'react-facebook';
 
 import AppNavLogin from './AppNavLogin';
