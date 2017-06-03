@@ -1,11 +1,18 @@
-import React, { Component } from 'react';
-import { Table, Badge } from 'reactstrap';
-import { Link } from 'react-router-dom';
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
+import React, {Component} from 'react';
+import {
+    Table,
+    Badge,
+    Form,
+    InputGroup,
+    InputGroupButton,
+    Input
+} from 'reactstrap';
+import {Link} from 'react-router-dom';
+import {connect} from 'react-redux';
+import {bindActionCreators} from 'redux';
 
 import ProfileAvailable from './ProfileAvailable'
-import { showProfile } from '../actions/profile';
+import {showProfile} from '../actions/profile';
 
 import './Profile.css';
 
@@ -16,7 +23,7 @@ function state2badge(phase) {
         'investigating': 'warning',
         'unreached': 'danger',
         'reached': 'success',
-        'over': 'default',
+        'over': 'default'
     }
     let n = {
         'judging': '審核中',
@@ -24,12 +31,25 @@ function state2badge(phase) {
         'judge_ac': '調查中',
         'unreached': '未達標',
         'reached': '已達標',
-        'over': '已結束',
+        'over': '已結束'
     }
     return <Badge className="profile-badge" color={m[phase]}>{n[phase]}</Badge>;
 }
 
 class Profile extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            email: ''
+        }
+        this.handleUpdateEmail = this.handleUpdateEmail.bind(this);
+    }
+
+    handleUpdateEmail(e) {
+        e.preventDefault();
+
+    }
+
     componentWillMount() {
         this.props.showProfile();
     }
@@ -38,10 +58,20 @@ class Profile extends Component {
         if (this.props.profile) {
             const {availableTime, propose, attend, comeUpWith, like} = this.props.profile;
             return (
-                <div className="container text-left">
+                <div className="container">
+                    <section className="mt-4">
+                        <h3>Email</h3>
+                        <p>供主辦人發送行前信</p>
+                        <Form onSubmit={this.handleUpdateEmail}>
+                            <InputGroup>
+                                <Input value={this.state.email} onChange={e => this.setState({email: e.target.value})} type="email" placeholder="username@gmail.com" required/>
+                                <InputGroupButton type="submit" color="primary">儲存</InputGroupButton>
+                            </InputGroup>
+                        </Form>
+                    </section>
                     <section className="mt-4">
                         <h3>平常有空的時間</h3>
-                        <p>供講師決定舉辦工作坊的時間</p>
+                        <p>供主辦人決定工作坊時間</p>
                         <ProfileAvailable availableTime={availableTime}/>
                     </section>
                     <section className="mt-4">
@@ -58,20 +88,23 @@ class Profile extends Component {
                                 </tr>
                             </thead>
                             <tbody>
-                                {
-                                    propose.map(ws => {
-                                        return (
-                                            <tr key={ws.w_id}>
-                                                <th><Link to={`/wp/${ws.w_id}`}>{ws.title}</Link></th>
-                                                <td>{ws.start_datetime}</td>
-                                                <td>{ws.attendees_number}/{ws.max_number}</td>
-                                                <td>{ws.min_number}</td>
-                                                <td>{state2badge(ws.state)}</td>
-                                                <td><Link to={`/wm/${ws.w_id}`} color="primary">管理</Link></td>
-                                            </tr>
-                                        );
-                                    })
-                                }
+                                {propose.map(ws => {
+                                    return (
+                                        <tr key={ws.w_id}>
+                                            <th>
+                                                <Link to={`/wp/${ws.w_id}`}>{ws.title}</Link>
+                                            </th>
+                                            <td>{ws.start_datetime}</td>
+                                            <td>{ws.attendees_number}/{ws.max_number}</td>
+                                            <td>{ws.min_number}</td>
+                                            <td>{state2badge(ws.state)}</td>
+                                            <td>
+                                                <Link to={`/wm/${ws.w_id}`} color="primary">管理</Link>
+                                            </td>
+                                        </tr>
+                                    );
+                                })
+}
                             </tbody>
                         </Table>
                     </section>
@@ -86,17 +119,18 @@ class Profile extends Component {
                                 </tr>
                             </thead>
                             <tbody>
-                                {
-                                    attend.map(ws => {
-                                        return (
-                                            <tr key={ws.w_id}>
-                                                <th><Link to={`/wp/${ws.w_id}`}>{ws.title}</Link></th>
-                                                <td>{ws.start_datetime}</td>
-                                                <td>{state2badge(ws.state)}</td>
-                                            </tr>
-                                        );
-                                    })
-                                }
+                                {attend.map(ws => {
+                                    return (
+                                        <tr key={ws.w_id}>
+                                            <th>
+                                                <Link to={`/wp/${ws.w_id}`}>{ws.title}</Link>
+                                            </th>
+                                            <td>{ws.start_datetime}</td>
+                                            <td>{state2badge(ws.state)}</td>
+                                        </tr>
+                                    );
+                                })
+}
                             </tbody>
                         </Table>
                     </section>
@@ -110,16 +144,19 @@ class Profile extends Component {
                                 </tr>
                             </thead>
                             <tbody>
-                                {
-                                    comeUpWith.map(i => {
-                                        return (
-                                            <tr key={i.i_id}>
-                                                <th><Link to={`/i/${i.i_id}`}>{`我想${i.idea_type === 'teach' ? '教' : '學'}${i.skill}`}</Link></th>
-                                                <td>{i.like_number}</td>
-                                            </tr>
-                                        );
-                                    })
-                                }
+                                {comeUpWith.map(i => {
+                                    return (
+                                        <tr key={i.i_id}>
+                                            <th>
+                                                <Link to={`/i/${i.i_id}`}>{`我想${i.idea_type === 'teach'
+                                                        ? '教'
+                                                        : '學'}${i.skill}`}</Link>
+                                            </th>
+                                            <td>{i.like_number}</td>
+                                        </tr>
+                                    );
+                                })
+}
                             </tbody>
                         </Table>
                     </section>
@@ -133,35 +170,36 @@ class Profile extends Component {
                                 </tr>
                             </thead>
                             <tbody>
-                                {
-                                    like.map(i => {
-                                        return (
-                                            <tr key={i.i_id}>
-                                                <th><Link to={`/i/${i.i_id}`}>{`我想${i.idea_type === 'teach' ? '教' : '學'}${i.skill}`}</Link></th>
-                                                <td>{i.like_number}</td>
-                                            </tr>
-                                        );
-                                    })
-                                }
+                                {like.map(i => {
+                                    return (
+                                        <tr key={i.i_id}>
+                                            <th>
+                                                <Link to={`/i/${i.i_id}`}>{`我想${i.idea_type === 'teach'
+                                                        ? '教'
+                                                        : '學'}${i.skill}`}</Link>
+                                            </th>
+                                            <td>{i.like_number}</td>
+                                        </tr>
+                                    );
+                                })
+}
                             </tbody>
                         </Table>
                     </section>
                 </div>
             );
         }
-        return <div />
+        return <div/>
     }
 }
 
-function mapStateToProps({ profile }) {
-    return {
-        profile,
-    }
+function mapStateToProps({profile}) {
+    return {profile}
 }
 
 function mapDispatchToProps(dispatch) {
     return bindActionCreators({
-        showProfile,
+        showProfile
     }, dispatch);
 }
 
