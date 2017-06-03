@@ -3,7 +3,7 @@ import {connect} from 'react-redux';
 import {CSVLink} from 'react-csv';
 ////undone
 import {Row, Col, ListGroup, ListGroupItem} from 'reactstrap';
-import WorkshopAttendee from './WorkshopAttendee';
+import WorkshopManageAttendeeListItem from './WorkshopManageAttendeeListItem';
 import {listAttendee} from '../actions/workshop.js'
 import {bindActionCreators} from 'redux';
 
@@ -32,7 +32,7 @@ class WorkshopManageAttendeeList extends Component {
         if (attendees.length) {
             children = attendees.map(p => (
                 <ListGroupItem key={p.name} action>
-                    <WorkshopAttendee {...p}/>
+                    <WorkshopManageAttendeeListItem {...p}/>
                 </ListGroupItem>
             ));
         }

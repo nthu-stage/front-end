@@ -28,7 +28,7 @@ export function hideAlert(delay){
     }
 }
 
-export function authenticated() {
+export function authenticate() {
     return ((dispatch, getState) => {
         if (!cookies.get('fb')) {
             history.replace('/');

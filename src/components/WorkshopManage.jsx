@@ -17,7 +17,7 @@ import {cookies} from '../common';
 import WorkshopAttendeeList from './WorkshopManageAttendeeList';
 import WorkshopManagePropose from './WorkshopManagePropose';
 import {deleteWorkshop} from '../actions/workshop';
-import {authenticated} from '../actions/common';
+import {authenticate} from '../actions/common';
 
 import './WorkshopManage.css';
 
@@ -25,7 +25,7 @@ class WorkshopManage extends Component {
     constructor(props) {
         super(props);
 
-        this.props.authenticated();
+        this.props.authenticate();
 
         this.state = {
             activeTab: '1',
@@ -115,7 +115,7 @@ function mapStateToProps({wm}) {
 function mapDispatchToProps(dispatch) {
     return bindActionCreators({
         deleteWorkshop,
-        authenticated
+        authenticate
     }, dispatch);
 }
 

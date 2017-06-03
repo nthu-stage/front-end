@@ -5,7 +5,7 @@ import {
     Col
 } from 'reactstrap';
 
-class WorkshopAttendee extends Component {
+class WorkshopManageAttendeeListItem extends Component {
 
 
     render() {
@@ -27,4 +27,4 @@ function mapStateToProps(state) {
     }
 }
 
-export default connect(mapStateToProps)(WorkshopAttendee);
+export default connect(mapStateToProps)(WorkshopManageAttendeeListItem);
