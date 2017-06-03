@@ -16,9 +16,9 @@ import {bindActionCreators} from 'redux';
 import {cookies, history} from '../common';
 import {regOrLogin} from '../actions/profile';
 
-import './NavbarLogin.css';
+import './AppNavLogin.css';
 
-class NavbarLogin extends Component {
+class AppNavLogin extends Component {
     constructor(props) {
         super(props);
 
@@ -108,4 +108,4 @@ function mapDispatchToProps(dispatch) {
     }, dispatch);
 }
 
-export default connect(null, mapDispatchToProps)(NavbarLogin);
+export default connect(null, mapDispatchToProps)(AppNavLogin);
