@@ -1,8 +1,8 @@
 export default function (state = null, action) {
     switch (action.type) {
-        case 'ALERT_SHOW':
+        case '@ALERT/SHOW':
             return action.payload;
-        case 'ALERT_HIDE':
+        case '@ALERT/HIDE':
             let next_state = JSON.parse(JSON.stringify(state));
             next_state.isOpen = action.payload;
             return next_state;

@@ -11,7 +11,7 @@ const initState = {
 export default function workshopPage(state = initState, action) {
     let next_state;
     switch (action.type) {
-        case '@WORKSHOP_PAGE/SHOW':
+        case '@WORKSHOP/SHOW':
             next_state = JSON.parse(JSON.stringify(action.payload));
             let start_datetime = new Date(next_state.start_datetime),
                 end_datetime = new Date(next_state.end_datetime),
@@ -26,20 +26,25 @@ export default function workshopPage(state = initState, action) {
             next_state.deadline_date = moment(deadline).format('YYYY-MM-DD');
             next_state.deadline_time = moment(deadline).format('hh:mm:ss');
             return next_state;
-        case '@WORKSHOPPAGE/WORKSHOPPAGE_SUBMIT':
+        case '@WORKSHOP/ATTEND':
             return {
                 ...state,
                 attended: action.payload.attended
             }
-        case '@WORKSHOPPAGE/LOADING':
+        case '@WORKSHOP/LOADING':
             return {
                 ...state,
                 masking: true
             }
-        case '@WORKSHOPPAGE/LOADING_DONE':
+        case '@WORKSHOP/LOADING_DONE':
             return {
                 ...state,
                 masking: false
+            }
+        case '@WORKSHOP/ATTENDEE':
+            return {
+                ...state,
+                attendees: action.payload.list
             }
         default:
             return state;

@@ -5,10 +5,10 @@ import IdeaListItem from './IdeaListItem';
 
 class IdeaList extends Component {
     render() {
-        if (this.props.ideaSearch) {
+        if (this.props.ideaList) {
             return (
                 <div className="row">
-                    {this.props.ideaSearch.map(idea => <IdeaListItem key={idea.i_id} {...idea}/>)}
+                    {this.props.ideaList.map(idea => <IdeaListItem key={idea.i_id} {...idea}/>)}
                 </div>
             );
         }
@@ -16,9 +16,9 @@ class IdeaList extends Component {
     }
 }
 
-function mapStateToProps({ ideaSearch }) {
+function mapStateToProps({ ideaList }) {
     return {
-        ideaSearch,
+        ideaList,
     }
 }
 

@@ -1,14 +1,14 @@
 export default function (state = null, action) {
     let next_state;
     switch (action.type) {
-        case 'IDEA_SHOW_VIEW_EDIT':
+        case '@IDEA/SHOW':
             next_state = Object.assign({}, action.payload);
             console.log('IDEA_SHOW_VIEW_EDIT', next_state.mostAvaiTime);
             for (let times of next_state.mostAvaiTime) {
                 times.name = ['一', '二', '三', '四', '五', '六', '日'][Math.floor(times.time / 3)] + ['早', '午', '晚'][times.time % 3];
             }
             return next_state;
-        case 'IDEA_LIKE_VIEW_EDIT':
+        case '@IDEA/LIKE_SHOW':
             next_state = Object.assign({}, state);;
             next_state.like_number = action.payload.like_number;
             next_state.liked = action.payload.liked;

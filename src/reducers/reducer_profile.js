@@ -12,7 +12,7 @@ function date2string(d) {
 export default function (state = null, action) {
     let next_state;
     switch (action.type) {
-        case 'PROFILE_SHOW':
+        case '@PROFILE/SHOW':
             next_state = JSON.parse(JSON.stringify(action.payload));
             next_state.propose.forEach(w => {
                 w.start_datetime = date2string(new Date(w.start_datetime));
@@ -22,7 +22,7 @@ export default function (state = null, action) {
                 w.start_datetime = date2string(new Date(w.start_datetime));
             });
             return next_state;
-        case 'PROFILE_UPDATE_AVAILABLE_TIME':
+        case '@PROFILE/UPDATE_AVAILABLE_TIME':
             next_state = JSON.parse(JSON.stringify(state));
             next_state.availableTime = action.payload;
             return next_state;

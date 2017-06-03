@@ -35,7 +35,7 @@ class WorkshopManagePropose extends Component {
 
     componentWillReceiveProps(next) {
         this.setState({
-            ...next.workshopManage
+            ...next.workshopShow
         })
     }
 
@@ -76,7 +76,7 @@ class WorkshopManagePropose extends Component {
         } = this.state;
         let readOnly = (phase === 'judging' || phase === 'judge_na' || phase === 'unreached');
         readOnly = false;
-        const {masking} = this.props.workshopPage;
+        const {masking} = this.props.workshopShow;
 
         return (
             <div className={`${masking
@@ -149,8 +149,8 @@ class WorkshopManagePropose extends Component {
     }
 }
 
-function mapStateToProps({workshopPage, workshopManage}) {
-    return {workshopPage, workshopManage};
+function mapStateToProps({workshopShow}) {
+    return {workshopShow};
 }
 
 function mapDispatchToProps(dispatch) {

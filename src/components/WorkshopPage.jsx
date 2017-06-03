@@ -48,9 +48,9 @@ class WorkshopPage extends Component {
     }
 
     componentWillReceiveProps(next) {
-        console.log('componentWillReceiveProps', next.workshopPage.attended);
+        console.log('componentWillReceiveProps', next.workshopShow.attended);
         this.setState({
-            ...next.workshopPage
+            ...next.workshopShow
         })
     }
 
@@ -74,7 +74,7 @@ class WorkshopPage extends Component {
             phase,
             attended
         } = this.state;
-        const {masking} = this.props.workshopPage;
+        const {masking} = this.props.workshopShow;
         const commentUrl = `www.nthu-stage/wp/${this.props.match.params.id}`;
         const btnStr = attended
             ? "取消報名"
@@ -134,8 +134,8 @@ class WorkshopPage extends Component {
     }
 }
 
-function mapStateToProps({workshopPage}) {
-    return {workshopPage};
+function mapStateToProps({workshopShow}) {
+    return {workshopShow};
 }
 
 function mapDispatchToProps(dispatch) {

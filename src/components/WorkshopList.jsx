@@ -5,10 +5,10 @@ import WorkshopListItem from './WorkshopListItem';
 
 class WorkshopList extends Component {
     render() {
-        if (this.props.workshop) {
+        if (this.props.workshopList) {
             return (
                 <div className="row">
-                    {this.props.workshop.map(workshop => <WorkshopListItem key={workshop.w_id} {...workshop}/>)}
+                    {this.props.workshopList.map(workshop => <WorkshopListItem key={workshop.w_id} {...workshop}/>)}
                 </div>
             );
         }
@@ -16,8 +16,8 @@ class WorkshopList extends Component {
     }
 }
 
-function mapStateToProps({workshop}) {
-    return {workshop}
+function mapStateToProps({workshopList}) {
+    return {workshopList}
 }
 
 export default connect(mapStateToProps)(WorkshopList);

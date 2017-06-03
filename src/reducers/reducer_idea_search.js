@@ -1,9 +1,9 @@
 export default function (state = [], action) {
     let next_state;
     switch (action.type) {
-        case 'IDEA_SEARCH':
+        case '@IDEA/LIST':
             return action.payload;
-        case 'IDEA_LIKE_SEARCH':
+        case '@IDEA/LIKE_LIST':
             next_state = state.slice();
             for (let idea of next_state) {
                 if (idea.i_id === parseInt(action.payload.i_id, 10)) {
@@ -12,17 +12,6 @@ export default function (state = [], action) {
                     break;
                 }
             }
-            return next_state;
-        case 'IDEA_COME_UP_WITH':
-            next_state = state.slice();
-            next_state.push({
-                i_id: 123456,
-                idea_type: 'teach',
-                skill: '畫畫',
-                goal: '素描',
-                like_number: 12,
-                liked: true,
-            });
             return next_state;
         default:
             return state;
