@@ -67,9 +67,9 @@ class AppNavLogin extends Component {
     }
 
     render() {
-        if (this.state.fb) {
-            return (
-                <div>
+        return (
+            <div>
+                {this.state.fb && <div>
                     <NavItem className="my-auto hidden-xs-down">
                         <Dropdown isOpen={this.state.dropdownOpen} toggle={this.toggle}>
                             <DropdownToggle caret className="facebook-picture">
@@ -87,20 +87,23 @@ class AppNavLogin extends Component {
                     <NavItem className="my-auto hidden-sm-up">
                         <NavLink href="" onClick={this.handleLogout}>登出</NavLink>
                     </NavItem>
+                </div>}
+                <div>
+                    <NavItem className="my-auto" style={{
+                        display: this.state.fb
+                            ? 'none'
+                            : 'inline-block'
+                    }}>
+                        <Login className="hidden-xs-down" fields={['name', 'email', 'picture']} onResponse={this.handleResponse}>
+                            <Button color="primary" className="navbar-btn ml-2 mr-2 facebook-button hidden-xs-down">登入</Button>
+                        </Login>
+                        <Login className="hidden-sm-up" fields={['name', 'email', 'picture']} onResponse={this.handleResponse}>
+                            <NavLink href="" className="nav-link hidden-sm-up">FB 登入</NavLink>
+                        </Login>
+                    </NavItem>
                 </div>
-            );
-        } else {
-            return (
-                <NavItem className="my-auto">
-                    <Login className="hidden-xs-down" fields={['name', 'email', 'picture']} onResponse={this.handleResponse}>
-                        <Button color="primary" className="navbar-btn ml-2 mr-2 facebook-button hidden-xs-down">登入</Button>
-                    </Login>
-                    <Login className="hidden-sm-up" fields={['name', 'email', 'picture']} onResponse={this.handleResponse}>
-                        <NavLink href="" className="nav-link hidden-sm-up">FB 登入</NavLink>
-                    </Login>
-                </NavItem>
-            );
-        }
+            </div>
+        );
     }
 }
 
