@@ -41,7 +41,6 @@ export function showIdea(fb, i_id) {
     let url = `${baseUrl}/ideas/${i_id}`;
     if (fb) {
         let { userID, signedRequest } = fb;
-        console.log({ headers: { userID, signedRequest } });
         return axios.get(url, { headers: { userID, signedRequest } });
     } else {
         return axios.get(url);

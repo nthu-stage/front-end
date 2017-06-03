@@ -62,7 +62,6 @@ export function proposeWorkshop(fb, propose) {
 
 export function updateWorkshop(fb, propose, w_id) {
     let url = `${baseUrl}/workshops/${w_id}`;
-    console.log('submitUpdate', propose, w_id, url);
     let {userID, signedRequest} = fb;
     return axios.put(url, propose, {
         headers: {

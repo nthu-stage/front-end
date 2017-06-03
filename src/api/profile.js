@@ -26,7 +26,6 @@ export function updateAvailableTime(fb, availableTime) {
 }
 
 export function registerOrLogin(fb) {
-    console.log('regOrLogin', fb);
     let url = `${baseUrl}/profile`;
     let {userID, signedRequest} = fb;
     return axios.post(url, fb, {

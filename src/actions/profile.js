@@ -51,7 +51,6 @@ export function regOrLogin(profile, alert) {
         ).catch(err => {
             cookies.remove('fb');
             dispatch(deliverAlert('登入失敗', 'danger', 3000));
-            console.log(err);
         });
     });
 }

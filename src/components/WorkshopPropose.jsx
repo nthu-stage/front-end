@@ -6,10 +6,10 @@ import {
     Input,
     Label,
     Form,
-    FormGroup,
-    Col
+    FormGroup
 } from 'reactstrap';
-import {proposeWorkshop, authenticate} from '../actions/common';
+import {authenticate} from '../actions/common';
+import {proposeWorkshop} from '../actions/workshop';
 import './WorkshopPropose.css';
 
 class WorkshopPropose extends Component {
@@ -69,8 +69,7 @@ class WorkshopPropose extends Component {
             location,
             introduction,
             content,
-            price,
-            phase
+            price
         } = this.state;
         return (
             <div className="container propose">
@@ -145,10 +144,6 @@ class WorkshopPropose extends Component {
     }
 }
 
-function mapStateToProps({pp}) {
-    return {pp}
-}
-
 function mapDispatchToProps(dispatch) {
     return bindActionCreators({
         proposeWorkshop,
@@ -156,4 +151,4 @@ function mapDispatchToProps(dispatch) {
     }, dispatch);
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(WorkshopPropose);
+export default connect(null, mapDispatchToProps)(WorkshopPropose);

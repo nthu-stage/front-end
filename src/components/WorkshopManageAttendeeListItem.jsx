@@ -1,12 +1,8 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {
-    Row,
-    Col
-} from 'reactstrap';
+import {Row, Col} from 'reactstrap';
 
 class WorkshopManageAttendeeListItem extends Component {
-
 
     render() {
         const {name, email} = this.props;
@@ -22,9 +18,7 @@ class WorkshopManageAttendeeListItem extends Component {
 }
 
 function mapStateToProps(state) {
-    return {
-
-    }
+    return {}
 }
 
 export default connect(mapStateToProps)(WorkshopManageAttendeeListItem);

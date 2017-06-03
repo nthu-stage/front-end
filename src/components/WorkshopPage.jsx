@@ -38,8 +38,8 @@ class WorkshopPage extends Component {
 
     componentWillReceiveProps(next) {
         this.setState({
-            ...next.wm,
-            attended: next.wsp.attended
+            ...next.workshopManage,
+            attended: next.workshopPage.attended
         })
     }
 
@@ -59,7 +59,7 @@ class WorkshopPage extends Component {
             phase,
             attended
         } = this.state;
-        const {masking} = this.props.wsp;
+        const {masking} = this.props.workshopPage;
         const commentUrl = `www.nthu-stage/wp/${this.props.match.params.id}`;
         const btnStr = attended
             ? "取消報名"
@@ -70,7 +70,7 @@ class WorkshopPage extends Component {
             investigating: 'warning',
             unreached: 'danger',
             reached: 'success',
-            over: 'default',
+            over: 'default'
         };
         const phase2str = {
             judging: '審核中',
@@ -78,7 +78,7 @@ class WorkshopPage extends Component {
             investigating: '調查中',
             unreached: '未達標',
             reached: '已達標',
-            over: '已結束',
+            over: '已結束'
         };
         const badgeColor = phase2color[phase];
         const badgeStr = phase2str[phase];
@@ -124,8 +124,8 @@ class WorkshopPage extends Component {
         this.props.attendWorkshop(this.props.match.params.id);
     }
 }
-function mapStateToProps(state) {
-    return {wsp: state.wsp, wm: state.wm, fb: state.fb}
+function mapStateToProps({workshopPage, workshopManage}) {
+    return {workshopPage, workshopManage};
 }
 
 function mapDispatchToProps(dispatch) {

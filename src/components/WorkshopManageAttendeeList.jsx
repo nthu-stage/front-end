@@ -18,7 +18,7 @@ class WorkshopManageAttendeeList extends Component {
 
     componentWillReceiveProps(next) {
         this.setState({
-            ...next.wsa
+            ...next.workshopManageAttendee
         })
     }
 
@@ -50,13 +50,15 @@ class WorkshopManageAttendeeList extends Component {
     }
 }
 
-function mapStateToProps({ wsa }) {
-    return {wsa};
+function mapStateToProps({workshopManageAttendee}) {
+    return {
+        workshopManageAttendee,
+    }
 }
 
 function mapDispatchToProps(dispatch) {
     return bindActionCreators({
-        listAttendee: listAttendee
+        listAttendee
     }, dispatch);
 }
 

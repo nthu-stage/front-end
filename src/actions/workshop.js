@@ -28,7 +28,6 @@ export function proposeWorkshop(propose) {
                     default:
                         dispatch(deliverAlert('提案失敗', 'danger', 3000));
                 }
-                console.log(err.response);
             });
         } else {
             history.replace('/');
