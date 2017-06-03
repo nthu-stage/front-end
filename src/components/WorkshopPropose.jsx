@@ -48,9 +48,9 @@ class WorkshopPropose extends Component {
             deadline_date,
             deadline_time
         } = next_state;
-        next_state.start_datetime = new Date(`${start_date} ${start_time} GMT+0800 (CST)`).getTime() / 1000;
-        next_state.end_datetime = new Date(`${end_date} ${end_time} GMT+0800 (CST)`).getTime() / 1000;
-        next_state.deadline = new Date(`${deadline_date} ${deadline_time} GMT+0800 (CST)`).getTime() / 1000;
+        next_state.start_datetime = new Date(`${start_date} ${start_time} GMT+0800 (CST)`).getTime();
+        next_state.end_datetime = new Date(`${end_date} ${end_time} GMT+0800 (CST)`).getTime();
+        next_state.deadline = new Date(`${deadline_date} ${deadline_time} GMT+0800 (CST)`).getTime();
         this.props.proposeWorkshop(next_state, this.props.w_id);
     }
 
