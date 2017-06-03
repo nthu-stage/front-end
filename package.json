@@ -17,6 +17,7 @@
     "react-facebook": "^4.0.8",
     "react-file-download": "^0.3.4",
     "react-redux": "^5.0.4",
+    "react-redux-loading-bar": "^2.9.1",
     "react-router-dom": "^4.1.1",
     "reactstrap": "^4.5.0",
     "recharts": "^0.22.4",

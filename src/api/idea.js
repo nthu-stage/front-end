@@ -1,7 +1,7 @@
 import axios from 'axios';
 
-// const baseUrl = 'http://NTHUStage-dev.us-west-2.elasticbeanstalk.com/api';
-const baseUrl = 'http://localhost:3090';
+const baseUrl = 'http://NTHUStage-dev.us-west-2.elasticbeanstalk.com/api';
+// const baseUrl = 'http://localhost:3090';
 
 export function comeUpWithIdea(fb, idea) {
     let url = `${baseUrl}/ideas`;
@@ -43,7 +43,7 @@ export function updateIdea(fb, idea) {
 export function deleteIdea(fb, i_id) {
     let url = `${baseUrl}/ideas/${i_id}`;
     let {userID, signedRequest} = fb;
-    return axios.delete(url, null, {
+    return axios.delete(url, {
         headers: {
             userID,
             signedRequest

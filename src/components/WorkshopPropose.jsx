@@ -73,7 +73,7 @@ class WorkshopPropose extends Component {
         } = this.state;
         return (
             <div className="container mt-3">
-                <img className="workhop-banner" src={image_url} alt=""/>
+                <img className="workshop-banner" src={image_url} alt=""/>
                 <div className="mt-3">
                     <Form onSubmit={this.handleSubmit}>
                         <FormGroup>
