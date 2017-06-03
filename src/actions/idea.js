@@ -14,7 +14,6 @@ export function comeUpWithIdea(idea) {
     return ((dispatch, getState) => {
         if (cookies.get('fb')) {
             comeUpWithIdeaFromApi(cookies.get('fb'), idea).then(res => {
-                dispatch({type: 'IDEA_COME_UP_WITH', payload: res.data});
                 history.replace(`/i/${res.data.i_id}`);
                 dispatch(deliverAlert('許願成功', 'success', 3000));
             }).catch(err => {
@@ -40,7 +39,7 @@ export function comeUpWithIdea(idea) {
 export function listIdea(searchText, order) {
     return ((dispatch, getState) => {
         listIdeaFromApi(cookies.get('fb'), searchText, order).then(res => {
-            dispatch({type: 'IDEA_SEARCH', payload: res.data});
+            dispatch({type: '@IDEA/LIST', payload: res.data});
         }).catch(err => {
             switch (err.response.status) {
                 case 400:
@@ -57,7 +56,7 @@ export function showIdea(i_id) {
     i_id = parseInt(i_id, 10);
     return ((dispatch, getState) => {
         showIdeaFromApi(cookies.get('fb'), i_id).then(res => {
-            dispatch({type: 'IDEA_SHOW_VIEW_EDIT', payload: res.data});
+            dispatch({type: '@IDEA/SHOW', payload: res.data});
         }).catch(err => {
             switch (err.response.status) {
                 case 400:
@@ -130,7 +129,7 @@ export function likeSearchIdea(i_id) {
     return ((dispatch, getState) => {
         if (cookies.get('fb')) {
             likeIdeaFromApi(cookies.get('fb'), i_id).then(res => {
-                dispatch({type: 'IDEA_LIKE_SEARCH', payload: res.data});
+                dispatch({type: '@IDEA/LIKE_LIST', payload: res.data});
             }).catch(err => {
                 switch (err.response.status) {
                     case 400:
@@ -154,7 +153,7 @@ export function likeViewEditIdea(i_id) {
     return ((dispatch, getState) => {
         if (cookies.get('fb')) {
             likeIdeaFromApi(cookies.get('fb'), i_id).then(res => {
-                dispatch({type: 'IDEA_LIKE_VIEW_EDIT', payload: res.data});
+                dispatch({type: '@IDEA/LIKE_SHOW', payload: res.data});
             }).catch(err => {
                 switch (err.response.status) {
                     case 400:

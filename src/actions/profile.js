@@ -6,7 +6,7 @@ export function showProfile() {
     return ((dispatch, getState) => {
         if (cookies.get('fb')) {
             showProfileFromApi(cookies.get('fb')).then(res => {
-                dispatch({type: 'PROFILE_SHOW', payload: res.data});
+                dispatch({type: '@PROFILE/SHOW', payload: res.data});
             }).catch(err => {
                 switch (err.response.status) {
                     case 400:
@@ -26,7 +26,7 @@ export function showProfile() {
 export function updateAvailableTime(availableTime) {
     return ((dispatch, getState) => {
         updateAvailableTimeFromApi(cookies.get('fb'), availableTime).then(res => {
-            dispatch({type: 'PROFILE_UPDATE_AVAILABLE_TIME', payload: res.data});
+            dispatch({type: '@PROFILE/UPDATE_AVAILABLE_TIME', payload: res.data});
         }).catch(err => {
             switch (err.response.status) {
                 case 400:

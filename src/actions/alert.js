@@ -7,7 +7,7 @@ export function deliverAlert(msg, type, delay){
 
 export function showAlert(msg, type){
     return {
-        type: 'ALERT_SHOW',
+        type: '@ALERT/SHOW',
         payload: { msg, type, isOpen: true },
     }
 }
@@ -21,7 +21,7 @@ export function hideAlert(delay){
         return ret;
     });
     return {
-        type: 'ALERT_HIDE',
+        type: '@ALERT/HIDE',
         payload: p,
     }
 }

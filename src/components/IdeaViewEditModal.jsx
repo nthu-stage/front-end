@@ -28,7 +28,7 @@ class IdeaViewEditModal extends Component {
 
     handleDelete() {
         const { toggle } = this.props;
-        const { i_id } = this.props.ideaViewEdit;
+        const { i_id } = this.props.ideaShow;
         this.props.deleteIdea(i_id);
         toggle();
     }
@@ -36,7 +36,7 @@ class IdeaViewEditModal extends Component {
     handleSubmit(e) {
         e.preventDefault();
         const { toggle } = this.props;
-        const { i_id, idea_type } = this.props.ideaViewEdit;
+        const { i_id, idea_type } = this.props.ideaShow;
         let { skill, goal, web_url, image_url } = this.state;
         this.props.updateIdea({ i_id, idea_type, skill, goal, web_url, image_url });
         toggle();
@@ -46,8 +46,8 @@ class IdeaViewEditModal extends Component {
         this.setState({
             activeTab: tab
         });
-        if (this.props.ideaViewEdit) {
-            const { skill, goal, web_url, image_url } = this.props.ideaViewEdit;
+        if (this.props.ideaShow) {
+            const { skill, goal, web_url, image_url } = this.props.ideaShow;
             this.setState({
                 skill,
                 goal,
@@ -58,9 +58,9 @@ class IdeaViewEditModal extends Component {
     }
 
     render() {
-        if (this.props.ideaViewEdit) {
+        if (this.props.ideaShow) {
             const { modal, toggle } = this.props;
-            const { i_id, idea_type, skill, goal, like_number, web_url, image_url, picture_url, name, isEditor, liked, mostAvaiTime } = this.props.ideaViewEdit;
+            const { i_id, idea_type, skill, goal, like_number, web_url, image_url, picture_url, name, isEditor, liked, mostAvaiTime } = this.props.ideaShow;
             return (
                 <Modal isOpen={modal} toggle={toggle}>
                     <div className="modal-header idea-view-view-modal-header">
@@ -150,10 +150,10 @@ class IdeaViewEditModal extends Component {
     }
 }
 
-function mapStateToProps({ fb, ideaViewEdit }) {
+function mapStateToProps({ fb, ideaShow }) {
     return {
         fb,
-        ideaViewEdit,
+        ideaShow,
     }
 }
 

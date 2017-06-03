@@ -14,7 +14,6 @@ export function proposeWorkshop(propose) {
     return ((dispatch, getState) => {
         if (cookies.get('fb')) {
             proposeWorkshopFromApi(cookies.get('fb'), propose).then(res => {
-                dispatch({type: '@PROPOSE/SUBMIT', payload: res.data});
                 history.replace(`/wp/${res.data.w_id}`);
                 dispatch(deliverAlert('提交成功', 'success', 3000));
             }).catch(err => {
@@ -40,7 +39,7 @@ export function proposeWorkshop(propose) {
 export function listWorkshop(searchText, stateFilter) {
     return ((dispatch, getState) => {
         listWorkshopFromApi(cookies.get('fb'), searchText, stateFilter).then(res => {
-            dispatch({type: 'WORKSHOP_SEARCH', payload: res.data});
+            dispatch({type: '@WORKSHOP/SEARCH', payload: res.data});
         }).catch(err => {
             switch (err.response.status) {
                 case 400:
@@ -55,10 +54,10 @@ export function listWorkshop(searchText, stateFilter) {
 
 export function showWorkshop(w_id) {
     return ((dispatch, getState) => {
-        dispatch({type: '@WORKSHOPPAGE/LOADING'});
+        dispatch({type: '@WORKSHOP/LOADING'});
         showWorkshopFromApi(cookies.get('fb'), w_id).then(res => {
-            dispatch({type: '@MANAGE/INIT', payload: res.data});
-            dispatch({type: '@WORKSHOPPAGE/LOADING_DONE'})
+            dispatch({type: '@WORKSHOP/SHOW', payload: res.data});
+            dispatch({type: '@WORKSHOP/LOADING_DONE'})
         }).catch(err => {
             switch (err.response.status) {
                 case 400:
@@ -79,7 +78,6 @@ export function updateWorkshop(propose, w_id) {
     return ((dispatch, getState) => {
         if (cookies.get('fb')) {
             updateWorkshopFromApi(cookies.get('fb'), propose, w_id).then(res => {
-                dispatch({type: '@MANAGE/UPDATE', payload: res.data});
                 history.replace(`/wm/${w_id}`);
                 dispatch(deliverAlert('提交成功', 'success', 3000));
             }).catch(err => {
@@ -106,7 +104,6 @@ export function deleteWorkshop(id) {
     return ((dispatch, getState) => {
         if (cookies.get('fb')) {
             deleteWorkshopFromApi(cookies.get('fb'), id).then(res => {
-                dispatch({type: '@MANAGE/DELETE', payload: res.data});
                 history.replace('/pf');
                 dispatch(deliverAlert('刪除成功', 'success', 3000));
             }).catch(err => {
@@ -133,7 +130,7 @@ export function attendWorkshop(w_id) {
     return ((dispatch, getState) => {
         if (cookies.get('fb')) {
             attendWorkshopFromApi(cookies.get('fb'), w_id).then(res => {
-                dispatch({type: '@WORKSHOPPAGE/WORKSHOPPAGE_SUBMIT', payload: res.data});
+                dispatch({type: '@WORKSHOP/ATTEND', payload: res.data});
                 if (res.data.attended) {
                     dispatch(deliverAlert('報名成功', 'success', 3000));
                 } else {
@@ -161,7 +158,7 @@ export function listAttendee(w_id) {
     return ((dispatch, getState) => {
         if (cookies.get('fb')) {
             listAttendeeFromApi(cookies.get('fb'), w_id).then(res => {
-                dispatch({type: '@ATTENDEELIST/GET_LIST', payload: res.data});
+                dispatch({type: '@WORKSHOP/ATTENDEE', payload: res.data});
             })
         } else {
             history.replace('/');

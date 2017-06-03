@@ -1,11 +1,10 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {CSVLink} from 'react-csv';
-////undone
-import {Row, Col, ListGroup, ListGroupItem} from 'reactstrap';
-import WorkshopManageAttendeeListItem from './WorkshopManageAttendeeListItem';
-import {listAttendee} from '../actions/workshop.js'
 import {bindActionCreators} from 'redux';
+import {Row, Col, ListGroup, ListGroupItem, Table} from 'reactstrap';
+import {CSVLink} from 'react-csv';
+
+import {listAttendee} from '../actions/workshop.js'
 
 class WorkshopManageAttendeeList extends Component {
     constructor(props) {
@@ -18,42 +17,50 @@ class WorkshopManageAttendeeList extends Component {
 
     componentWillReceiveProps(next) {
         this.setState({
-            ...next.workshopManageAttendee
-        })
+            ...next.workshopShow
+        });
     }
 
     render() {
-        const {attendees} = this.state;
-        let children = (
-            <ListGroupItem className='empty d-flex justify-content-center align-items-center'>
-                <div className='empty-text'>目前沒有人報名喔ㄏㄏ</div>
-            </ListGroupItem>
-        );
-        if (attendees.length) {
-            children = attendees.map(p => (
-                <ListGroupItem key={p.name} action>
-                    <WorkshopManageAttendeeListItem {...p}/>
-                </ListGroupItem>
-            ));
+        let {attendees} = this.state;
+        if (attendees.length === 0) {
+            return (
+                <h3>尚無人報名</h3>
+            );
         }
         return (
-            <div className='container'>
+            <div>
                 <Row>
-                    <Col sm={6}>
-                        <h3>報名人列表</h3>
+                    <Col>
+                        <h3>{`報名人數 ${attendees.length}`}</h3>
                     </Col>
-                    <CSVLink data={attendees} filename={"參加名單.csv"} className="btn btn-info">匯出</CSVLink>
+                    <Col className="text-right">
+                        <CSVLink data={attendees} filename={"參加名單.csv"} className="btn btn-info">匯出</CSVLink>
+                    </Col>
                 </Row>
-                <ListGroup>{children}</ListGroup>
+                <Table striped>
+                    <thead>
+                        <tr>
+                            <th>FB 名稱</th>
+                            <th>Email</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {attendees.map((p, i) => (
+                            <tr>
+                                <td>{p.name}</td>
+                                <td>{p.email}</td>
+                            </tr>
+                        ))}
+                    </tbody>
+                </Table>
             </div>
         );
     }
 }
 
-function mapStateToProps({workshopManageAttendee}) {
-    return {
-        workshopManageAttendee,
-    }
+function mapStateToProps({workshopShow}) {
+    return {workshopShow}
 }
 
 function mapDispatchToProps(dispatch) {

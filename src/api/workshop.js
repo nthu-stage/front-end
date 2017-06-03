@@ -1,7 +1,7 @@
 import axios from 'axios';
 
-const baseUrl = 'http://NTHUStage-dev.us-west-2.elasticbeanstalk.com/api';
-// const baseUrl = 'http://localhost:3090';
+// const baseUrl = 'http://NTHUStage-dev.us-west-2.elasticbeanstalk.com/api';
+const baseUrl = 'http://localhost:3090';
 
 export function listWorkshop(fb, searchText, stateFilter) {
     stateFilter = 'all';
@@ -67,7 +67,7 @@ export function listAttendee(fb, w_id) {
 export function deleteWorkshop(fb, w_id) {
     let url = `${baseUrl}/workshops/${w_id}`;
     let {userID, signedRequest} = fb;
-    return axios.delete(url, null, {
+    return axios.delete(url, {
         headers: {
             userID,
             signedRequest
