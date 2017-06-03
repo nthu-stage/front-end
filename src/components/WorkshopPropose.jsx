@@ -6,8 +6,7 @@ import {
     Input,
     Label,
     Form,
-    FormGroup,
-    Col
+    FormGroup
 } from 'reactstrap';
 import {proposeWorkshop, authenticate} from '../actions/common';
 import './WorkshopPropose.css';
@@ -69,8 +68,7 @@ class WorkshopPropose extends Component {
             location,
             introduction,
             content,
-            price,
-            phase
+            price
         } = this.state;
         return (
             <div className="container propose">

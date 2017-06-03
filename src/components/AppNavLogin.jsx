@@ -37,7 +37,6 @@ class AppNavLogin extends Component {
     }
 
     handleResponse(data) {
-        console.log('handle fb login', data);
         let {name, picture, email} = data.profile;
         let {expiresIn, userID, signedRequest} = data.tokenDetail;
         let fb = {

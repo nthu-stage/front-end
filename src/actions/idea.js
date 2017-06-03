@@ -49,7 +49,6 @@ export function listIdea(searchText, order) {
                 default:
                     dispatch(deliverAlert('搜尋失敗', 'danger', 3000));
             }
-            console.log(err.response);
         });
     });
 }
@@ -143,7 +142,6 @@ export function likeSearchIdea(i_id) {
                     default:
                         dispatch(deliverAlert('喜歡失敗', 'danger', 3000));
                 }
-                console.log('like Idea', err.response);
             });
         } else {
             dispatch(deliverAlert('請先登入', 'warning', 3000));
