@@ -1,4 +1,4 @@
-import history from '../history';
+import {history} from '../common';
 import {deliverAlert} from './alert';
 import {
     comeUpWithIdea as comeUpWithIdeaFromApi,
@@ -8,7 +8,7 @@ import {
     likeIdea as likeIdeaFromApi,
     showIdea as showIdeaFromApi
 } from '../api/idea';
-import cookies from '../cookies';
+import {cookies} from '../common';
 
 export function comeUpWithIdea(idea) {
     return ((dispatch, getState) => {
@@ -39,7 +39,6 @@ export function comeUpWithIdea(idea) {
 
 export function listIdea(searchText, order) {
     return ((dispatch, getState) => {
-        console.log('listIdea', getState());
         listIdeaFromApi(cookies.get('fb'), searchText, order).then(res => {
             dispatch({type: 'IDEA_SEARCH', payload: res.data});
         }).catch(err => {
@@ -51,6 +50,24 @@ export function listIdea(searchText, order) {
                     dispatch(deliverAlert('搜尋失敗', 'danger', 3000));
             }
             console.log(err.response);
+        });
+    });
+}
+
+export function showIdea(i_id) {
+    i_id = parseInt(i_id, 10);
+    return ((dispatch, getState) => {
+        showIdeaFromApi(cookies.get('fb'), i_id).then(res => {
+            dispatch({type: 'IDEA_SHOW_VIEW_EDIT', payload: res.data});
+        }).catch(err => {
+            switch (err.response.status) {
+                case 400:
+                    history.replace(`/i`);
+                    dispatch(deliverAlert('願望不存在', 'danger', 3000));
+                    break;
+                default:
+                    dispatch(deliverAlert('讀取失敗', 'danger', 3000));
+            }
         });
     });
 }
@@ -131,24 +148,6 @@ export function likeSearchIdea(i_id) {
         } else {
             dispatch(deliverAlert('請先登入', 'warning', 3000));
         }
-    });
-}
-
-export function showIdea(i_id) {
-    i_id = parseInt(i_id, 10);
-    return ((dispatch, getState) => {
-        showIdeaFromApi(cookies.get('fb'), i_id).then(res => {
-            dispatch({type: 'IDEA_SHOW_VIEW_EDIT', payload: res.data});
-        }).catch(err => {
-            switch (err.response.status) {
-                case 400:
-                    history.replace(`/i`);
-                    dispatch(deliverAlert('願望不存在', 'danger', 3000));
-                    break;
-                default:
-                    dispatch(deliverAlert('讀取失敗', 'danger', 3000));
-            }
-        });
     });
 }
 

@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Button, Modal, ModalBody, ModalFooter, Form, FormGroup, Label, Input } from 'reactstrap';
 
+import {cookies} from '../common';
 import { comeUpWithIdea } from '../actions/idea';
 
 class IdeaNewModal extends Component {
@@ -27,15 +28,15 @@ class IdeaNewModal extends Component {
     }
 
     render() {
-        if (!this.props.fb) return <div />
+        if (!cookies.get('fb')) return <div />
         const { type, modal, toggle } = this.props;
         const { skill, goal, web_url, image_url } = this.state;
         return (
             <Modal isOpen={modal} toggle={toggle}>
                 <div className="modal-header">
                     <h4 className="modal-title">
-                        <span className="mr-3"><img className="idea-view-view-facebook-picture" src={this.props.fb.picture_url} alt="fb" /></span>
-                        <span className="idea-view-view-modal-title">{this.props.fb.name}</span>
+                        <span className="mr-3"><img className="idea-view-view-facebook-picture" src={cookies.get('fb').picture_url} alt="fb" /></span>
+                        <span className="idea-view-view-modal-title">{cookies.get('fb').name}</span>
                     </h4>
                     <button onClick={this.props.toggle} type="button" className="close">
                         <span aria-hidden="true">&times;</span>
@@ -78,16 +79,10 @@ class IdeaNewModal extends Component {
     }
 }
 
-function mapStateToProps({ fb }) {
-    return {
-        fb,
-    }
-}
-
 function mapDispatchToProps(dispatch) {
     return bindActionCreators({
         comeUpWithIdea,
     }, dispatch);
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(IdeaNewModal);
+export default connect(null, mapDispatchToProps)(IdeaNewModal);

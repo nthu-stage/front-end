@@ -1,4 +1,4 @@
-import history from '../history';
+import {history} from '../common';
 const initPropose={
     image_url:'',
     start_datetime:'',

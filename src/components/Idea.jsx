@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Route } from 'react-router-dom';
-import history from '../history';
+import {history} from '../common';
 import IdeaNav from './IdeaNav'
 import IdeaList from './IdeaList'
 import IdeaViewEditModal from './IdeaViewEditModal'

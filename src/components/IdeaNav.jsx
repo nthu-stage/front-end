@@ -1,11 +1,12 @@
-import React, { Component } from 'react';
-import { Button, Form, ButtonGroup, Input } from 'reactstrap';
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
+import React, {Component} from 'react';
+import {Button, Form, ButtonGroup, Input} from 'reactstrap';
+import {connect} from 'react-redux';
+import {bindActionCreators} from 'redux';
 
-import { listIdea } from '../actions/idea';
+import {cookies} from '../common'
+import {listIdea} from '../actions/idea';
 import IdeaNewModal from './IdeaNewModal';
-import { deliverAlert } from '../actions/alert';
+import {deliverAlert} from '../actions/common';
 
 import './IdeaNav.css';
 
@@ -23,7 +24,7 @@ class IdeaNav extends Component {
             newLearnModal: false,
             viewEditModal: false,
             searchText: '',
-            order: 'new',
+            order: 'new'
         };
 
         this.props.listIdea(this.state.searchText, this.state.order);
@@ -35,15 +36,16 @@ class IdeaNav extends Component {
     }
 
     handleFilter(order) {
-        if (this.state.order === order) return;
-        this.setState({ order });
+        if (this.state.order === order)
+            return;
+        this.setState({order});
         this.props.listIdea(this.state.searchText, order);
     }
 
     newTeachToggle() {
-        if (this.props.fb) {
+        if (cookies.get('fb')) {
             this.setState({
-                newTeachModal: !this.state.newTeachModal,
+                newTeachModal: !this.state.newTeachModal
             });
         } else {
             this.props.deliverAlert('請先登入', 'warning', 3000);
@@ -51,9 +53,9 @@ class IdeaNav extends Component {
     }
 
     newLearnToggle() {
-        if (this.props.fb) {
+        if (cookies.get('fb')) {
             this.setState({
-                newLearnModal: !this.state.newLearnModal,
+                newLearnModal: !this.state.newLearnModal
             });
         } else {
             this.props.deliverAlert('請先登入', 'warning', 3000);
@@ -62,7 +64,7 @@ class IdeaNav extends Component {
 
     viewEditToggle() {
         this.setState({
-            viewEditModal: !this.state.viewEditModal,
+            viewEditModal: !this.state.viewEditModal
         });
     }
 
@@ -72,20 +74,24 @@ class IdeaNav extends Component {
                 <div className="col col-md-3">
                     <ButtonGroup className="idea-nav-filter">
                         <Button color="primary" onClick={this.newTeachToggle}>我想教</Button>
-                        <IdeaNewModal type="teach" modal={this.state.newTeachModal} toggle={this.newTeachToggle} />
+                        <IdeaNewModal type="teach" modal={this.state.newTeachModal} toggle={this.newTeachToggle}/>
                         <Button color="danger" onClick={this.newLearnToggle}>我想學</Button>
-                        <IdeaNewModal type="learn" modal={this.state.newLearnModal} toggle={this.newLearnToggle} />
+                        <IdeaNewModal type="learn" modal={this.state.newLearnModal} toggle={this.newLearnToggle}/>
                     </ButtonGroup>
                 </div>
                 <div className="col col-md-6">
                     <Form onSubmit={this.handleSubmit}>
-                        <Input type="text" onChange={e => this.setState({searchText: e.target.value})} placeholder="尋找願望" />
+                        <Input type="text" onChange={e => this.setState({searchText: e.target.value})} placeholder="尋找願望"/>
                     </Form>
                 </div>
                 <div className="col col-md-3">
                     <ButtonGroup className="idea-nav-filter">
-                        <Button color={this.state.order === 'new' ? 'info' : 'secondary'} onClick={e => this.handleFilter('new')}>最新</Button>
-                        <Button color={this.state.order === 'hot' ? 'info' : 'secondary'} onClick={e => this.handleFilter('hot')}>熱門</Button>
+                        <Button color={this.state.order === 'new'
+                            ? 'info'
+                            : 'secondary'} onClick={e => this.handleFilter('new')}>最新</Button>
+                        <Button color={this.state.order === 'hot'
+                            ? 'info'
+                            : 'secondary'} onClick={e => this.handleFilter('hot')}>熱門</Button>
                     </ButtonGroup>
                 </div>
             </div>
@@ -93,17 +99,11 @@ class IdeaNav extends Component {
     }
 }
 
-function mapStateToProps({ fb }) {
-    return {
-        fb,
-    }
-}
-
 function mapDispatchToProps(dispatch) {
     return bindActionCreators({
         listIdea,
-        deliverAlert,
+        deliverAlert
     }, dispatch);
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(IdeaNav);
+export default connect(null, mapDispatchToProps)(IdeaNav);

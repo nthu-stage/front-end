@@ -13,17 +13,19 @@ import {
     ModalFooter
 } from 'reactstrap';
 
+import {cookies} from '../common';
 import WorkshopAttendeeList from './WorkshopManageAttendeeList';
 import WorkshopManagePropose from './WorkshopManagePropose';
-import {deleteWorkshop} from '../actions/workshop.js';
-import {isLogin} from '../actions/workshop.js';
+import {deleteWorkshop} from '../actions/workshop';
+import {authenticated} from '../actions/common';
 
 import './WorkshopManage.css';
 
 class WorkshopManage extends Component {
     constructor(props) {
         super(props);
-        // this.props.isLogin();
+
+        this.props.authenticated();
 
         this.state = {
             activeTab: '1',
@@ -60,7 +62,7 @@ class WorkshopManage extends Component {
     }
 
     render() {
-        if (this.props.fb) {
+        if (cookies.get('fb')) {
             return (
                 <div className="container">
                     <Row className="option">
@@ -106,14 +108,14 @@ class WorkshopManage extends Component {
     }
 }
 
-function mapStateToProps({ wm, fb }) {
-    return {wm, fb};
+function mapStateToProps({wm}) {
+    return {wm};
 }
 
 function mapDispatchToProps(dispatch) {
     return bindActionCreators({
         deleteWorkshop,
-        isLogin
+        authenticated
     }, dispatch);
 }
 

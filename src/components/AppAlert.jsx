@@ -3,7 +3,7 @@ import { Alert } from 'reactstrap';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
-import { hideAlert } from '../actions/alert';
+import { hideAlert } from '../actions/common';
 
 class AppAlert extends Component {
     render() {
