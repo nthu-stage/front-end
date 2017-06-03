@@ -5,8 +5,6 @@ import { bindActionCreators } from 'redux';
 
 import { listWorkshop } from '../actions/workshop';
 
-import './WorkshopNav.css';
-
 class WorkshopNav extends Component {
     constructor(props) {
         super(props);
@@ -42,9 +40,9 @@ class WorkshopNav extends Component {
                     </Form>
                 </div>
                 <div className="col col-md-3">
-                    <ButtonGroup className="workshop-nav-filter">
-                        <Button color={prop ? 'info' : 'secondary'} onClick={e => this.handleFilter(1 - prop, goal)}>調查中</Button>
-                        <Button color={goal ? 'info' : 'secondary'} onClick={e => this.handleFilter(prop, 1 - goal)}>已達標</Button>
+                    <ButtonGroup className="w-100">
+                        <Button className="w-50" color={prop ? 'info' : 'secondary'} onClick={e => this.handleFilter(1 - prop, goal)}>調查中</Button>
+                        <Button className="w-50" color={goal ? 'info' : 'secondary'} onClick={e => this.handleFilter(prop, 1 - goal)}>已達標</Button>
                     </ButtonGroup>
                 </div>
             </div>

@@ -74,19 +74,16 @@ class WorkshopManagePropose extends Component {
             price,
             phase
         } = this.state;
-        const readOnly = (phase === 'judging' || phase === 'judge_na' || phase === 'unreached');
+        let readOnly = (phase === 'judging' || phase === 'judge_na' || phase === 'unreached');
+        readOnly = false;
         const {masking} = this.props.workshopPage;
 
         return (
-            <div className={`container propose ${masking
+            <div className={`${masking
                 ? 'mask'
                 : ''}`}>
-                <div className="coverImg">
-                    <img src={image_url} alt=''/>
-                </div>
-                <h3>Detail</h3>
-                <hr/>
-                <div>
+                <img className="workhop-banner" src={image_url} alt=""/>
+                <div className="mt-3">
                     <Form onSubmit={this.handleSubmit}>
                         <FormGroup>
                             <Label>圖片網址</Label>
@@ -121,7 +118,7 @@ class WorkshopManagePropose extends Component {
                             <Input type="number" value={max_number} onChange={e => this.setState({max_number: e.target.value})} required readOnly={readOnly}/>
                         </FormGroup>
                         <FormGroup>
-                            <Label>最少人數</Label>
+                            <Label>最低人數</Label>
                             <Input type="number" value={min_number} onChange={e => this.setState({min_number: e.target.value})} required readOnly={readOnly}/>
                         </FormGroup>
                         <FormGroup>
@@ -144,7 +141,7 @@ class WorkshopManagePropose extends Component {
                             <Label>詳細介紹</Label>
                             <Input type="textarea" rows="10" value={content} onChange={e => this.setState({content: e.target.value})} required readOnly={readOnly}/>
                         </FormGroup>
-                        <Button color="primary" type="submit" size="lg" block>提交修改</Button>
+                        <Button color="primary" type="submit" size="lg" block disabled={readOnly}>提交修改</Button>
                     </Form>
                 </div>
             </div>

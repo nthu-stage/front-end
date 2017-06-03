@@ -8,8 +8,6 @@ import {listIdea} from '../actions/idea';
 import IdeaNewModal from './IdeaNewModal';
 import {deliverAlert} from '../actions/common';
 
-import './IdeaNav.css';
-
 class IdeaNav extends Component {
     constructor(props) {
         super(props);
@@ -85,11 +83,11 @@ class IdeaNav extends Component {
                     </Form>
                 </div>
                 <div className="col col-md-3">
-                    <ButtonGroup className="idea-nav-filter">
-                        <Button color={this.state.order === 'new'
+                    <ButtonGroup className="w-100">
+                        <Button className="w-50" color={this.state.order === 'new'
                             ? 'info'
                             : 'secondary'} onClick={e => this.handleFilter('new')}>最新</Button>
-                        <Button color={this.state.order === 'hot'
+                        <Button className="w-50" color={this.state.order === 'hot'
                             ? 'info'
                             : 'secondary'} onClick={e => this.handleFilter('hot')}>熱門</Button>
                     </ButtonGroup>

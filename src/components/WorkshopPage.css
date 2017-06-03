@@ -1,32 +1,40 @@
-.coverImg img{
-    /*height: 35vw;
-    width: 81vw;*/
-    width:100%;
-    border-radius: 3px; 
-    margin: 0.5rem auto 0.5rem auto;
+.workshop-page-badge {
+    vertical-align: middle;
+    margin-top: -0.2em;
+    margin-right: 0.5em;
+}
+
+.workshop-page-info {
+    position: relative;
+}
+
+.workshop-page-info ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.workshop-page-info li {
+    padding-left: 24px;
+}
+
+.workshop-page-info i {
     display: block;
-}
-.workshopPage{
+    width: 16px;
+    margin-right: 8px;
     text-align: center;
+    position: absolute;
+    line-height: 1.5;
+    left: 0;
 }
-h3{
-    margin-top:0.5rem;
-    padding: 1rem auto;
-    font-weight: bold;
-    display: block
-}
-.description{
+
+.description {
     text-align: left;
     overflow: auto;
     word-break: break-all;
     white-space: pre-wrap;
 }
-.workshop-info{
-    margin:1rem auto;
-}
-.badge{
-    float: left
-}
-.mask{
+
+.mask {
     opacity: 0
 }

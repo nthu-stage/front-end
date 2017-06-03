@@ -72,13 +72,9 @@ class WorkshopPropose extends Component {
             price
         } = this.state;
         return (
-            <div className="container propose">
-                <div className="coverImg">
-                    <img src={image_url} alt=''/>
-                </div>
-                <h3>Detail</h3>
-                <hr/>
-                <div>
+            <div className="container mt-3">
+                <img className="workhop-banner" src={image_url} alt=""/>
+                <div className="mt-3">
                     <Form onSubmit={this.handleSubmit}>
                         <FormGroup>
                             <Label>圖片網址</Label>
@@ -113,7 +109,7 @@ class WorkshopPropose extends Component {
                             <Input type="number" value={max_number} onChange={e => this.setState({max_number: e.target.value})} required/>
                         </FormGroup>
                         <FormGroup>
-                            <Label>最少人數</Label>
+                            <Label>最低人數</Label>
                             <Input type="number" value={min_number} onChange={e => this.setState({min_number: e.target.value})} required/>
                         </FormGroup>
                         <FormGroup>

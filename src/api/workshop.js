@@ -67,7 +67,7 @@ export function listAttendee(fb, w_id) {
 export function deleteWorkshop(fb, w_id) {
     let url = `${baseUrl}/workshops/${w_id}`;
     let {userID, signedRequest} = fb;
-    return axios.delete(url, null, {
+    return axios.delete(url, {
         headers: {
             userID,
             signedRequest

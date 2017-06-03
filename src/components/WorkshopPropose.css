@@ -1,16 +1,8 @@
-.propose{
-    text-align: left;
-    padding: 0.5rem;
-
-}
-.coverImg img{
-    /*height: 35vw;
-    width: 81vw;*/
+.workhop-banner {
     width: 100%;
-    border-radius: 3px; 
-    margin: 0.5rem auto 0.5rem auto;
-    display: block;
+    border-radius: 3px;
 }
+
 .mask {
     opacity: 0
 }
