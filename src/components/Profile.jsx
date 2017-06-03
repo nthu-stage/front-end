@@ -7,7 +7,9 @@ import { bindActionCreators } from 'redux';
 import ProfileAvailable from './ProfileAvailable'
 import { showProfile } from '../actions/profile';
 
-function phase2badge(phase) {
+import './Profile.css';
+
+function state2badge(phase) {
     let m = {
         'judging': 'primary',
         'judge_na': 'danger',
@@ -19,19 +21,17 @@ function phase2badge(phase) {
     let n = {
         'judging': '審核中',
         'judge_na': '審核失敗',
-        'investigating': '調查中',
+        'judge_ac': '調查中',
         'unreached': '未達標',
         'reached': '已達標',
         'over': '已結束',
     }
-    return <Badge color={m[phase]}>{n[phase]}</Badge>;
+    return <Badge className="profile-badge" color={m[phase]}>{n[phase]}</Badge>;
 }
 
 class Profile extends Component {
-    constructor(props) {
-        super(props);
+    componentWillMount() {
         this.props.showProfile();
-
     }
 
     render() {
@@ -66,7 +66,7 @@ class Profile extends Component {
                                                 <td>{ws.start_datetime}</td>
                                                 <td>{ws.attendees_number}/{ws.max_number}</td>
                                                 <td>{ws.min_number}</td>
-                                                <td>{phase2badge(ws.phase)}</td>
+                                                <td>{state2badge(ws.state)}</td>
                                                 <td><Link to={`/wm/${ws.w_id}`} color="primary">管理</Link></td>
                                             </tr>
                                         );
@@ -92,7 +92,7 @@ class Profile extends Component {
                                             <tr key={ws.w_id}>
                                                 <th><Link to={`/wp/${ws.w_id}`}>{ws.title}</Link></th>
                                                 <td>{ws.start_datetime}</td>
-                                                <td>{phase2badge(ws.phase)}</td>
+                                                <td>{state2badge(ws.state)}</td>
                                             </tr>
                                         );
                                     })
@@ -150,7 +150,6 @@ class Profile extends Component {
             );
         }
         return <div />
-
     }
 }
 

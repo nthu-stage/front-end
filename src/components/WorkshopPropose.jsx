@@ -10,14 +10,12 @@ import {
 } from 'reactstrap';
 import {authenticate} from '../actions/common';
 import {proposeWorkshop} from '../actions/workshop';
+
 import './WorkshopPropose.css';
 
 class WorkshopPropose extends Component {
     constructor(props) {
         super(props);
-
-        this.props.authenticate();
-
         this.handleSubmit = this.handleSubmit.bind(this);
         this.state = {
             image_url: 'https://placeholdit.imgix.net/~text?txtsize=33&txt=1500%C3%97600&w=1500&h=600',
@@ -35,6 +33,10 @@ class WorkshopPropose extends Component {
             content: '1',
             price: '1'
         }
+    }
+
+    componentWillMount() {
+        this.props.authenticate();
     }
 
     handleSubmit(e) {

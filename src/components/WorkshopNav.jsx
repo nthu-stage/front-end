@@ -8,14 +8,15 @@ import { listWorkshop } from '../actions/workshop';
 class WorkshopNav extends Component {
     constructor(props) {
         super(props);
-
         this.handleSubmit = this.handleSubmit.bind(this);
         this.handleFilter = this.handleFilter.bind(this);
         this.state = {
             searchText: '',
             stateFilter: 3,
         };
+    }
 
+    componentWillMount() {
         this.props.listWorkshop(this.state.searchText, this.state.stateFilter);
     }
 

@@ -11,9 +11,6 @@ import './IdeaViewEditModal.css';
 class IdeaViewEditModal extends Component {
     constructor(props) {
         super(props);
-
-        this.props.showIdea(this.props.match.params.i_id);
-
         this.handleDelete = this.handleDelete.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
         this.tabToggle = this.tabToggle.bind(this);
@@ -24,6 +21,10 @@ class IdeaViewEditModal extends Component {
             web_url: '',
             image_url: '',
         };
+    }
+
+    componentWillMount() {
+        this.props.showIdea(this.props.match.params.i_id);
     }
 
     handleDelete() {

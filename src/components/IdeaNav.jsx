@@ -24,7 +24,9 @@ class IdeaNav extends Component {
             searchText: '',
             order: 'new'
         };
+    }
 
+    componentWillMount() {
         this.props.listIdea(this.state.searchText, this.state.order);
     }
 

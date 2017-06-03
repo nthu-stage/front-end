@@ -3,8 +3,6 @@ import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import {Comments} from 'react-facebook';
 import {
-    ListGroup,
-    ListGroupItem,
     Badge,
     Card,
     Button,
@@ -23,9 +21,6 @@ import './WorkshopPage.css';
 class WorkshopPage extends Component {
     constructor(props) {
         super(props);
-
-        this.props.showWorkshop(this.props.match.params.id);
-
         this.handleSubmit = this.handleSubmit.bind(this);
         this.state = {
             image_url: '',
@@ -47,8 +42,11 @@ class WorkshopPage extends Component {
         }
     }
 
+    componentWillMount() {
+        this.props.showWorkshop(this.props.match.params.id);
+    }
+
     componentWillReceiveProps(next) {
-        console.log('componentWillReceiveProps', next.workshopShow.attended);
         this.setState({
             ...next.workshopShow
         })
@@ -105,7 +103,7 @@ class WorkshopPage extends Component {
                     </CardHeader>
                     <CardImg top width="100%" src={image_url} alt="Card image cap" />
                     <CardFooter>
-                        <CardText className="workshop-page-info">
+                        <div className="workshop-page-info">
                             <ul>
                                 <li><i className="fa fa-calendar" aria-hidden="true"/>工作坊時間：{`${start_datetime} ~ ${end_datetime}`}</li>
                                 <li><i className="fa fa-map-marker" aria-hidden="true"/>工作坊地點：{location}</li>
@@ -114,7 +112,7 @@ class WorkshopPage extends Component {
                                 <li><i className="fa fa-money" aria-hidden="true"></i>價 格：{price}</li>
                                 <li><i className="fa fa-user-o" aria-hidden="true"></i>講 者：{name}</li>
                             </ul>
-                        </CardText>
+                        </div>
                     </CardFooter>
                     <CardBlock>
                         <CardTitle>簡介</CardTitle>

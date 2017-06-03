@@ -23,7 +23,6 @@ export function IdeaShowReducer(state = null, action) {
     switch (action.type) {
         case '@IDEA/SHOW':
             next_state = Object.assign({}, action.payload);
-            console.log('IDEA_SHOW_VIEW_EDIT', next_state.mostAvaiTime);
             for (let times of next_state.mostAvaiTime) {
                 times.name = ['一', '二', '三', '四', '五', '六', '日'][Math.floor(times.time / 3)] + ['早', '午', '晚'][times.time % 3];
             }

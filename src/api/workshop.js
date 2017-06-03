@@ -14,9 +14,8 @@ export function listWorkshop(fb, searchText, stateFilter) {
                 signedRequest
             }
         });
-    } else {
-        return axios.get(url);
     }
+    return axios.get(url);
 }
 
 export function showWorkshop(fb, w_id) {
@@ -29,39 +28,29 @@ export function showWorkshop(fb, w_id) {
                 signedRequest
             }
         });
-    } else {
-        return axios.get(url);
     }
-
+    return axios.get(url);
 }
 export function attendWorkshop(fb, w_id) {
     let url = `${baseUrl}/workshops/${w_id}`;
-    if (fb) {
-        let {userID, signedRequest} = fb;
-        return axios.post(url, null, {
-            headers: {
-                userID,
-                signedRequest
-            }
-        });
-    } else {
-        return
-    }
+    let {userID, signedRequest} = fb;
+    return axios.post(url, null, {
+        headers: {
+            userID,
+            signedRequest
+        }
+    });
 }
-////////////後端沒做 undone
+
 export function listAttendee(fb, w_id) {
-    let url = `${baseUrl}/dashboard/${w_id}`;
-    if (fb) {
-        let {userID, signedRequest} = fb;
-        return axios.get(url, {
-            headers: {
-                userID,
-                signedRequest
-            }
-        });
-    } else {
-        return
-    }
+    let url = `${baseUrl}/dashboard/attendees/${w_id}`;
+    let {userID, signedRequest} = fb;
+    return axios.get(url, {
+        headers: {
+            userID,
+            signedRequest
+        }
+    });
 }
 
 export function deleteWorkshop(fb, w_id) {
