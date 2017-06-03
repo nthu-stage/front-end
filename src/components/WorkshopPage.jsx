@@ -16,8 +16,7 @@ import {
     CardImg
 } from 'reactstrap';
 
-import {attendWorkshop} from '../actions/workshop.js';
-import {showWorkshop} from '../actions/workshop.js'
+import {showWorkshop, attendWorkshop} from '../actions/workshop.js';
 
 import './WorkshopPage.css';
 
@@ -49,9 +48,9 @@ class WorkshopPage extends Component {
     }
 
     componentWillReceiveProps(next) {
+        console.log('componentWillReceiveProps', next.workshopPage.attended);
         this.setState({
-            ...next.workshopManage,
-            attended: next.workshopPage.attended
+            ...next.workshopPage
         })
     }
 
@@ -124,7 +123,7 @@ class WorkshopPage extends Component {
                         <CardText className="description">{introduction}</CardText>
                         <CardTitle>內容</CardTitle>
                         <CardText className="description">{content}</CardText>
-                        <Button color="primary" size="lg" block onClick={this.handleSubmit}>{btnStr}</Button>
+                        <Button color={attended ? 'danger' : 'primary'} size="lg" block onClick={this.handleSubmit}>{btnStr}</Button>
                         <Comments href={commentUrl} width="100%" num_posts="6"/>
                     </CardBlock>
                 </Card>
@@ -135,8 +134,8 @@ class WorkshopPage extends Component {
     }
 }
 
-function mapStateToProps({workshopPage, workshopManage}) {
-    return {workshopPage, workshopManage};
+function mapStateToProps({workshopPage}) {
+    return {workshopPage};
 }
 
 function mapDispatchToProps(dispatch) {

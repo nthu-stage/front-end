@@ -70,10 +70,10 @@ class IdeaNav extends Component {
         return (
             <div className="row mt-3">
                 <div className="col col-md-3">
-                    <ButtonGroup className="idea-nav-filter">
-                        <Button color="primary" onClick={this.newTeachToggle}>我想教</Button>
+                    <ButtonGroup className="w-100">
+                        <Button className="w-50" color="primary" onClick={this.newTeachToggle}>我想教</Button>
                         <IdeaNewModal type="teach" modal={this.state.newTeachModal} toggle={this.newTeachToggle}/>
-                        <Button color="danger" onClick={this.newLearnToggle}>我想學</Button>
+                        <Button className="w-50" color="danger" onClick={this.newLearnToggle}>我想學</Button>
                         <IdeaNewModal type="learn" modal={this.state.newLearnModal} toggle={this.newLearnToggle}/>
                     </ButtonGroup>
                 </div>

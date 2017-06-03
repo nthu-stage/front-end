@@ -57,7 +57,7 @@ export function showWorkshop(w_id) {
     return ((dispatch, getState) => {
         dispatch({type: '@WORKSHOPPAGE/LOADING'});
         showWorkshopFromApi(cookies.get('fb'), w_id).then(res => {
-            dispatch({type: '@MANAGE/INIT', payload: res.data});
+            dispatch({type: '@WORKSHOP_PAGE/SHOW', payload: res.data});
             dispatch({type: '@WORKSHOPPAGE/LOADING_DONE'})
         }).catch(err => {
             switch (err.response.status) {
