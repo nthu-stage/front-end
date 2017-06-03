@@ -35,8 +35,8 @@ class Profile extends Component {
     }
 
     render() {
-        if (this.props.pf) {
-            const {availableTime, propose, attend, comeUpWith, like} = this.props.pf;
+        if (this.props.profile) {
+            const {availableTime, propose, attend, comeUpWith, like} = this.props.profile;
             return (
                 <div className="container text-left">
                     <section className="mt-4">
@@ -154,9 +154,9 @@ class Profile extends Component {
     }
 }
 
-function mapStateToProps({ pf }) {
+function mapStateToProps({ profile }) {
     return {
-        pf,
+        profile,
     }
 }
 

@@ -1,13 +1,7 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
-import {
-    Button,
-    Input,
-    Label,
-    Form,
-    FormGroup
-} from 'reactstrap';
+import {Button, Input, Label, Form, FormGroup} from 'reactstrap';
 
 import {updateWorkshop, showWorkshop} from '../actions/workshop.js';
 
@@ -41,7 +35,7 @@ class WorkshopManagePropose extends Component {
 
     componentWillReceiveProps(next) {
         this.setState({
-            ...next.wm
+            ...next.workshopManage
         })
     }
 
@@ -81,7 +75,7 @@ class WorkshopManagePropose extends Component {
             phase
         } = this.state;
         const readOnly = (phase === 'judging' || phase === 'judge_na' || phase === 'unreached');
-        const {masking} = this.props.wsp;
+        const {masking} = this.props.workshopPage;
 
         return (
             <div className={`container propose ${masking
@@ -158,14 +152,14 @@ class WorkshopManagePropose extends Component {
     }
 }
 
-function mapStateToProps({wm, wsp}) {
-    return {wm, wsp};
+function mapStateToProps({workshopPage, workshopManage}) {
+    return {workshopPage, workshopManage};
 }
 
 function mapDispatchToProps(dispatch) {
     return bindActionCreators({
-        updateWorkshop: updateWorkshop,
-        showWorkshop: showWorkshop
+        updateWorkshop,
+        showWorkshop
     }, dispatch);
 }
 

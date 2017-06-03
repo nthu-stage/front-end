@@ -11,14 +11,14 @@ import AttendeeReducer from './reducer_attendee';
 
 const rootReducer = combineReducers({
     alert: AlertReducer,
-    ws: WorkshopReducer,
-    pf: ProfileReducer,
+    profile: ProfileReducer,
     ideaSearch: IdeaSearchReducer,
     ideaViewEdit: IdeaViewEditReducer,
-    wsp: WorkshopPageReducer,
-    wm: WorkshopManageReducer,
-    pp: ProposeReducer,
-    wsa:AttendeeReducer
+    workshop: WorkshopReducer,
+    workshopPage: WorkshopPageReducer,
+    workshopManage: WorkshopManageReducer,
+    workshopPropose: ProposeReducer,
+    workshopManageAttendee: AttendeeReducer
 });
 
 export default rootReducer;

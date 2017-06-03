@@ -108,10 +108,6 @@ class WorkshopManage extends Component {
     }
 }
 
-function mapStateToProps({wm}) {
-    return {wm};
-}
-
 function mapDispatchToProps(dispatch) {
     return bindActionCreators({
         deleteWorkshop,
@@ -119,4 +115,4 @@ function mapDispatchToProps(dispatch) {
     }, dispatch);
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(WorkshopManage);
+export default connect(null, mapDispatchToProps)(WorkshopManage);

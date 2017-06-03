@@ -1,14 +1,14 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
+import React, {Component} from 'react';
+import {connect} from 'react-redux';
 
 import WorkshopListItem from './WorkshopListItem';
 
 class WorkshopList extends Component {
     render() {
-        if (this.props.ws) {
+        if (this.props.workshop) {
             return (
                 <div className="row">
-                    {this.props.ws.map(workshop => <WorkshopListItem key={workshop.w_id} {...workshop}/>)}
+                    {this.props.workshop.map(workshop => <WorkshopListItem key={workshop.w_id} {...workshop}/>)}
                 </div>
             );
         }
@@ -16,11 +16,8 @@ class WorkshopList extends Component {
     }
 }
 
-
-function mapStateToProps({ ws }) {
-    return {
-        ws,
-    }
+function mapStateToProps({workshop}) {
+    return {workshop}
 }
 
 export default connect(mapStateToProps)(WorkshopList);
