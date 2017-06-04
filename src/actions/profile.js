@@ -1,6 +1,6 @@
 import {showLoading, hideLoading} from 'react-redux-loading-bar';
 import {cookies, history} from '../common';
-import {deliverAlert} from './alert';
+import {deliverAlert} from './common';
 import {registerOrLogin, showProfile as showProfileFromApi, updateAvailableTime as updateAvailableTimeFromApi, updateEmail as updateEmailFromApi} from '../api/profile';
 
 export function regOrLogin(profile, alert) {

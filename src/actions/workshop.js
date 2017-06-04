@@ -1,6 +1,6 @@
 import {showLoading, hideLoading} from 'react-redux-loading-bar';
 import {cookies, history} from '../common';
-import {deliverAlert} from './alert';
+import {deliverAlert} from './common';
 import {
     listWorkshop as listWorkshopFromApi,
     attendWorkshop as attendWorkshopFromApi,
