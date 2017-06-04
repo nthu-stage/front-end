@@ -47,7 +47,9 @@ class Profile extends Component {
 
     handleUpdateEmail(e) {
         e.preventDefault();
-        this.props.updateEmail(this.state.email);
+        this.props.updateEmail({
+            email: this.state.email
+        });
     }
 
     componentWillMount() {

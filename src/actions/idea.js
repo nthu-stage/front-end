@@ -1,6 +1,6 @@
 import {showLoading, hideLoading} from 'react-redux-loading-bar';
 import {history} from '../common';
-import {deliverAlert} from './alert';
+import {deliverAlert} from './common';
 import {
     comeUpWithIdea as comeUpWithIdeaFromApi,
     listIdea as listIdeaFromApi,
@@ -68,7 +68,7 @@ export function showIdea(i_id) {
         }).catch(err => {
             switch (err.response.status) {
                 case 400:
-                    history.replace(`/i`);
+                    history.replace('/i');
                     dispatch(deliverAlert('願望不存在', 'danger', 3000));
                     break;
                 default:
@@ -115,12 +115,12 @@ export function deleteIdea(i_id) {
         if (cookies.get('fb')) {
             dispatch(showLoading());
             deleteIdeaFromApi(cookies.get('fb'), i_id).then(res => {
-                history.replace(`/i`);
+                history.replace('/i');
                 dispatch(deliverAlert('刪除成功', 'success', 3000));
             }).catch(err => {
                 switch (err.response.status) {
                     case 400:
-                        history.replace(`/i`);
+                        history.replace('/i');
                         dispatch(deliverAlert('願望不存在', 'danger', 3000));
                         break;
                     case 401:

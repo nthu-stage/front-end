@@ -29,7 +29,7 @@ export default function (state = null, action) {
             return next_state;
         case '@PROFILE/UPDATE_EMAIL':
             next_state = JSON.parse(JSON.stringify(state));
-            next_state.email = action.payload;
+            next_state.email = action.payload.email;
             return next_state;
         default:
             return state;
