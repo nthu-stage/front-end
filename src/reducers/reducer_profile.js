@@ -21,10 +21,15 @@ export default function (state = null, action) {
             next_state.attend.forEach(w => {
                 w.start_datetime = date2string(new Date(w.start_datetime));
             });
+            // next_state.email = 'test@gmail.com';
             return next_state;
         case '@PROFILE/UPDATE_AVAILABLE_TIME':
             next_state = JSON.parse(JSON.stringify(state));
             next_state.availableTime = action.payload;
+            return next_state;
+        case '@PROFILE/UPDATE_EMAIL':
+            next_state = JSON.parse(JSON.stringify(state));
+            next_state.email = action.payload;
             return next_state;
         default:
             return state;

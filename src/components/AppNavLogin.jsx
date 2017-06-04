@@ -54,7 +54,6 @@ class AppNavLogin extends Component {
     }
 
     handleLogout() {
-        // cookies.set('fb', null, {maxAge: 0});
         cookies.remove('fb');
         this.setState({fb: null});
         history.replace('/');
