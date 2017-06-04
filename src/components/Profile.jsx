@@ -12,7 +12,7 @@ import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 
 import ProfileAvailable from './ProfileAvailable'
-import {showProfile} from '../actions/profile';
+import {showProfile, updateEmail} from '../actions/profile';
 
 import './Profile.css';
 
@@ -47,11 +47,15 @@ class Profile extends Component {
 
     handleUpdateEmail(e) {
         e.preventDefault();
-
+        this.props.updateEmail(this.state.email);
     }
 
     componentWillMount() {
         this.props.showProfile();
+    }
+
+    componentWillReceiveProps(next) {
+        this.setState({email: next.profile.email || ''});
     }
 
     render() {
@@ -103,8 +107,7 @@ class Profile extends Component {
                                             </td>
                                         </tr>
                                     );
-                                })
-}
+                                })}
                             </tbody>
                         </Table>
                     </section>
@@ -129,8 +132,7 @@ class Profile extends Component {
                                             <td>{state2badge(ws.state)}</td>
                                         </tr>
                                     );
-                                })
-}
+                                })}
                             </tbody>
                         </Table>
                     </section>
@@ -155,8 +157,7 @@ class Profile extends Component {
                                             <td>{i.like_number}</td>
                                         </tr>
                                     );
-                                })
-}
+                                })}
                             </tbody>
                         </Table>
                     </section>
@@ -181,8 +182,7 @@ class Profile extends Component {
                                             <td>{i.like_number}</td>
                                         </tr>
                                     );
-                                })
-}
+                                })}
                             </tbody>
                         </Table>
                     </section>
@@ -199,7 +199,8 @@ function mapStateToProps({profile}) {
 
 function mapDispatchToProps(dispatch) {
     return bindActionCreators({
-        showProfile
+        showProfile,
+        updateEmail
     }, dispatch);
 }
 

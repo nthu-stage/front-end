@@ -1,7 +1,23 @@
 import {showLoading, hideLoading} from 'react-redux-loading-bar';
 import {cookies, history} from '../common';
 import {deliverAlert} from './alert';
-import {showProfile as showProfileFromApi, updateAvailableTime as updateAvailableTimeFromApi, registerOrLogin} from '../api/profile';
+import {registerOrLogin, showProfile as showProfileFromApi, updateAvailableTime as updateAvailableTimeFromApi, updateEmail as updateEmailFromApi} from '../api/profile';
+
+export function regOrLogin(profile, alert) {
+    return ((dispatch, getState) => {
+        dispatch(showLoading());
+        registerOrLogin(profile).then(res => {
+            if (alert)
+                dispatch(deliverAlert('登入成功', 'success', 3000));
+            }
+        ).catch(err => {
+            cookies.remove('fb');
+            dispatch(deliverAlert('登入失敗', 'danger', 3000));
+        }).then(() => {
+            dispatch(hideLoading());
+        });
+    });
+}
 
 export function showProfile() {
     return ((dispatch, getState) => {
@@ -49,16 +65,22 @@ export function updateAvailableTime(availableTime) {
     });
 }
 
-export function regOrLogin(profile, alert) {
+export function updateEmail(email) {
     return ((dispatch, getState) => {
         dispatch(showLoading());
-        registerOrLogin(profile).then(res => {
-            if (alert)
-                dispatch(deliverAlert('登入成功', 'success', 3000));
+        updateEmailFromApi(cookies.get('fb'), email).then(res => {
+            dispatch({type: '@PROFILE/UPDATE_EMAIL', payload: res.data});
+        }).catch(err => {
+            switch (err.response.status) {
+                case 400:
+                    dispatch(deliverAlert('內容有誤', 'danger', 3000));
+                    break;
+                case 401:
+                    dispatch(deliverAlert('請先登入', 'warning', 3000));
+                    break;
+                default:
+                    dispatch(deliverAlert('許願失敗', 'danger', 3000));
             }
-        ).catch(err => {
-            cookies.remove('fb');
-            dispatch(deliverAlert('登入失敗', 'danger', 3000));
         }).then(() => {
             dispatch(hideLoading());
         });
