@@ -1,8 +1,10 @@
 export function IdeaListReducer(state = [], action) {
     let next_state;
     switch (action.type) {
-        case '@IDEA/LIST':
+        case '@IDEA/LIST':    
             return action.payload;
+        case '@IDEA/LIST_MORE':
+            return [...state,...action.payload];
         case '@IDEA/LIKE_LIST':
             next_state = state.slice();
             for (let idea of next_state) {

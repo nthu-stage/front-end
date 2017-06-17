@@ -21,6 +21,8 @@ export default class Idea extends Component {
         } else {
             this.setState({
                 viewEditModal: true,
+                searchtext:'',
+                order:'new',
             });
         }
     }
@@ -34,8 +36,8 @@ export default class Idea extends Component {
     render() {
         return (
             <div className="container">
-                <IdeaNav />
-                <IdeaList />
+                <IdeaNav passbackSearchtext={(e)=>this.setState({searchtext:e})} passbackOrder={(e)=>this.setState({order:e})}/>
+                <IdeaList order={this.state.order} searchtext={this.state.searchtext} />
                 <Route path='/i/:i_id' render={props => <IdeaViewEditModal {...props} modal={this.state.viewEditModal} toggle={this.viewEditToggle} />}/>
             </div>
         );

@@ -59,6 +59,26 @@ export function listWorkshop(searchText, stateFilter) {
     });
 }
 
+export function listMoreWorkshop(searchText='', stateFilter=3, offset, limit) {
+    console.log("load more ws");
+    return ((dispatch, getState) => {
+        dispatch(showLoading());
+        listWorkshopFromApi(cookies.get('fb'), searchText, stateFilter, offset, limit).then(res => {
+            dispatch({type: '@WORKSHOP/LIST_MORE', payload: res.data});
+        }).catch(err => {
+            switch (err.response.status) {
+                case 400:
+                    dispatch(deliverAlert('內容有誤', 'danger', 3000));
+                    break;
+                default:
+                    dispatch(deliverAlert('搜尋失敗', 'danger', 3000));
+            }
+        }).then(() => {
+            dispatch(hideLoading());
+        });
+    });
+}
+
 export function showWorkshop(w_id) {
     return ((dispatch, getState) => {
         dispatch(showLoading());
