@@ -43,11 +43,12 @@ class AppNavLogin extends Component {
         let {expiresIn, userID, signedRequest} = data.tokenDetail;
         let fb = {
             name,
-            email,
+            email: email || '',
             picture_url: picture.data.url,
             userID,
             signedRequest
         };
+        console.log(fb);
         cookies.set('fb', fb, {maxAge: expiresIn});
         this.setState({fb});
         this.props.regOrLogin(fb, true);

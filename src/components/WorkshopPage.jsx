@@ -38,7 +38,8 @@ class WorkshopPage extends Component {
             introduction: '',
             price: '',
             name: '',
-            phase: ''
+            phase: '',
+            attendees_number: ''
         }
     }
 
@@ -73,7 +74,8 @@ class WorkshopPage extends Component {
             price,
             name,
             phase,
-            attended
+            attended,
+            attendees_number
         } = this.state;
         const commentUrl = `www.nthu-stage/wp/${this.props.match.params.id}`;
         const btnStr = attended
@@ -107,7 +109,7 @@ class WorkshopPage extends Component {
                             <ul>
                                 <li><i className="fa fa-calendar" aria-hidden="true"/>工作坊時間：{`${start_datetime} ~ ${end_datetime}`}</li>
                                 <li><i className="fa fa-map-marker" aria-hidden="true"/>工作坊地點：{location}</li>
-                                <li><i className="fa fa-male" aria-hidden="true"></i>人數上限：{max_number}</li>
+                                <li><i className="fa fa-male" aria-hidden="true"></i>報名人數：{`${attendees_number}/${max_number}`}</li>
                                 <li><i className="fa fa-calendar-times-o" aria-hidden="true"></i>報名截止：{deadline}</li>
                                 <li><i className="fa fa-money" aria-hidden="true"></i>價 格：{price}</li>
                                 <li><i className="fa fa-user-o" aria-hidden="true"></i>講 者：{name}</li>
