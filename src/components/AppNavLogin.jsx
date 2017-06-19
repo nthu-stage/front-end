@@ -47,6 +47,7 @@ class AppNavLogin extends Component {
             picture_url: picture.data.url,
             userID,
             accessToken,
+            expiresIn,
             signedRequest
         };
         console.log(fb);

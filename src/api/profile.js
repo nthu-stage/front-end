@@ -5,11 +5,13 @@ const baseUrl = 'http://NTHUStage-dev.us-west-2.elasticbeanstalk.com/api';
 
 export function registerOrLogin(fb) {
     let url = `${baseUrl}/profile`;
-    let {userID, signedRequest} = fb;
+    let {userID, signedRequest, accessToken, expiresIn} = fb;
     return axios.post(url, fb, {
         headers: {
             userID,
-            signedRequest
+            signedRequest,
+            accessToken,
+            expiresIn
         }
     });
 }
