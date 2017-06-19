@@ -40,7 +40,7 @@ class AppNavLogin extends Component {
 
     handleResponse(data) {
         let {name, picture, email} = data.profile;
-        let {accessToken, expiresIn, userID, signedRequest} = data.tokenDetail;
+        let {accessToken, expiresIn, userID} = data.tokenDetail;
         let fb = {
             name,
             email: email || '',
@@ -48,7 +48,6 @@ class AppNavLogin extends Component {
             userID,
             accessToken,
             expiresIn,
-            signedRequest
         };
         console.log(fb);
         cookies.set('fb', fb, {maxAge: expiresIn});
