@@ -5,11 +5,11 @@ const baseUrl = 'http://NTHUStage-dev.us-west-2.elasticbeanstalk.com/api';
 
 export function comeUpWithIdea(fb, idea) {
     let url = `${baseUrl}/ideas`;
-    let {userID, signedRequest} = fb;
+    let {userID, accessToken} = fb;
     return axios.post(url, idea, {
         headers: {
             userID,
-            signedRequest
+            accessToken
         }
     });
 }
@@ -17,11 +17,11 @@ export function comeUpWithIdea(fb, idea) {
 export function listIdea(fb, searchText, order) {
     let url = `${baseUrl}/ideas?searchText=${searchText}&order=${order}`;
     if (fb) {
-        let {userID, signedRequest} = fb;
+        let {userID, accessToken} = fb;
         return axios.get(url, {
             headers: {
                 userID,
-                signedRequest
+                accessToken
             }
         });
     } else {
@@ -31,33 +31,33 @@ export function listIdea(fb, searchText, order) {
 
 export function updateIdea(fb, idea) {
     let url = `${baseUrl}/ideas/${idea.i_id}`;
-    let {userID, signedRequest} = fb;
+    let {userID, accessToken} = fb;
     return axios.put(url, idea, {
         headers: {
             userID,
-            signedRequest
+            accessToken
         }
     });
 }
 
 export function deleteIdea(fb, i_id) {
     let url = `${baseUrl}/ideas/${i_id}`;
-    let {userID, signedRequest} = fb;
+    let {userID, accessToken} = fb;
     return axios.delete(url, {
         headers: {
             userID,
-            signedRequest
+            accessToken
         }
     });
 }
 
 export function likeIdea(fb, i_id) {
     let url = `${baseUrl}/ideas/${i_id}`;
-    let {userID, signedRequest} = fb;
+    let {userID, accessToken} = fb;
     return axios.post(url, null, {
         headers: {
             userID,
-            signedRequest
+            accessToken
         }
     });
 }
@@ -65,11 +65,11 @@ export function likeIdea(fb, i_id) {
 export function showIdea(fb, i_id) {
     let url = `${baseUrl}/ideas/${i_id}`;
     if (fb) {
-        let {userID, signedRequest} = fb;
+        let {userID, accessToken} = fb;
         return axios.get(url, {
             headers: {
                 userID,
-                signedRequest
+                accessToken
             }
         });
     } else {
