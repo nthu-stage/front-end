@@ -15,11 +15,11 @@ export function listWorkshop(fb, searchText, stateFilter, offset, limit) {
         url+=`${limit}`;
     }
     if (fb) {
-        let {userID, signedRequest} = fb;
+        let {userID, accessToken} = fb;
         return axios.get(url, {
             headers: {
                 userID,
-                signedRequest
+                accessToken
             }
         });
     }
@@ -29,11 +29,11 @@ export function listWorkshop(fb, searchText, stateFilter, offset, limit) {
 export function showWorkshop(fb, w_id) {
     let url = `${baseUrl}/workshops/${w_id}`;
     if (fb) {
-        let {userID, signedRequest} = fb;
+        let {userID, accessToken} = fb;
         return axios.get(url, {
             headers: {
                 userID,
-                signedRequest
+                accessToken
             }
         });
     }
@@ -41,55 +41,55 @@ export function showWorkshop(fb, w_id) {
 }
 export function attendWorkshop(fb, w_id) {
     let url = `${baseUrl}/workshops/${w_id}`;
-    let {userID, signedRequest} = fb;
+    let {userID, accessToken} = fb;
     return axios.post(url, null, {
         headers: {
             userID,
-            signedRequest
+            accessToken
         }
     });
 }
 
 export function listAttendee(fb, w_id) {
     let url = `${baseUrl}/dashboard/attendees/${w_id}`;
-    let {userID, signedRequest} = fb;
+    let {userID, accessToken} = fb;
     return axios.get(url, {
         headers: {
             userID,
-            signedRequest
+            accessToken
         }
     });
 }
 
 export function deleteWorkshop(fb, w_id) {
     let url = `${baseUrl}/workshops/${w_id}`;
-    let {userID, signedRequest} = fb;
+    let {userID, accessToken} = fb;
     return axios.delete(url, {
         headers: {
             userID,
-            signedRequest
+            accessToken
         }
     });
 }
 
 export function proposeWorkshop(fb, propose) {
     let url = `${baseUrl}/workshops`;
-    let {userID, signedRequest} = fb;
+    let {userID, accessToken} = fb;
     return axios.post(url, propose, {
         headers: {
             userID,
-            signedRequest
+            accessToken
         }
     });
 }
 
 export function updateWorkshop(fb, propose, w_id) {
     let url = `${baseUrl}/workshops/${w_id}`;
-    let {userID, signedRequest} = fb;
+    let {userID, accessToken} = fb;
     return axios.put(url, propose, {
         headers: {
             userID,
-            signedRequest
+            accessToken
         }
     });
 }

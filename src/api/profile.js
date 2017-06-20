@@ -5,44 +5,45 @@ const baseUrl = 'http://NTHUStage-dev.us-west-2.elasticbeanstalk.com/api';
 
 export function registerOrLogin(fb) {
     let url = `${baseUrl}/profile`;
-    let {userID, signedRequest} = fb;
+    let {userID, accessToken, expiresIn} = fb;
     return axios.post(url, fb, {
         headers: {
             userID,
-            signedRequest
+            accessToken,
+            expiresIn
         }
     });
 }
 
 export function showProfile(fb) {
     let url = `${baseUrl}/profile`;
-    let {userID, signedRequest} = fb;
+    let {userID, accessToken} = fb;
     return axios.get(url, {
         headers: {
             userID,
-            signedRequest
+            accessToken
         }
     });
 }
 
 export function updateAvailableTime(fb, availableTime) {
     let url = `${baseUrl}/profile?key=availableTime`;
-    let {userID, signedRequest} = fb;
+    let {userID, accessToken} = fb;
     return axios.put(url, availableTime, {
         headers: {
             userID,
-            signedRequest
+            accessToken
         }
     });
 }
 
 export function updateEmail(fb, email) {
     let url = `${baseUrl}/profile?key=email`;
-    let {userID, signedRequest} = fb;
+    let {userID, accessToken} = fb;
     return axios.put(url, email, {
         headers: {
             userID,
-            signedRequest
+            accessToken
         }
     });
 }

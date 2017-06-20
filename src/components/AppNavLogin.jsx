@@ -40,13 +40,14 @@ class AppNavLogin extends Component {
 
     handleResponse(data) {
         let {name, picture, email} = data.profile;
-        let {expiresIn, userID, signedRequest} = data.tokenDetail;
+        let {accessToken, expiresIn, userID} = data.tokenDetail;
         let fb = {
             name,
             email: email || '',
             picture_url: picture.data.url,
             userID,
-            signedRequest
+            accessToken,
+            expiresIn,
         };
         console.log(fb);
         cookies.set('fb', fb, {maxAge: expiresIn});
@@ -94,10 +95,10 @@ class AppNavLogin extends Component {
                             ? 'none'
                             : 'inline-block'
                     }}>
-                        <Login className="hidden-xs-down" fields={['name', 'email', 'picture']} onResponse={this.handleResponse}>
+                        <Login className="hidden-xs-down" scope='email,user_friends' fields={['name', 'email', 'picture']} onResponse={this.handleResponse}>
                             <Button color="primary" className="navbar-btn ml-2 mr-2 facebook-button hidden-xs-down">登入</Button>
                         </Login>
-                        <Login className="hidden-sm-up" fields={['name', 'email', 'picture']} onResponse={this.handleResponse}>
+                        <Login className="hidden-sm-up" scope='email,user_friends' fields={['name', 'email', 'picture']} onResponse={this.handleResponse}>
                             <NavLink href="" className="nav-link hidden-sm-up">FB 登入</NavLink>
                         </Login>
                     </NavItem>
