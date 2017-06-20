@@ -14,8 +14,16 @@ export function comeUpWithIdea(fb, idea) {
     });
 }
 
-export function listIdea(fb, searchText, order) {
+export function listIdea(fb, searchText, order, offset, limit) {
     let url = `${baseUrl}/ideas?searchText=${searchText}&order=${order}`;
+    if(offset){
+        url+='&offset=';
+        url+=`${offset}`;
+    }
+    if(limit){
+        url+='&limit=';
+        url+=`${limit}`;
+    }
     if (fb) {
         let {userID, accessToken} = fb;
         return axios.get(url, {

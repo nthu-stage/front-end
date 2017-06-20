@@ -59,6 +59,25 @@ export function listIdea(searchText, order) {
     });
 }
 
+export function listMoreIdea(searchText='', order='new', offset, limit) {
+    return ((dispatch, getState) => {
+        dispatch(showLoading());
+        listIdeaFromApi(cookies.get('fb'), searchText, order, offset, limit).then(res => {
+            dispatch({type: '@IDEA/LIST_MORE', payload: res.data});
+        }).catch(err => {
+            switch (err.response.status) {
+                case 400:
+                    dispatch(deliverAlert('內容有誤', 'danger', 3000));
+                    break;
+                default:
+                    dispatch(deliverAlert('搜尋失敗', 'danger', 3000));
+            }
+        }).then(() => {
+            dispatch(hideLoading());
+        });
+    });
+}
+
 export function showIdea(i_id) {
     i_id = parseInt(i_id, 10);
     return ((dispatch, getState) => {

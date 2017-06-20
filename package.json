@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "amdefine": "^1.0.1",
     "axios": "^0.16.1",
     "bootstrap": "^4.0.0-alpha.6",
     "classnames": "^2.2.5",
@@ -16,6 +17,8 @@
     "react-dom": "^15.5.4",
     "react-facebook": "^4.0.8",
     "react-file-download": "^0.3.4",
+    "react-infinite-scroller": "^1.0.12",
+    "react-native-search-bar": "^3.0.0",
     "react-redux": "^5.0.4",
     "react-redux-loading-bar": "^2.9.1",
     "react-router-dom": "^4.1.1",

@@ -33,12 +33,14 @@ class IdeaNav extends Component {
     handleSubmit(event) {
         event.preventDefault();
         this.props.listIdea(this.state.searchText, this.state.order);
+        this.props.passbackSearchtext(this.state.searchText);
     }
 
     handleFilter(order) {
         if (this.state.order === order)
             return;
         this.setState({order});
+        this.props.passbackOrder(this.state.order);
         this.props.listIdea(this.state.searchText, order);
     }
 
@@ -69,6 +71,7 @@ class IdeaNav extends Component {
     }
 
     render() {
+        console.log(this.props);
         return (
             <div className="row mt-3">
                 <div className="col col-md-3">

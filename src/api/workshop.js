@@ -3,9 +3,17 @@ import axios from 'axios';
 const baseUrl = 'http://NTHUStage-dev.us-west-2.elasticbeanstalk.com/api';
 // const baseUrl = 'http://localhost:3090';
 
-export function listWorkshop(fb, searchText, stateFilter) {
+export function listWorkshop(fb, searchText, stateFilter, offset, limit) {
     stateFilter = 'all';
     let url = `${baseUrl}/workshops?searchText=${searchText}&stateFilter=${stateFilter}`;
+    if(offset){
+        url+='&offset=';
+        url+=`${offset}`;
+    }
+    if(limit){
+        url+='&limit=';
+        url+=`${limit}`;
+    }
     if (fb) {
         let {userID, accessToken} = fb;
         return axios.get(url, {

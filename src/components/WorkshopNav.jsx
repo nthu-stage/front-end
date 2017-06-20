@@ -23,10 +23,12 @@ class WorkshopNav extends Component {
     handleSubmit(event) {
         event.preventDefault();
         this.props.listWorkshop(this.state.searchText, this.state.stateFilter);
+        this.passbackSearchText(this.state.searchText);
     }
 
     handleFilter(prop, goal) {
         this.setState({stateFilter: (prop << 1) + goal});
+        this.props.passbackStateFilter(this.state.stateFilter);
         this.props.listWorkshop(this.state.searchText, (prop << 1) + goal);
     }
 
